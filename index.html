@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">	
+		<title>Online Examination</title>
+		<meta name="description" content="Online Examination System">
+		<meta name="keywords" content="Online Examination System">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/style.css"> 
+
+	</head>
+	<body style="background-color: #EAEDF1;">
+		<div id="main_body">
+			<div class="navbar navbar-top navbar-inverse">
+				<div class="navbar-inner">
+					<div class="container-fluid">                        
+						<a class="brand" href="index.html">Online Examination System</a>  
+					<a href="#myModal" class="register" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up</a>   
+					<div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title" align="center" style="font-weight:500;">Sign Up</h2>
+                </div>
+                <div class="modal-body">
+	<form action="adminlogin.html" controller="Users" name="post_req" id="post_req" method="post" accept-charset="utf-8" class="form-horizontal">
+
+     <div class="form-group">
+    <label class="control-label col-sm-4" for="name">User Name:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="uname" id="uname" placeholder="Enter user name" required>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label class="control-label col-sm-4" for="phone">Phone:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control"  name ="phone" id="phone" placeholder="Enter phone" required>
+    </div>
+  </div>   
+
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="email">Email:</label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" name ="email"  id="email" placeholder="Enter email" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="pwd">Password:</label>
+    <div class="col-sm-8"> 
+      <input type="password" class="form-control" name ="pass" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$" id="pwd" placeholder="Enter password" required>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label class="control-label col-sm-4" for="email">Confirm Password:</label>
+    <div class="col-sm-8">
+      <input type="password" class="form-control"  name ="cpass" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$" id="cpwd" placeholder="Confirm password" required>
+    </div>
+  </div>
+
+      <div class="form-group">
+    <label class="control-label col-sm-4" for="email">Address:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control"  name ="address" id="address" placeholder="Address" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+  <label class="control-label col-sm-4" for="sel1">Country:</label>
+    <div class="col-sm-4">
+  <select class="form-control" id="sel1"  name ="country">
+    <option>India</option>
+    <option>Pakistan</option>
+    <option>USA</option>
+    <option>Switerzland</option>
+  </select>
+   </div>
+  </div>
+
+       <div class="form-group">
+    <label class="control-label col-sm-4" for="gender">Gender:</label>
+    <div class="col-sm-8">
+          <label class="radio-inline">
+      <input type="radio" name="gender" required>Male
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="gender" required>Female
+    </label>
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="control-label col-sm-4" for="school">Qualification/Job:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="occupation" pattern="^[a-zA-Z ]+$" id="occupation" placeholder="Enter School">
+      <p class="help-block">Optional</p>
+    </div>
+  </div>
+  
+      <div class="form-group">
+    <label class="control-label col-sm-4" for="school">Birth Date:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="dob" id="datepicker" required>
+                <script src="js/moment.min.js"></script>
+ <script src="js/pikaday.js"></script>
+
+    <script>
+
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('datepicker'),
+		format: 'YYYY-MM-DD',
+        firstDay: 1,
+        minDate: new Date(1930,1,1),
+        maxDate: new Date(2020, 12, 31),
+        yearRange: [1930,2020],
+		
+    });
+
+    </script>
+    </div>
+  </div>
+   
+        <div class="form-group">
+    <label class="control-label col-sm-4" for="school">Profile Pic:</label>
+    <div class="col-sm-8">
+      <input type="file" class="form-control" id="profilepic">
+    </div>
+  </div>
+   </div>
+                <div class="modal-footer">
+                	
+                	   <button type="submit" class="btn btn-primary">Sign Up</button> 
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                 </form>
+            </div>
+        </div>
+    </div>           
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div>
+					<div style="margin-top:10px">
+						<center>
+							
+
+						<img src="images/logo/your-school.png"  > 
+											 	
+
+						<div style="margin:auto; width:100%;">
+							
+							<ul>
+							<li>
+								<section class="student">
+								<a href="studentlogin.html">
+								<div class="text">
+								<h2>STUDENT</h2>
+								</div>
+								</a>
+								</section>
+							</li>
+						<!--	<li>
+								<section class="center">
+								<a href="center/index.php.html">
+								<div class="text">
+								<h2>CENTER</h2>
+								</div>
+								</a>
+								</section>
+							</li> -->
+							<li>
+								<section class="admin">
+								<a href="adminlogin.html">
+								<div class="text">
+								<h2>ADMIN/TEACHER</h2>
+								</div>
+								</a>
+								</section> 
+							</li>
+							</ul>
+						</div>
+						</center>
+						<div style="clear:both;color:#aaa; padding:20px;">
+	<center>&copy; 2017  <a href="index.html" target="_blank">Online Examination System</a></center>
+	<center>A Product of Anurag</center>
+</div>  					</div>
+				</div>
+			</div>
+		</div>    
+	</body>
+</html>
