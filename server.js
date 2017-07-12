@@ -1,18 +1,23 @@
  var express=require('express');
 var app=express();
 var fs=require('fs');
+var path=require('path');
 
+var jsonwebtoken=require('jsonwebtoken');
+var CONFIG=require('./config.js');
+var TOKEN_SECRET=CONFIG.jwtSecret;
+var auth=require('./loginsauth.js');
 
 var mongoose=require('mongoose');
  var User=require('./userSchema.js');
- mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
-var path=require('path');
 var bodyParser=require('body-parser');
 app.use(bodyParser.json({strict:false}));
 app.use(bodyParser.urlencoded({extended:false}));
+
 var events=require('events');
 var eventEmitter=new events.EventEmitter();
+
 var multer=require('multer');
 var storage=multer.diskStorage({
   destination:function(req,file,cb){
@@ -29,6 +34,7 @@ eventEmitter.emit('fileevent',{req:req,filename:filename});
 });
 var upload=multer({storage:storage});
 
+
 app.use(express.static(__dirname));
  app.get('/',function(req,res){
   res.sendFile(__dirname + "/index.html");
@@ -36,6 +42,9 @@ app.use(express.static(__dirname));
 app.get('/loginpage',function(req,res){
 res.sendFile(__dirname+"adminlogin.html");
 
+});
+app.get('/home',auth.verifyToken,function(req,res){
+res.sendFile(__dirname+"admin/index.html");
 });
 
  eventEmitter.on('fileevent',function (obj){
@@ -61,6 +70,7 @@ profilepic:filename
 
   console.log("Connected to DB");
   console.log(userobj);
+  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
   var  user=new User(userobj);
   user.save(function(err){
     if(err) throw err;
@@ -76,7 +86,19 @@ profilepic:filename
  });
  app.post('/login',function (req,res){
 var data=req.body;
-
+ User.find({ email:data.username ,password:data.password}, function(err, user) {
+  if (err) throw err; 
+  else{
+   console.log("avaialble");
+                  id=(user._id).str;
+                  console.log(id);
+                 var token=jsonwebtoken.sign({id:id,userName:user.username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
+                 res.status(200).json({
+                  success:true,
+                  token:token
+                 });
+       }       
+});
 
  })
  app.listen(8080);

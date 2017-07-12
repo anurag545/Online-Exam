@@ -8,6 +8,7 @@
 		<meta name="description" content="Online Examination System">
 		<meta name="keywords" content="Online Examination System">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 				    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -95,10 +96,10 @@
 
 <script type="text/javascript">
 var app=angular.module('loginApp',[]);
-app.controller('loginCtrl',function (){
+app.controller('loginCtrl',function ($scope){
 $scope.myForm={};
 $scope.myForm.name="";
-$scop.myForm.pass="";
+$scope.myForm.pass="";
 $scope.myForm.Login=function (){
 	var  obj={
 		username:$scope.myForm.name,
@@ -106,9 +107,15 @@ $scope.myForm.Login=function (){
 	};
     $http.post("/login",obj)
     .then(function(response) {
-        //var data = response.data;
-        //console.log(data);
-        //$scope.data=data;
+        var token = response.data;
+        console.log(token);
+   var obj ={
+    token:token
+   };
+   localStorage.token=obj;
+   console.log(userdata,token);
+   
+    window.location="/home?token="+token;
     });
 }
 
