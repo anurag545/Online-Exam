@@ -25,7 +25,12 @@ app.service('multipartForm', ['$http', function($http){
 		$http.post(uploadUrl, fd, {
 			transformRequest: angular.indentity,
 			headers: { 'Content-Type': undefined }
-		});
+		}).then(function (response){console.log("done signup");
+		if(response.status==200){
+			console.log("ok");
+     window.location="/loginpage";
+         }
+	},function (err){console.log("error sign up")});
 	}
 }]);
 app.controller('formCtrl',['$scope','multipartForm',function ($scope,multipartForm){

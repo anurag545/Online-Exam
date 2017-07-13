@@ -5,7 +5,7 @@ function verifyToken(request,response,next){
 var token=request.body.token || request.query.token || request.headers['x-access-token'];
  if(token){
 jsonwebtoken.verify(token,TOKEN_SECRET,function (err,decoded){
-if(error){
+if(err){
 	response.status(403).json({
 		success:false,
 		message:'Failed to authenticate token.'

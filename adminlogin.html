@@ -39,14 +39,14 @@
   	<div class="col-sm-12" >
   		<h2 align="center" style="font-weight:500;padding-bottom:15px;margin-top:6px;margin-bottom:15px;border-bottom: 1px solid #eee"><strong>Log In</strong></h2>
   	</div>
-   <form role="form" action="/login" method="post" ng-submit="myForm.Login()">
+   <form  method="POST" ng-submit="loginForm.Login()">
   <div class="form-group">
     <label for="exampleInputEmail1">Username or Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" ng-model="myForm.name" placeholder="Enter email" required>
+    <input type="email" class="form-control" id="name" name="name" ng-model="loginForm.name" placeholder="Enter email" required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password </label>
-    <input type="password" class="form-control" id="exampleInputPassword1" ng-model="myForm.pass" placeholder="Password" required>
+    <input type="password" class="form-control" id="pass" name="pass" ng-model="loginForm.pass" placeholder="Password" required>
   </div>
   		<div class="col-sm-6">
 					<div class="row">
@@ -58,6 +58,7 @@
 						<p class="help-block"><a href="Forgots/username.html">Forgot User Name</a></p>
 					</div>
 				</div>
+				<p class="col-sm-12" style="color:red"> {{ elogin }} </p>
   <button type="submit" class="btn btn-md btn-primary">Sign in</button><br/><br/>
 
 </form>
@@ -67,6 +68,53 @@
   </div>
 </div>
 </div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+var app=angular.module('loginApp',[]);
+app.controller('loginCtrl',['$scope','$http',function ($scope,$http){
+$scope.loginForm={};
+$scope.loginForm.name="";
+$scope.loginForm.pass="";
+$scope.elogin="";
+$scope.loginForm.Login=function (){
+	var  obj={
+		username:$scope.loginForm.name,
+		password:$scope.loginForm.pass
+	};
+	console.log(obj);
+
+$http.post("/login",obj)
+		      .then(function(response) {
+		        var data = response.data;
+		        if(response.data.err){
+                  $scope.elogin=response.data.err.errmsg;
+		        }
+		        else{
+		        console.log(data.token);
+		   var obj ={
+		    token:data.token
+		   };
+		   localStorage.token=obj;
+		   console.log(obj);
+		   
+		    window.location="/home?token="+data.token;
+
+            }
+
+		    },function (error){
+		      
+		    });
+		  
+}
+
+}]);
+</script>
+	</div>
+   </div>
+</body>
+</html>
  <!-- <div class="col-md-4 login-form">
 <form action="admin/index.html">
   <div class="form-group">
@@ -91,37 +139,3 @@
   <br/><br/>
 </form>
 		</div>-->
-		</div>
-	</div>
-
-<script type="text/javascript">
-var app=angular.module('loginApp',[]);
-app.controller('loginCtrl',function ($scope){
-$scope.myForm={};
-$scope.myForm.name="";
-$scope.myForm.pass="";
-$scope.myForm.Login=function (){
-	var  obj={
-		username:$scope.myForm.name,
-		password:$scope.myForm.pass
-	};
-    $http.post("/login",obj)
-    .then(function(response) {
-        var token = response.data;
-        console.log(token);
-   var obj ={
-    token:token
-   };
-   localStorage.token=obj;
-   console.log(userdata,token);
-   
-    window.location="/home?token="+token;
-    });
-}
-
-});
-</script>
-	</div>
-   </div>
-</body>
-</html>
