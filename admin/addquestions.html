@@ -3,7 +3,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                      <div class="panel-body">
-                          <form method="post">      
+                          <form method="post" ng-controller="quesCtrl">      
                             <div class="form-group">
                                     <label class="control-label col-sm-2" for="name">Question</label>
                                      <div class="col-sm-10">
@@ -13,9 +13,9 @@
                             <div class="form-group">
                                     <label class="control-label col-sm-2" for="name">Question Type</label>
                                      <div class="col-sm-10">
-                                        <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.type">Objective</label>
-                                        <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.type">True/False</label>
-                                         <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.type">MultiSelect</label>
+                                        <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.questype">Objective</label>
+                                        <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.questype">True/False</label>
+                                         <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.questype">MultiSelect</label>
                                      </div>
                             </div>
                         
@@ -104,11 +104,11 @@
                           <div class="col-sm-12">
                                     <div class="col-sm-2">
                                         <br/>
-                                        <button type="submit" class="btn btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button>
+                                     <button class="btn btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button></a>
                                      </div>
                                      <div class="col-sm-10">
                                         <br/>
-                                         <button type="submit" class="btn btn-success" ng-click="quesForm.finish()">Done</button>
+                                         <button class="btn btn-success" ng-click="quesForm.finish()">Done</button>
                                      </div>
                            </div>          
                                                                   

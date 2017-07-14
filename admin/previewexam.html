@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>New Exam</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!--date-->
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      
+                                   <script src="js/moment.min.js"></script>
+                                  <script src="js/pikaday.js"></script>
+       <link href="css/pikaday.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Admin/Teacher</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="newexam.html"><i class="fa fa-fw fa-dashboard"></i> New Exam</a>
+                    </li>
+                    <li>
+                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    </li>
+                    <li>
+                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    </li>
+                    <li>
+                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    </li>
+                    <li>
+                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid" ng-app="examApp">
+
+                <!-- Page Heading -->
+              <script type="text/javascript">
+                    function showDiv(elem){
+
+    if(elem.value == 'objective')
+
+    {
+
+    document.getElementById('hidden_div_objective').style.display = "block";
+
+    document.getElementById('hidden_div_truefalse').style.display = "none";
+
+    document.getElementById('hidden_div_multiselect').style.display = "none";
+
+    }
+
+    else if(elem.value=='true-false')
+
+    {
+
+    document.getElementById('hidden_div_truefalse').style.display = "block";
+
+    document.getElementById('hidden_div_objective').style.display = "none";
+
+    document.getElementById('hidden_div_multiselect').style.display = "none";
+
+
+
+    }
+
+    else if(elem.value=='multiselect')
+
+    {
+
+        document.getElementById('hidden_div_multiselect').style.display = "block";
+
+        document.getElementById('hidden_div_objective').style.display = "none";
+
+        document.getElementById('hidden_div_truefalse').style.display = "none";
+
+    }
+    function showque(){
+        document.getElementById('addquestion').style.display="block";
+    }
+    }
+
+              </script>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            New Exam
+                            <small></small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-file"></i> New Exam
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+<!-- /.row -->
+                <div class="row">
+                 <form method="post" ng-submit="examForm.examSubmit()">
+                    <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label>Exam Name</label>
+                                <input class="form-control" name="xname" ng-model="examForm.xname" placeholder="Exam name" type="text" required>
+                            </div>
+                                <div class="form-group">
+                                <label>Exam Date</label>
+                                <input class="form-control" name="xdate" ng-model="examForm.xdate"type="text" id="datepicker" placeholder="Exam Date" required>
+                            </div>
+
+                          <div class="form-group">
+                                <label>Exam Time </label>
+                                <input class="form-control" name="xtime" ng-model="examForm.xtime" placeholder="Exam Time" type="text" required>
+                            </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                           <div class="form-group">
+                                <label>Description</label>
+                                <input class="form-control" name="xdes" ng-model="examForm.xdes" placeholder="Description" type="text">
+                            
+                            </div>
+                            <div class="form-group">
+                                <label>Marks</label>
+                                <input class="form-control" name="xmarks" ng-model="examForm.xmarks" placeholder="Enter marks" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                                <input class="form-control" name="xdur" ng-model="examForm.xdur" placeholder="In Minutes" type="text" required>
+                            </div>
+                    </div>
+
+                    <div class="col-lg-12">
+
+
+                    <button type="submit" class="btn btn-success" >Add Questions</button><br><br>
+                    </div> 
+
+                </form>    
+                
+                  
+<div class="row" id="addquestion">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                     <div class="panel-body">
+                          <form method="post" ng-controller="quesCtrl">      
+                            <div class="form-group">
+                                    <label class="control-label col-sm-2" for="name">Question</label>
+                                     <div class="col-sm-10">
+                                          <textarea class="form-control" rows="5" id="qinput" name="ques" ng-model="quesForm.ques"></textarea>
+                                     </div>
+                            </div><br/><br/>
+                            <div class="form-group">
+                                    <label class="control-label col-sm-2" for="name">Question Type</label>
+                                     <div class="col-sm-10">
+                                        <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.questype">Objective</label>
+                                        <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.questype">True/False</label>
+                                         <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.questype">MultiSelect</label>
+                                     </div>
+                            </div>
+                        
+                                    <div class="form-group col-sm-11" style="display:none;" id="hidden_div_objective"> 
+                                        <h5>Enter Choices</h5>
+                                        <table class="table table-bordered  table-striped">
+                                        <thead>
+                                     <tr>
+                                        <th>No.</th>
+                                        <th>Correct</th>
+                                        <th>Options</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>A</td>
+                                        <td><input type="radio" name="optObj" value="objA" ng-model="quesForm.ansObj"  id="objective"></td>
+                                        <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optObjA" type="text"></td>
+                                      </tr>
+                                      <tr>
+                                        <td>B</td>
+                                        <td><input type="radio" name="optObj" value="objB" id="objective" ng-model="quesForm.ansObj"></td>
+                                        <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optObjB" type="text"></td>
+                                      </tr>
+                                      <tr>
+                                        <td>C</td>
+                                        <td><input type="radio" name="optObj" value="objC" id="objective" ng-model="quesForm.ansObj"></td>
+                                        <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optObjC" type="text"></td>
+                                      </tr>
+                                            <tr>
+                                        <td>D</td>
+                                        <td><input type="radio" name="optObj" value="objD" id="objective" ng-model="quesForm.ansObj"></td>
+                                        <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optObjD" type="text"></td>
+                                      </tr>
+                                    </tbody>
+                                     </table>
+                                </div>
+                                    <div class="form-group col-sm-12" style="display:none;" id="hidden_div_truefalse"> 
+                                        <h5>Answer</h5>
+                                        <label class="radio-inline"><input type="radio" name="optTrue" ng-model="quesForm.alterType" value="true" id="objective">True</label>
+                                        <label class="radio-inline"><input type="radio" name="optFalse"  ng-model="quesForm.alterType" value="false" id="true-false">False</label>
+                                </div>
+                                    <div class="form-group col-sm-11" style="display:none;" id="hidden_div_multiselect"> 
+                                        <h5>Enter Choices</h5>
+                                        <table class="table table-bordered  table-striped">
+                                        <thead>
+                                     <tr>
+                                        <th>No.</th>
+                                        <th>Correct</th>
+                                        <th>Options</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>A</td>
+                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiA"></td>
+                                        <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optMultiA" type="text"></td>
+                                      </tr>
+                                      <tr>
+                                        <td>B</td>
+                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiB"></td>
+                                        <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optMultiB" type="text"></td>
+                                      </tr>
+                                      <tr>
+                                        <td>C</td>
+                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiC"></td>
+                                        <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optMultiC"  type="text"></td>
+                                      </tr>
+                                            <tr>
+                                        <td>D</td>
+                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiD"></td>
+                                        <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optMultiD" type="text"></td>
+                                      </tr>
+                                    </tbody>
+                                     </table>
+                                </div>                 
+                        <div class="col-sm-12">
+                          <br/>
+                            <div class="form-group" id="mark">
+                                    <label class="control-label col-sm-2" for="name">Set Marks</label>
+                                     <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="minput" placeholder="Enter Marks" ng-model="quesForm.marks">
+                                     </div>
+                            </div>
+                          </div>  
+                          <div class="col-sm-12">
+                                    <div class="col-sm-2">
+                                        <br/>
+                                     <button class="btn btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button></a>
+                                     </div>
+                                     <div class="col-sm-10">
+                                        <br/>
+                                         <button class="btn btn-success" ng-click="quesForm.finish()">Done</button>
+                                     </div>
+                           </div>          
+                                                                  
+                    </form>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="js/newexam.js"></script>
+</body>
+
+</html>

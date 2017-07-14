@@ -11,6 +11,7 @@ var auth=require('./loginsauth.js');
 var mongoose=require('mongoose');
  var User=require('./userSchema.js');
  var Exam=require('./admin/js/examSchema.js');
+  var Question=require('./admin/js/quesSchema.js');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 var bodyParser=require('body-parser');
@@ -122,26 +123,52 @@ res.sendFile(__dirname+"/admin/index.html");
 });
  app.post('/examdetails',function (req,res){
   var data=req.body;
-  console.log(data);
+ // console.log(data);
   var examObj={
-    examname:data.examname,
-    examdes:data.examdes,
-    examdate:data.examdate,
-    exammarks:data.exammarks,
-    examtime:data.examtime,
-    examdur:data.examdur
+    examName:data.examname,
+    examDes:data.examdes,
+    examDate:data.examdate,
+    examMarks:data.exammarks,
+    examTime:data.examtime,
+    examDur:data.examdur
   };
   var exam=new Exam(examObj);
-  console.log(examObj);
+  //console.log(examObj);
   exam.save(function(err,exam,numAffected){
     if(err)
       throw err
      if(numAffected){
-    console.log("added",exam);
+   // console.log("added",exam);
     res.send(exam._id);
      }
   });
  });
+
+app.post('/question',function (req,res){
+var data=req.body;
+//console.log(data);
+var quesObj={
+    examId:data.examid,
+    quesType:data.questype,
+    quesName:data.question,
+    quesOptions:data.options,
+    quesAnswer:data.answer,
+    quesMarks:data.marks
+};
+console.log(quesObj,"server data");
+var question=new Question(quesObj);
+question.save(function (err,question,numAffected){
+    if (err) throw err
+        if(numAffected){
+            console.log(question.examId,"in");
+           // var mark=(question.quesMarks).toString();
+            res.send(question.examId);
+        }
+});
+});
+
+
+
  app.listen(8080,function(){
     console.log("localhost at 8080");
  });
