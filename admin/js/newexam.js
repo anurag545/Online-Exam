@@ -65,6 +65,8 @@ $http.post('/examdetails',examObj).then(function(response){
     //$log.log(idArray[1]);
    $scope.examid=idArray[1];
     console.log($scope.examid);
+    $scope.continue="";
+    $scope.finish="";
     $scope.quesForm={};
     $scope.quesForm.ques="";
     $scope.quesForm.questype="";
@@ -86,8 +88,9 @@ $http.post('/examdetails',examObj).then(function(response){
         var quesObj={};
     var optArray=[];
     var  ansArray=[];
-    $scope.quesForm.saveContinue=function (){
-    	console.log($scope.quesForm.questype);
+    $scope.quesForm.ContinueFinish=function (button){
+
+    	console.log(button,$scope.quesForm.questype);
      if($scope.quesForm.questype=="objective")
      {
          
@@ -156,16 +159,46 @@ $http.post('/examdetails',examObj).then(function(response){
          console.log(quesDetails);
           
        }  
+       if(button=="continue"){
        $http.post('/question',quesDetails).then(function (response){
        $scope.examId=response.data
         console.log($scope.examId,"done with servefr");
        // window.location="/newexam.html#!/addque/:"+$scope.examId;
-         window.location="/addexamques/:"+$scope.examid;
        },function (error){
        	console.log("question http error");
        })
+            $scope.quesForm.ques="";
+            $scope.quesForm.questype="";
+            $scope.quesForm.ansObj="";
+            $scope.quesForm.optObjA="";
+            $scope.quesForm.optObjB="";
+            $scope.quesForm.optObjC="";
+            $scope.quesForm.optObjD="";
+            $scope.quesForm.alterType="";
+            $scope.quesForm.ansMultiA="";
+            $scope.quesForm.ansMultiB="";
+            $scope.quesForm.ansMultiC="";
+            $scope.quesForm.ansMultiD="";
+            $scope.quesForm.optMultiA="";
+            $scope.quesForm.optMultiB="";
+            $scope.quesForm.optMultiC="";
+            $scope.quesForm.optMultiD="";
+            $scope.quesForm.marks="";
+
+
+        }
+        if(button=="finish"{
+        $http.post('/question',quesDetails).then(function (response){          
+        $scope.examid=response.data
+        console.log($scope.examid,"client done server");
+        window.location="/preview?examid="+$scope.examid;
+
+       },function (error){
+        console.log("question http error");
+       })
+      }
     };
-    $scope.quesForm.finish=function (){
+  /*  $scope.quesForm.finish=function (){
 
      	console.log($scope.quesForm.questype);
      if($scope.quesForm.questype=="objective")
@@ -245,7 +278,7 @@ $http.post('/examdetails',examObj).then(function(response){
        },function (error){
        	console.log("question http error");
        })
-    };
+    };*/
 
 
 

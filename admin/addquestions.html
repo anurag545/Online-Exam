@@ -104,11 +104,11 @@
                           <div class="col-sm-12">
                                     <div class="col-sm-2">
                                         <br/>
-                                     <button class="btn btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button></a>
+                                     <button class="btn btn-success" ng-model="continue" ng-click="quesForm.ContinueFinish(continue)">Save & Continue</button></a>
                                      </div>
                                      <div class="col-sm-10">
                                         <br/>
-                                         <button class="btn btn-success" ng-click="quesForm.finish()">Done</button>
+                                         <button class="btn btn-success" ng-model="finish" ng-click="quesForm.ContinueFinish(finish)">Done</button>
                                      </div>
                            </div>          
                                                                   

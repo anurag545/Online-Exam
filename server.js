@@ -43,22 +43,6 @@ app.use(express.static(__dirname+"/admin"));
   res.sendFile(__dirname + "/index.html");
  });
 
-/* eventEmitter.on('fileevent',function (obj){
-//console.log(obj.filename);
-var data=obj.req.body;
- //var filedata=obj.req.file;
- //console.log(filedata);
- var filename=obj.filename;
-
-
-
-
-
-  eventEmitter.on('success',function (){
-    console.log("helooo");
-  //res.redirect('/loginpage');
- });*/
-
  app.post('/signup',upload.single('profilepic'),function (req,res){
   //console.log("Request in server");
   var data=req.body;
@@ -166,7 +150,11 @@ question.save(function (err,question,numAffected){
         }
 });
 });
-
+app.get('/addexamques',function (req,res){
+  var examid=req.params.examid;
+  console.log(examid);
+  res.redirect('/')
+});
 
 
  app.listen(8080,function(){
