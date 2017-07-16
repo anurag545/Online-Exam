@@ -32,7 +32,7 @@ var storage=multer.diskStorage({
      req.body.profilePicName=filename;
 //eventEmitter.emit('fileevent',{req:req,filename:filename});
     cb(null,filename);
-   } 
+   }
 });
 var upload=multer({storage:storage});
 
@@ -97,8 +97,8 @@ var data=req.body;
      res.status(200).json({
       success:true,
       token:token
-     });   
-     }  
+     });
+     }
 });
 
  });
@@ -150,12 +150,31 @@ question.save(function (err,question,numAffected){
         }
 });
 });
-app.get('/addexamques',function (req,res){
+app.get('/preview',function (req,res){
   var examid=req.params.examid;
   console.log(examid);
-  res.redirect('/')
+  res.sendFile(__dirname+"admin/previewexam.html");
 });
+app.get('/examDetails',function(req,res){
+  var examid=req.query.examid;
+  Exam.findbyId(examid, function(err,exam) {
+  if (err) throw err;
 
+  // object of the user
+  console.log(exam);
+  res.send(exam);
+});
+});
+app.get('/questionsDetails',function (req,res){
+  var examid=req.query.examid;
+  Question.find({ examId: examid }, function(err,questions) {
+  if (err) throw err;
+
+  // object of the user
+  console.log(questions);
+  res.send(questions);
+});
+});
 
  app.listen(8080,function(){
     console.log("localhost at 8080");
