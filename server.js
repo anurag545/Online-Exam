@@ -3,6 +3,7 @@ var app=express();
 var fs=require('fs');
 var path=require('path');
 
+var Cookies=require('cookies');
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('./config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
@@ -94,21 +95,19 @@ var data=req.body;
       email=user[0].email;
       //console.log(email,user);
      var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
-     res.status(200).json({
-      success:true,
-      token:token
-     });
-     }
-});
-
+     var cookies=new Cookies (req,res);
+     cookies.set("token",token);
+     res.sendStatus(200);
+   }
+ });
  });
  app.get('/home',auth.verifyToken,function(req,res){
 res.sendFile(__dirname+"/admin/index.html");
 });
- app.post('/examdetails',function (req,res){
-  var data=req.body;
+ app.post('/examdetails',auth.verifyToken,function (req,res){
+    var data=req.body;
  // console.log(data);
-  var examObj={
+    var examObj={
     examName:data.examname,
     examDes:data.examdes,
     examDate:data.examdate,
@@ -162,7 +161,7 @@ app.get('/examDetails',function(req,res){
   res.send(exam);
 });
 });
-app.get('/questionsDetails',function (req,res){
+app.get('/questionsDetails',auth.verifyToken,function (req,res){
   var examid=req.query.examid;
   Question.find({ examId: examid }, function(err,questions) {
   if (err) throw err;
@@ -170,7 +169,12 @@ app.get('/questionsDetails',function (req,res){
   res.send(questions);
 });
 });
-
+app.get('/logout',auth.verifyToken,function (req,res){
+  var cookies=new Cookies (req,res);
+  var  time=new Date();
+  console.log(time);
+  cookies.set("token","",{expires:new Date()});
+});
  app.listen(8080,function(){
     console.log("localhost at 8080");
  });

@@ -1,8 +1,12 @@
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('./config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
+var Cookies=require('cookies');
 function verifyToken(request,response,next){
-var token=request.body.token || request.query.token || request.headers['x-access-token'];
+  var cookies=new Cookies(request,response);
+  var tokenCookies=cookies.get("token");
+  console.log(tokenCookies);
+var token=request.body.token || request.query.token || request.headers['x-access-token'] || tokenCookies;
  if(token){
 jsonwebtoken.verify(token,TOKEN_SECRET,function (err,decoded){
 if(err){

@@ -9,7 +9,17 @@ app.config(['$routeProvider',function($routeProvider){
         controller :'quesCtrl'
     })
 }]);
-
+app.controller('mainExamCtrl',['$scope','$http',function($scope,$http){
+$scope.Logout=function(){
+   $http.get('/logout').then(function (response){});
+}
+$scope.Profile()=function (){
+ window.location="/profile";
+}
+$scope.Setting()=function (){
+  winddow.location="/settings";
+}
+}]);
 app.controller('examCtrl',['$scope','$http','$log',function ($scope,$http,$log){
 $scope.examForm={};
 

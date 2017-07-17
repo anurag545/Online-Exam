@@ -22,8 +22,8 @@
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
       <script src="js/bootstrap.min.js"></script>
-      <script src="js/preview.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -249,7 +249,7 @@
                                      <table class="table" align="left">
                                              <tbody>
                                                <tr ng-repeat="options in question.quesOptions">
-                                                 <td width="5%">{{$index}}{{ String.fromCharCode(65+$index)}}</td>
+                                                 <td width="5%">{{optionArr[$index]}}</td>
                                                  <td width="5%"><input type="checkbox" name="optMulti" ng-if="question.quesType=='multiselect'" ><input type="radio" name="optMulti" ng-if="question.quesType!='multiselect'" ></td>
                                                  <td>{{options}}</td>
                                                </tr>
@@ -262,7 +262,7 @@
                      <div class="col-sm-12">
                              <div class="col-sm-6" align="right">
                                    <br/>
-                                <a href="/home"><button class="btn btn-success">Save Only</button></a>
+                                <a<button class="btn btn-success" ng-click="SaveOnly()">Save Only</button></a>
                                 </div>
                                 <div class="col-sm-6" align="left">
                                    <br/>
@@ -294,7 +294,7 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
+             <script src="js/preview.js"></script>
     <!-- Bootstrap Core JavaScript -->
 </body>
 
