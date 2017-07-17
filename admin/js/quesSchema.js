@@ -5,8 +5,8 @@ var questionSchema=new Schema({
 	examId:{type:String,required:true},
 	quesType:{type:String,required:true},
     quesName:{type:String,required:true},
-    quesOptions:{type:String,required:true},
-    quesAnswer:{type:String,required:true},
+    quesOptions:{type:[String],required:true},
+    quesAnswer:{type:[String],required:true},
     quesMarks:{type:Number,required:true}
 });
 

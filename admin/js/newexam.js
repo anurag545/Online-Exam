@@ -1,4 +1,4 @@
-var app = angular.module('examApp', ['ngRoute']);
+var app = angular.module('examApp',['ngRoute']);
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider.when('/',{
    templateUrl : "newexamdetail.html",
@@ -28,13 +28,12 @@ $scope.examForm.xdur="";
 
 
 var picker = new Pikaday(
- {
-     field: document.getElementById('datepicker'),
-      format: 'YYYY-MM-DD',
-   firstDay: 1,
+     {
+       field: document.getElementById('datepickeronly'),
+       format: 'YYYY-MM-DD',
+       firstDay: 1,
        minDate: new Date(),
-    maxDate: new Date(2020, 12, 31),
-  yearRange: [1930,2020],
+      maxDate: new Date(2020, 12, 31)
 
    });
 $scope.examForm.examSubmit=function (){
@@ -89,7 +88,7 @@ $http.post('/examdetails',examObj).then(function(response){
     var  ansArray=[];
     $scope.quesForm.saveContinue=function (){
 
-    	console.log(button,$scope.quesForm.questype);
+    	console.log($scope.quesForm.questype);
       var quesObj={};
   var optArray=[];
   var  ansArray=[];
@@ -100,11 +99,12 @@ $http.post('/examdetails',examObj).then(function(response){
         	optArray.push($scope.quesForm.optObjA);
         } if($scope.quesForm.optObjB){
         	optArray.push($scope.quesForm.optObjB);
-        } if($scope.quesForm.optObjB){
+        } if($scope.quesForm.optObjC){
         	optArray.push($scope.quesForm.optObjC);
-        } if($scope.quesForm.optObjB){
+        } if($scope.quesForm.optObjD){
         	optArray.push($scope.quesForm.optObjD);
         }
+        ansArray.push($scope.quesForm.ansObj);
       // console.log(optArray);
          quesDetails={
          examid:	$scope.examid,
@@ -117,6 +117,9 @@ $http.post('/examdetails',examObj).then(function(response){
         console.log(quesDetails);
      }
      else if($scope.quesForm.questype=="true-false"){
+          ansArray.push($scope.quesForm.alterType);
+          optArray.push("True");
+          optArray.push("False");
           quesDetails={
          examid:	$scope.examid,
          questype: $scope.quesForm.questype,
@@ -161,7 +164,18 @@ $http.post('/examdetails',examObj).then(function(response){
          console.log(quesDetails);
 
        }
+       console.log(ansArray.length,optArray.length);
+       if(ansArray.length==0 || optArray.length<=1)
+       {
+         $scope.emsg="Plz select options/answer";
 
+         return
+       }else if($scope.quesForm.ques=="" ||  $scope.quesForm.marks=="" || $scope.quesForm.questype==""){
+         $scope.emsg="Plz fill all fields";
+         return
+       }
+       else{
+         $scope.emsg="";
        $http.post('/question',quesDetails).then(function (response){
        $scope.examId=response.data
         console.log($scope.examId,"done with servefr");
@@ -188,6 +202,7 @@ $http.post('/examdetails',examObj).then(function(response){
        },function (error){
        	console.log("question http error");
        })
+     }
     };
     $scope.quesForm.Finish=function (){
 
@@ -195,86 +210,100 @@ $http.post('/examdetails',examObj).then(function(response){
      if($scope.quesForm.questype=="objective")
      {
 
-        if($scope.quesForm.optObjA){
-        	optArray.push($scope.quesForm.optObjA);
-        } if($scope.quesForm.optObjB){
-        	optArray.push($scope.quesForm.optObjB);
-        } if($scope.quesForm.optObjB){
-        	optArray.push($scope.quesForm.optObjC);
-        } if($scope.quesForm.optObjB){
-        	optArray.push($scope.quesForm.optObjD);
-        }
-       console.log(optArray);
-        var quesDetails={
-         examid:	$scope.examid,
-         questype: $scope.quesForm.questype,
-         question: $scope.quesForm.ques,
-         answer:   $scope.quesForm.ansObj,
-         options:  optArray,
-         marks:    $scope.quesForm.marks
+       if($scope.quesForm.optObjA){
+         optArray.push($scope.quesForm.optObjA);
+       } if($scope.quesForm.optObjB){
+         optArray.push($scope.quesForm.optObjB);
+       } if($scope.quesForm.optObjC){
+         optArray.push($scope.quesForm.optObjC);
+       } if($scope.quesForm.optObjD){
+         optArray.push($scope.quesForm.optObjD);
+       }
+       ansArray.push($scope.quesForm.ansObj);
+     // console.log(optArray);
+        quesDetails={
+        examid:	$scope.examid,
+        questype: $scope.quesForm.questype,
+        question: $scope.quesForm.ques,
+        answer:   $scope.quesForm.ansObj,
+        options:  optArray,
+        marks:    $scope.quesForm.marks
+       };
+       console.log(quesDetails);
+    }
+    else if($scope.quesForm.questype=="true-false"){
+         ansArray.push($scope.quesForm.alterType);
+         optArray.push("True");
+         optArray.push("False");
+         quesDetails={
+        examid:	$scope.examid,
+        questype: $scope.quesForm.questype,
+        question: $scope.quesForm.ques,
+        options:  ["True","False"],
+        answer:   $scope.quesForm.alterType,
+        marks:    $scope.quesForm.marks
         };
         console.log(quesDetails);
-     }
-     else if($scope.quesForm.questype=="true-false"){
-         var quesDetails={
-         examid:	$scope.examid,
-         questype: $scope.quesForm.questype,
-         question: $scope.quesForm.ques,
-         options:  ["True","False"],
-         answer:   $scope.quesForm.alterType,
-         marks:    $scope.quesForm.marks
-         };
-         console.log(quesDetails);
-     }
-     else if($scope.quesForm.questype=="multiselect"){
+    }
+    else if($scope.quesForm.questype=="multiselect"){
 
 
-        if($scope.quesForm.optMultiA){
-        	optArray.push($scope.quesForm.optMultiA);
-        } if($scope.quesForm.optMultiB){
-        	optArray.push($scope.quesForm.optMultiB);
-        } if($scope.quesForm.optMultiC){
-        	optArray.push($scope.quesForm.optMultiC);
-        } if($scope.quesForm.optMultiD){
-        	optArray.push($scope.quesForm.optMultiD);
-        }
-
-        if($scope.quesForm.ansMultiA){
-        	ansArray.push($scope.quesForm.ansMultiA);
-        } if($scope.quesForm.ansMultiB){
-        	ansArray.push($scope.quesForm.ansMultiB);
-        } if($scope.quesForm.ansMultiC){
-        	ansArray.push($scope.quesForm.ansMultiC);
-        } if($scope.quesForm.ansMultiD){
-        	ansArray.push($scope.quesForm.ansMultiD);
-        }
-         console.log(optArray,ansArray);
-         var quesDetails={
-         examid:	$scope.examid,
-         questype: $scope.quesForm.questype,
-         question: $scope.quesForm.ques,
-         options:  optArray,
-         answer:   ansArray,
-         marks:    $scope.quesForm.marks
-         };
-         console.log(quesDetails);
-
+       if($scope.quesForm.optMultiA){
+         optArray.push($scope.quesForm.optMultiA);
+       } if($scope.quesForm.optMultiB){
+         optArray.push($scope.quesForm.optMultiB);
+       } if($scope.quesForm.optMultiC){
+         optArray.push($scope.quesForm.optMultiC);
+       } if($scope.quesForm.optMultiD){
+         optArray.push($scope.quesForm.optMultiD);
        }
 
+       if($scope.quesForm.ansMultiA){
+         ansArray.push($scope.quesForm.ansMultiA);
+       } if($scope.quesForm.ansMultiB){
+         ansArray.push($scope.quesForm.ansMultiB);
+       } if($scope.quesForm.ansMultiC){
+         ansArray.push($scope.quesForm.ansMultiC);
+       } if($scope.quesForm.ansMultiD){
+         ansArray.push($scope.quesForm.ansMultiD);
+       }
+        console.log(optArray,ansArray);
+        var quesDetails={
+        examid:	$scope.examid,
+        questype: $scope.quesForm.questype,
+        question: $scope.quesForm.ques,
+        options:  optArray,
+        answer:   ansArray,
+        marks:    $scope.quesForm.marks
+        };
+        console.log(quesDetails);
+
+      }
+       if(ansArray.length==0 || optArray.length<=1)
+       {
+         $scope.emsg="Plz select options/answer";
+         return
+       }else if($scope.quesForm.ques=="" ||  $scope.quesForm.marks=="" || $scope.quesForm.questype==""){
+         $scope.emsg="Plz fill all fields";
+         return
+       }
+       else {
+         $scope.emsg="";
        $http.post('/question',quesDetails).then(function (response){
         $scope.examid=response.data
         console.log($scope.examid,"client done server");
-        window.location="/preview/:examid="+$scope.examid;
+        window.location="/preview?examid="+$scope.examid;
 
        },function (error){
        	console.log("question http error");
-       })
+      });
+     }
     };
 }]);
 
 
 /*previewqQuestionPaper*/
-var appPreview=angular.module('previewApp', []);
+/*var appPreview=angular.module('previewApp', []);
 appPreview.controller('previewCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
   $scope.examid=$routeParams.examid;
   $http.get('/examDetails?examid='+$scope.examid).then(function(response){
@@ -290,5 +319,5 @@ console.log(questions);
 },function (error){console.log("error in previre http questions")});
 
 }]);
-
+*/
 /*end*/

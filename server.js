@@ -151,17 +151,14 @@ question.save(function (err,question,numAffected){
 });
 });
 app.get('/preview',function (req,res){
-  var examid=req.params.examid;
-  console.log(examid);
-  res.sendFile(__dirname+"admin/previewexam.html");
+  res.sendFile(__dirname+"/admin/previewexam.html");
 });
 app.get('/examDetails',function(req,res){
   var examid=req.query.examid;
-  Exam.findbyId(examid, function(err,exam) {
+  //console.log(examid);
+  Exam.findById(examid, function(err,exam) {
   if (err) throw err;
-
-  // object of the user
-  console.log(exam);
+  //console.log(exam);
   res.send(exam);
 });
 });
@@ -169,8 +166,6 @@ app.get('/questionsDetails',function (req,res){
   var examid=req.query.examid;
   Question.find({ examId: examid }, function(err,questions) {
   if (err) throw err;
-
-  // object of the user
   console.log(questions);
   res.send(questions);
 });

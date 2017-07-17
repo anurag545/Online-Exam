@@ -7,12 +7,12 @@
                             </div>
                                 <div class="form-group">
                                 <label>Exam Date</label>
-                                <input class="form-control" name="xdate" ng-model="examForm.xdate"type="text" id="datepicker" placeholder="Exam Date" required>
+                                <input class="form-control" name="xdate" ng-model="examForm.xdate" type="text" id="datepickeronly" placeholder="Exam Date" required>
                             </div>
 
                           <div class="form-group">
                                 <label>Exam Time </label>
-                                <input class="form-control" name="xtime" ng-model="examForm.xtime" placeholder="Exam Time" type="text" id="timepicker" required>
+                                <input class="form-control" name="xtime" pattern="^[0-9]*$" ng-model="examForm.xtime" placeholder="Exam Time" type="text" required>
                             </div>
 
                     </div>
@@ -25,11 +25,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Marks</label>
-                                <input class="form-control" name="xmarks" ng-model="examForm.xmarks" placeholder="Enter marks" type="text" required>
+                                <input class="form-control" pattern="^[0-9]*$" name="xmarks" ng-model="examForm.xmarks" placeholder="Enter marks" type="text" required>
                             </div>
                             <div class="form-group">
                                 <label>Duration</label>
-                                <input class="form-control" name="xdur" ng-model="examForm.xdur" placeholder="In Minutes" type="text" required>
+                                <input class="form-control" pattern="^[0-9]*$" name="xdur" ng-model="examForm.xdur" placeholder="In Minutes" type="text" required>
                             </div>
                     </div>
 

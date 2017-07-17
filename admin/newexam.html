@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="examApp">
 
 <head>
 
@@ -23,9 +23,8 @@
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
-
-       <script src="js/moment.min.js"></script>
-      <script src="js/pikaday.js"></script>
+      <script src="js/moment.min.js"></script>
+     <script src="js/pikaday.js"></script>
        <link href="css/pikaday.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -203,7 +202,7 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid" ng-app="examApp">
+            <div class="container-fluid">
 
                 <!-- Page Heading -->
               <script type="text/javascript">
@@ -246,9 +245,6 @@
         document.getElementById('hidden_div_truefalse').style.display = "none";
 
     }
-    function showque(){
-        document.getElementById('addquestion').style.display="block";
-    }
     }
 
               </script>
@@ -283,7 +279,6 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="js/newexam.js"></script>
 </body>
