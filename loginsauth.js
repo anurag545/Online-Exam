@@ -3,9 +3,10 @@ var CONFIG=require('./config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
 var Cookies=require('cookies');
 function verifyToken(request,response,next){
-  var cookies=new Cookies(request,response);
-  var tokenCookies=cookies.get("token");
-  console.log(tokenCookies);
+  //var cookies=new Cookies(request,response);
+  //var tokenCookies=cookies.get("token");
+  var tokenCookies=request.cookies.token;
+  //console.log(tokenCookies);
 var token=request.body.token || request.query.token || request.headers['x-access-token'] || tokenCookies;
  if(token){
 jsonwebtoken.verify(token,TOKEN_SECRET,function (err,decoded){
@@ -28,8 +29,9 @@ if(err){
   }
 }
 function getTokenPayload(request){
+  var tokenCookies=request.cookies.token;
  var payload=null;
- var token=request.body.token || request.query.token || request.headers['x-access-token'];
+ var token=request.body.token || request.query.token || request.headers['x-access-token'] || tokenCookies ;
  if(token){
   payload=jsonwebtoken.decode(token,{complete:true}).payload;
  }
@@ -37,10 +39,10 @@ function getTokenPayload(request){
 }
 function getUserIdNameFromToken (request){
 	var payload=getTokenPayload(request);
-	if(playload){
+	if(payload){
 		return payload;
 	}
-  return null;
+    return null;
 }
 module.exports={
 	verifyToken:verifyToken,

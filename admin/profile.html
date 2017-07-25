@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="examApp">
+<html lang="en" ng-app="mainApp">
 
 <head>
 
@@ -35,7 +35,7 @@
     <![endif]-->
 </head>
 
-<body ng-controller="mainExamCtrl">
+<body ng-controller="mainCtrl">
 
     <div id="wrapper">
 
@@ -201,7 +201,7 @@
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" ng-controller="profileCtrl">
 
             <div class="container-fluid">
 
@@ -209,7 +209,7 @@
                 <div class="row">
                     <div class="col-lg-12" style="position:'fixed';">
                         <h1 class="page-header">
-                            New Exam
+                          Profile
                             <small></small>
                         </h1>
                         <ol class="breadcrumb">
@@ -217,16 +217,91 @@
                                 <i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> New Exam
+                                <i class="fa fa-file"></i> Profile
                             </li>
                         </ol>
                     </div>
                 </div>
 <!-- /.row -->
-                <div class="row" ng-view>
+            <div class="row" ng-view>
 
+                        <div class="col-md-4" align="center" style="min-height:600px">
+                        <img src="../uploads/{{myProfile.profilepic}}" width="300px" >
+                        <div>
+                          {{name}}
+                        </div>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="form-group">
+                              <label>UserName</label>
+                              <input class="form-control" name="pname" ng-model="myProfile.name"
+                           type="text" required>
+                          </div>
+                              <div class="form-group">
+                              <label>Phone</label>
+                              <input class="form-control" name="pdate" pattern="^[0-9]*$" ng-model="myProfile.phone" type="text" required>
+                          </div>
 
+                        <div class="form-group">
+                              <label>Email</label>
+                              <input class="form-control" name="ptime" ng-model="myProfile.email" type="email" required>
+                          </div>
+
+                       <div class="form-group">
+                     <label for="address">Address:</label>
+                       <input type="text" class="form-control"  name ="paddress" ng-model="myProfile.address" id="address"  required>
+                   </div>
+
+                   <div class="form-group">
+                   <label for="sel1">Country:</label>
+                   <select class="form-control" id="sel1"  name ="country" ng-model="myProfile.country">
+                     <option>India</option>
+                     <option>Pakistan</option>
+                     <option>USA</option>
+                     <option>Switerzland</option>
+                   </select>
+                   </div>
+
+                        <div class="form-group">
+                     <label for="gender">Gender:</label><br>
+
+                           <label class="radio-inline">
+                       <input type="radio" name="gender"  ng-model="myProfile.gender" value="Male" required>Male
+                     </label>
+                     <label class="radio-inline">
+                       <input type="radio" name="gender"  ng-model="myProfile.gender" value="Female"required>Female
+                     </label>
+                   </div>
+                     <div class="form-group" ngif="myProfile.job!==''">
+                     <label for="job">Qualification/Job:</label>
+                       <input type="text" class="form-control" name="occupation" ng-model="myProfile.job" pattern="^[a-zA-Z ]+$" id="occupation" placeholder="Enter School">
+                   </div>
+
+                       <div class="form-group">
+                     <label for="birthdate">Birth Date:</label>
+                       <input type="text" class="form-control" name="dob" ng-value="myProfile.birthdate | date" id="datepicker" required>
+                                 <script src="js/moment.min.js"></script>
+                  <script src="js/pikaday.js"></script>
+
+                     <script>
+
+                     var picker = new Pikaday(
+                     {
+                         field: document.getElementById('datepicker'),
+                    format: 'YYYY-MM-DD',
+                         firstDay: 1,
+                         minDate: new Date(1930,1,1),
+                         maxDate: new Date(2020, 12, 31),
+                         yearRange: [1930,2020],
+
+                     });
+
+                     </script>
+                   </div>
+
+         <!--row end below tag -->
             </div>
+
             <!-- /.container-fluid -->
 
         </div>
@@ -238,7 +313,7 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="js/newexam.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
 </body>
 
 </html>

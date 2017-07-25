@@ -225,9 +225,11 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
-
-
-
+/*Dashboard*/
+ .page-header{
+   margin-top: 0px;
+ }
+/*End*/
 /*Edited Form.html*/
 #qinput {
     width: 70%;
@@ -243,7 +245,7 @@ width: 30%;
 /*End*/
 /*peviewexamhtml*/
 .preview-questions{
-  margin-top:15px; 
+  margin-top:15px;
 }
 .question-number,.col-md-1{
   width:2%;

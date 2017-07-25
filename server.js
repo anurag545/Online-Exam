@@ -3,12 +3,15 @@ var app=express();
 var fs=require('fs');
 var path=require('path');
 
-var Cookies=require('cookies');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+//var Cookies=require('cookies');
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('./config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
 var auth=require('./loginsauth.js');
-
+var UserClass=require('./model/user.js');
+var UserC=new UserClass();
 var mongoose=require('mongoose');
  var User=require('./userSchema.js');
  var Exam=require('./admin/js/examSchema.js');
@@ -76,7 +79,33 @@ console.log("Connected to DB");
  app.get('/loginpage',function(req,res){
 res.sendFile(__dirname+"/adminlogin.html");
 });
- app.post('/login',function (req,res){
+app.post('/login',function (req,res){
+var data=req.body;
+//console.log(data,"data");
+//console.log(data.username,"datauser")
+var user=[];
+UserC.Login(data,function(user){
+console.log(user);
+if(user.length=="0"){
+   var obj={
+     err:{
+       errmsg:"Invalid UserName/password"
+     }
+   }
+   res.send(obj);
+
+ }else if(user.length!="0"){
+ //  console.log("avaialble");
+   email=user[0].email;
+   //console.log(email,user);
+  var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
+  //var cookies=new Cookies (req,res);
+  //cookies.set("token",token);
+  res.cookie('token',token).sendStatus(200);
+}
+});
+});
+ /*app.post('/login',function (req,res){
 var data=req.body;
 //console.log(data,"data");
  User.find({ email:data.username ,password:data.password}, function(err, user) {
@@ -94,15 +123,27 @@ var data=req.body;
     //  console.log("avaialble");
       email=user[0].email;
       //console.log(email,user);
-     var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
-     var cookies=new Cookies (req,res);
-     cookies.set("token",token);
-     res.sendStatus(200);
+     var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES});
+     //var cookies=new Cookies (req,res);
+     //cookies.set("token",token);
+     res.cookie('token',token).sendStatus(200);
    }
  });
- });
+ });*/
  app.get('/home',auth.verifyToken,function(req,res){
 res.sendFile(__dirname+"/admin/index.html");
+});
+app.get('/profile',auth.verifyToken,function(req,res){
+res.sendFile(__dirname+"/admin/profile.html");
+});
+app.get('/profileDetails',auth.verifyToken,function (req,res){
+  var payloadData=auth.getUserIdNameFromToken;
+  var  data=payloadData(req);
+  User.find({email:data.id}, function(err,userProfile) {
+  if (err) throw err;
+  console.log(userProfile);
+  res.send(userProfile);
+});
 });
  app.post('/examdetails',auth.verifyToken,function (req,res){
     var data=req.body;
@@ -170,10 +211,18 @@ app.get('/questionsDetails',auth.verifyToken,function (req,res){
 });
 });
 app.get('/logout',auth.verifyToken,function (req,res){
-  var cookies=new Cookies (req,res);
-  var  time=new Date();
-  console.log(time);
-  cookies.set("token","",{expires:new Date()});
+  //var cookies=new Cookies (req,res);
+  //var  time=new Date();
+  //console.log(time);
+  //cookies.set("token","",{expires:new Date()});
+  //res.cookie(name , 'value', {expire : new Date() + 9999});
+    var token1=req.cookies.token;
+    console.log(token1,"1");
+    //res.cookie("token",token1, {expire : new Date()+9999});
+    //res.clearCookie('token');
+    res.cookie("token","");
+    console.log(req.cookies.token,"2");
+    res.sendStatus(200);
 });
  app.listen(8080,function(){
     console.log("localhost at 8080");
