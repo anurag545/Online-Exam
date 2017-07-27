@@ -5,12 +5,11 @@ var mongoose=require('mongoose');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 function UserClass(){
-  this.name="Anurag";
   this.Login=function (data,callback){
     //console.log(data);
      User.find({ email:data.username ,password:data.password}, function(err, user) {
       if (err) throw err;
-      console.log("user",user);;
+    //  console.log("user",user);;
        callback(user);
      });
 

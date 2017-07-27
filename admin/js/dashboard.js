@@ -1,8 +1,17 @@
+var rootApp=angular.module('rootApp',['mainApp','examApp']);
 var appMain = angular.module('mainApp',[]);
 appMain.controller('mainCtrl',['$scope','$http',function($scope,$http){
 $scope.Logout=function(){
-   $http.get('/logout').then(function (response){});
+   $http.get('/logout').then(function (response){
+     if(response.status===200){
+       console.log("done");
+       window.location="/loginpage";
+     }
+   });
 }
+$http.get('/name').then(function(response){
+   $scope.name=response.data;
+});
 $scope.Profile=function (){
  window.location="/profile";
 }

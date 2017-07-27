@@ -77,15 +77,14 @@ console.log("Connected to DB");
 });
 
  app.get('/loginpage',function(req,res){
+   console.log(res.cookies);
 res.sendFile(__dirname+"/adminlogin.html");
 });
 app.post('/login',function (req,res){
 var data=req.body;
-//console.log(data,"data");
-//console.log(data.username,"datauser")
 var user=[];
 UserC.Login(data,function(user){
-console.log(user);
+//console.log(user);
 if(user.length=="0"){
    var obj={
      err:{
@@ -95,12 +94,8 @@ if(user.length=="0"){
    res.send(obj);
 
  }else if(user.length!="0"){
- //  console.log("avaialble");
    email=user[0].email;
-   //console.log(email,user);
   var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
-  //var cookies=new Cookies (req,res);
-  //cookies.set("token",token);
   res.cookie('token',token).sendStatus(200);
 }
 });
@@ -136,6 +131,11 @@ res.sendFile(__dirname+"/admin/index.html");
 app.get('/profile',auth.verifyToken,function(req,res){
 res.sendFile(__dirname+"/admin/profile.html");
 });
+app.get('/name',auth.verifyToken,function(req,res){
+    var payloadData=auth.getUserIdNameFromToken;
+    var data=payloadData(req);
+    res.send(data.username);
+});
 app.get('/profileDetails',auth.verifyToken,function (req,res){
   var payloadData=auth.getUserIdNameFromToken;
   var  data=payloadData(req);
@@ -163,12 +163,12 @@ app.get('/profileDetails',auth.verifyToken,function (req,res){
       throw err
      if(numAffected){
    // console.log("added",exam);
-    res.send(exam._id);
+    res.send(eauth.verifyToken,xam._id);
      }
   });
  });
 
-app.post('/question',function (req,res){
+app.post('/question',auth.verifyToken,function (req,res){
 var data=req.body;
 //console.log(data);
 var quesObj={
@@ -190,10 +190,10 @@ question.save(function (err,question,numAffected){
         }
 });
 });
-app.get('/preview',function (req,res){
+app.get('/preview',auth.verifyToken,function (req,res){
   res.sendFile(__dirname+"/admin/previewexam.html");
 });
-app.get('/examDetails',function(req,res){
+app.get('/examDetails',auth.verifyToken,auth.verifyToken,function(req,res){
   var examid=req.query.examid;
   //console.log(examid);
   Exam.findById(examid, function(err,exam) {
@@ -211,17 +211,9 @@ app.get('/questionsDetails',auth.verifyToken,function (req,res){
 });
 });
 app.get('/logout',auth.verifyToken,function (req,res){
-  //var cookies=new Cookies (req,res);
-  //var  time=new Date();
-  //console.log(time);
-  //cookies.set("token","",{expires:new Date()});
-  //res.cookie(name , 'value', {expire : new Date() + 9999});
-    var token1=req.cookies.token;
-    console.log(token1,"1");
-    //res.cookie("token",token1, {expire : new Date()+9999});
-    //res.clearCookie('token');
-    res.cookie("token","");
-    console.log(req.cookies.token,"2");
+    //var token1=req.cookies.token;
+    res.clearCookie('token',{path:'/'});
+    //console.log(req.cookies,"2");
     res.sendStatus(200);
 });
  app.listen(8080,function(){

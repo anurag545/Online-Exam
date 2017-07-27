@@ -262,3 +262,10 @@ width: 30%;
   border-top: 0px;
 }
 /*end*/
+/*exam form*/
+#examform{
+  min-height: 500px;
+}
+#addquestion{
+  min-height: 200px;
+}

@@ -22,10 +22,11 @@ if(err){
    });
   }
   else{
-  	response.status(403).json({
+     response.redirect('/loginpage');
+  	/*response.status(403).json({
   		success:false,
   		message:'No token provided'
-  	});
+  	});*/
   }
 }
 function getTokenPayload(request){
