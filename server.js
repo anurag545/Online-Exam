@@ -163,7 +163,7 @@ app.get('/profileDetails',auth.verifyToken,function (req,res){
       throw err
      if(numAffected){
    // console.log("added",exam);
-    res.send(eauth.verifyToken,xam._id);
+    res.send(exam._id);
      }
   });
  });
