@@ -1,25 +1,15 @@
 var mongoose=require('mongoose');
- var Student=require('../schemas/studentSchema.js');
- var Teacher=require('../schemas/teacherSchema.js');
+ var User=require('../schemas/userSchema.js');
  //var Exam=require('../admin/js/examSchema.js');
   //var Question=require('../admin/js/quesSchema.js');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 function UserAuth(){
   this.signInWithUserNameAndPassword=function (data,callback){
-    if(data.client==="student"){
-     Student.find({ email:data.username ,password:data.password}, function(err, user) {
+   User.find({ email:data.username ,password:data.password}, function(err, user) {
       if (err) throw err;
        callback(user);
      });
-   }
-   if(data.client==="teacher"){
-    Teacher.find({ email:data.username ,password:data.password}, function(err, user) {
-     if (err) throw err;
-      callback(user);
-    });
-  }
-
   }
   this.signupdata=function (data,callback){
         var userObj={
@@ -27,7 +17,6 @@ function UserAuth(){
                phone:data.phone,
                email:data.email,
                password:data.pwd,
-               client:data.client,
                address:data.address,
                country:data.country,
                gender:data.gender,
@@ -35,27 +24,15 @@ function UserAuth(){
                birthdate:data.dob,
                profilepic:data.profilePicName
            };
-           console.log(userObj,"model");
-           console.log(data.client);
-           if(data.client=="Student"){
-             var  student=new Student(userObj);
-             student.save(function(err,numAffected){
+           //console.log(userObj,"model");
+           //console.log(data.client);
+             var  user=new User(userObj);
+               user.save(function(err,numAffected){
                if(err) throw err;
                console.log("modeldb");
                callback(numAffected);
              });
-           }
-           else if(data.client=="Teacher"){
-             var  teacher=new Teacher(userObj);
-             teacher.save(function(err,numAffected){
-               if(err) throw err;
-               callback(numAffected);
-             });
-           }
-
     }
-
-
 }
 /*var mongoose=require('mongoose');
  var User=require('../userSchema.js');

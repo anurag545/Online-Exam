@@ -6,15 +6,16 @@ var path=require('path');
 var teacher = require("./routes/teacher");
 var student =require("./routes/student");
 
+var user=require('./controllers/user.js');
+
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
-//var Cookies=require('cookies');
+
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('./config/config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
 var auth=require('./config/loginsauth.js');
-var UserClass=require('./controllers/user.js');
-var UserC=new UserClass();
+
 var mongoose=require('mongoose');
  var User=require('./userSchema.js');
  var Exam=require('./admin/js/examSchema.js');
@@ -46,63 +47,20 @@ var upload=multer({storage:storage});
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname+"/admin"));
- app.get('/',function(req,res){
-  res.sendFile(__dirname + "/index.html");
- });
 
- app.post('/signup',upload.single('profilepic'),function (req,res){
-  //console.log("Request in server");
-  var data=req.body;
- var userObj={
-        username:data.uname,
-        phone:data.phone,
-        email:data.email,
-        password:data.pwd,
-        address:data.address,
-        country:data.country,
-        gender:data.gender,
-        job:data.job,
-        birthdate:data.dob,
-        profilepic:data.profilePicName
-    };
+app.get('/',user.home);
 
-console.log("Connected to DB");
-  //console.log(userObj);
-  var  user=new User(userObj);
-  user.save(function(err,numAffected){
-    if(err) throw err;
-   //  mongoose.connection.close();
-   if(numAffected){
-   //console.log("db done");
-    res.status(200).send();
-    }
-  });
-});
+app.post('/signup',upload.single('profilepic'),user.signup);
 
- app.get('/loginpage',function(req,res){
-   console.log(res.cookies);
-res.sendFile(__dirname+"/adminlogin.html");
-});
-app.post('/login',function (req,res){
-var data=req.body;
-var user=[];
-UserC.Login(data,function(user){
-//console.log(user);
-if(user.length=="0"){
-   var obj={
-     err:{
-       errmsg:"Invalid UserName/password"
-     }
-   }
-   res.send(obj);
+app.get('/studentlogin',user.studentlogin);
 
- }else if(user.length!="0"){
-   email=user[0].email;
-  var token=jsonwebtoken.sign({id:email,username:user[0].username},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
-  res.cookie('token',token).sendStatus(200);
-}
-});
-});
+app.get('/teacherlogin',user.teacherlogin);
+
+app.post('/login',user.login);
+
+app.post('/teacher',auth.verifyToken,teacher);
+
+//app.post('/student',student);
  /*app.post('/login',function (req,res){
 var data=req.body;
 //console.log(data,"data");

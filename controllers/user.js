@@ -1,6 +1,6 @@
 var express = require ( "express" );
 
-var userAuth = require ("../models/index");
+var userAuth = require ("../models/user");
 
 var UserAuth = new userAuth();
 
@@ -47,7 +47,7 @@ user.login=function (req,res){
 
 			 }else if(user.length!="0"){
 			   email=user[0].email;
-			  var token=jsonwebtoken.sign({id:email,username:user[0].username,user:user[0].client},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
+			  var token=jsonwebtoken.sign({id:email,username:user[0].username,user:data.client},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
 			  res.cookie('token',token).sendStatus(200);
 			}
 			});

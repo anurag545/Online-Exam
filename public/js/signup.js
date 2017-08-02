@@ -16,7 +16,7 @@ app.directive('fileModel', ['$parse', function($parse){
 		}
 	}
 }])
-app.service('multipartForm', ['$http', function($http){
+app.service('multipartForm',['$http',function($http){
 	this.post = function(uploadUrl, data){
 		var fd = new FormData();
 		for(var key in data)
@@ -28,7 +28,7 @@ app.service('multipartForm', ['$http', function($http){
 		}).then(function (response){console.log("done signup");
 		if(response.status==200){
 			console.log("ok");
-     window.location="/loginpage";
+     window.location="/";
          }
 	},function (err){console.log("error sign up")});
 	}
@@ -66,6 +66,6 @@ $scope.myForm.Submit=function (){
 	}else{
 		var uploadUrl = '/signup';
 		multipartForm.post(uploadUrl, $scope.myForm);
-   }     
+   }
 }
 }]);
