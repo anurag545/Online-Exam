@@ -10,11 +10,11 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-				    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-                <script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="../../public/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../public/bootstrap/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/bootstrap/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../../public/css/style.css">
 
 	</head>
 <body>
@@ -25,12 +25,12 @@
 				<div class="navbar-inner">
 					<div class="container-fluid">
 						<a class="brand" href="index.html">Online Examination System</a>
-						<a class="register" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+						<a class="register" href="../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
 					</div>
 				</div>
 			</div>
 	<div class="container">
-		<div class="col-md-12 mrg-1 text-center"><h3><strong><i><p align="center"><img src="images/logo/your-school.png" alt="Edu Expression" width="200" align="center" class="img-responsive" /> </p><p align="center"></p></i></strong></h3></div>
+		<div class="col-md-12 mrg-1 text-center"><h3><strong><i><p align="center"><img src="../../public/images/logo/your-school.png" alt="Edu Expression" width="200" align="center" class="img-responsive" /> </p><p align="center"></p></i></strong></h3></div>
         </div>
 	</header>
      <div id="page-content">
@@ -82,7 +82,8 @@ $scope.elogin="";
 $scope.loginForm.Login=function (){
 	var  obj={
 		username:$scope.loginForm.name,
-		password:$scope.loginForm.pass
+		password:$scope.loginForm.pass,
+		client:teacher
 	};
 	console.log(obj);
 
@@ -94,7 +95,7 @@ $http.post("/login",obj)
                  $scope.elogin=response.data.err.errmsg;
 		        }
 		        else if(response.status==200){
-							window.location="/home";
+							window.location="/teacher";
 		   // console.log(data.token);
 		   //var obj ={
 		   // token:data.token

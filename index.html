@@ -9,12 +9,11 @@
 		<meta name="keywords" content="Online Examination System">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="public/bootstrap/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/pikaday.css">
+		<script type="text/javascript" src="public/bootstrap/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/pikaday.css">
 	</head>
 	<body style="background-color: #EAEDF1;">
 		<div id="main_body">
@@ -110,8 +109,8 @@
     <label class="control-label col-sm-4" for="birthdate">Birth Date:</label>
     <div class="col-sm-8">
       <input type="text" class="form-control" name="dob" ng-model="myForm.dob" id="datepicker" required>
-                <script src="js/moment.min.js"></script>
- <script src="js/pikaday.js"></script>
+                <script src="public/js/moment.min.js"></script>
+ <script src="public/js/pikaday.js"></script>
 
     <script>
 
@@ -156,7 +155,7 @@
 						<center>
 
 
-						<img src="images/logo/your-school.png"  >
+						<img src="public/images/logo/your-school.png"  >
 
 
 						<div style="margin:auto; width:100%;">
@@ -164,7 +163,7 @@
 							<ul>
 							<li>
 								<section class="student">
-								<a href="studentlogin.html">
+								<a href="views/student/studentlogin.html">
 								<div class="text">
 								<h2>STUDENT</h2>
 								</div>
@@ -182,7 +181,7 @@
 							</li> -->
 							<li>
 								<section class="admin">
-								<a href="adminlogin.html">
+								<a href="views/teacher/teacherlogin.html">
 								<div class="text">
 								<h2>ADMIN/TEACHER</h2>
 								</div>
@@ -200,6 +199,6 @@
 			</div>
 		</div>
 
-    <script type="text/javascript" src="signup.js"></script>
+    <script type="text/javascript" src="public/js/signup.js"></script>
 	</body>
 </html>

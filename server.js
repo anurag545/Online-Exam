@@ -3,14 +3,17 @@ var app=express();
 var fs=require('fs');
 var path=require('path');
 
+var teacher = require("./routes/teacher");
+var student =require("./routes/student");
+
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 //var Cookies=require('cookies');
 var jsonwebtoken=require('jsonwebtoken');
-var CONFIG=require('./config.js');
+var CONFIG=require('./config/config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
-var auth=require('./loginsauth.js');
-var UserClass=require('./model/user.js');
+var auth=require('./config/loginsauth.js');
+var UserClass=require('./controllers/user.js');
 var UserC=new UserClass();
 var mongoose=require('mongoose');
  var User=require('./userSchema.js');

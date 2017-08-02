@@ -22,7 +22,7 @@ if(err){
    });
   }
   else{
-     response.redirect('/loginpage');
+     response.redirect('/');
   	/*response.status(403).json({
   		success:false,
   		message:'No token provided'
