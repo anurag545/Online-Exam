@@ -1,4 +1,9 @@
 var express = require ( "express" );
+var path=require('path');
+
+var jsonwebtoken=require('jsonwebtoken');
+var CONFIG=require('../config/config.js');
+var TOKEN_SECRET=CONFIG.jwtSecret;
 
 var userAuth = require ("../models/user");
 
@@ -11,7 +16,8 @@ user.constructor = function(){
 };
 
 user.home=function(req,res){
-		 res.sendFile(__dirname + "/index.html");
+	console.log(path.resolve(__dirname + "/../index.html"));
+		 res.sendFile(path.resolve(__dirname + "/../index.html"));
 		}
 
 user.signup=function(req,res){
@@ -25,11 +31,12 @@ user.signup=function(req,res){
 		}
 
 user.studentlogin=function(req,res){
-		res.sendFile(__dirname+"/views/student/studentlogin.html");
+		res.sendFile(path.resolve(__dirname+"/../views/student/studentlogin.html"));
 		}
 
 user.teacherlogin=function(req,res){
-		res.sendFile(__dirname+"/views/teachher/teacherlogin.html");
+	  console.log(__dirname);
+		res.sendFile(path.resolve(__dirname+"/../views/teacher/teacherlogin.html"));
 		}
 
 user.login=function (req,res){

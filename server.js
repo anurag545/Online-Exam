@@ -6,18 +6,14 @@ var path=require('path');
 var teacher = require("./routes/teacher");
 var student =require("./routes/student");
 
-var user=require('./controllers/user.js');
-
+var user=require('./controllers/user');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-var jsonwebtoken=require('jsonwebtoken');
-var CONFIG=require('./config/config.js');
-var TOKEN_SECRET=CONFIG.jwtSecret;
 var auth=require('./config/loginsauth.js');
 
 var mongoose=require('mongoose');
- var User=require('./userSchema.js');
+ //var User=require('./schemas/userSchema.js');
  var Exam=require('./admin/js/examSchema.js');
   var Question=require('./admin/js/quesSchema.js');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
@@ -32,7 +28,7 @@ var eventEmitter=new events.EventEmitter();
 var multer=require('multer');
 var storage=multer.diskStorage({
   destination:function(req,file,cb){
-    cb(null,__dirname +"/uploads");},
+    cb(null,__dirname +"/public/uploads");},
    filename:function(req,file,cb){
         var extArray = file.mimetype.split("/");
     var extension = extArray[extArray.length - 1];
@@ -43,13 +39,10 @@ var storage=multer.diskStorage({
    }
 });
 var upload=multer({storage:storage});
-
-
 app.use(express.static(__dirname));
-app.use(express.static(__dirname+"/admin"));
-
+//app.use (express.static (path.join (__dirname,'public')));
 app.get('/',user.home);
-
+//app.use(express.static(__dirname+"/public"));
 app.post('/signup',upload.single('profilepic'),user.signup);
 
 app.get('/studentlogin',user.studentlogin);
@@ -57,8 +50,8 @@ app.get('/studentlogin',user.studentlogin);
 app.get('/teacherlogin',user.teacherlogin);
 
 app.post('/login',user.login);
-
-app.post('/teacher',auth.verifyToken,teacher);
+app.use(express.static(__dirname+"/public"));
+app.use('/teacher',teacher);
 
 //app.post('/student',student);
  /*app.post('/login',function (req,res){

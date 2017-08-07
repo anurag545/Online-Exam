@@ -4,6 +4,7 @@
   "description": "",
   "main": "appendfile.js",
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
