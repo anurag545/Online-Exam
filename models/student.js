@@ -1,9 +1,7 @@
 var mongoose=require('mongoose');
 var User=require('../schemas/userSchema.js');
-var Exam=require('../schemas/examSchema.js');
-var Question=require('../schemas/quesSchema.js');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
- function studentAuth(){
+ function StudentAuth(){
 
    this.signInWithUserNameAndPassword=function (data,callback){
     User.find({ email:data.username ,password:data.password}, function(err, user) {
@@ -21,4 +19,4 @@ var Question=require('../schemas/quesSchema.js');
      });
    }
 }
-module.exports=studentAuth
+module.exports=StudentAuth

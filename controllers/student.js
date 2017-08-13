@@ -8,7 +8,7 @@ var TOKEN_SECRET=CONFIG.jwtSecret;
 var auth=require('../config/loginsauth.js');
 
 var studentAuth = require ("../models/student");
-var studentAuth = new studentAuth ();
+var StudentAuth = new studentAuth ();
 //app.use(express.static(__dirname+"/public/student"));
 var studentController = {};
 
@@ -22,7 +22,7 @@ studentController.login=function(request,response){
 studentController.studentlogin=function (request,response){
 	 var data=request.body;
 	 var user=[];
-	 studentAuth.signInWithUserNameAndPassword(data,function(user){
+	 StudentAuth.signInWithUserNameAndPassword(data,function(user){
 			//console.log(user);
 			if(user.length=="0"){
 			   var obj={

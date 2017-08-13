@@ -120,4 +120,7 @@ teacherController.quesInfo=function(request,response){
 			response.send(questions);
 		});
 }
+teacherController.group=function(request,response){
+	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
+}
 module.exports=teacherController

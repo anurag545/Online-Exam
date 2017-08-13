@@ -23,4 +23,5 @@ router.post('/question',auth.verifyToken,teacherRoute.question);
 router.get('/preview',auth.verifyToken,teacherRoute.preview);
 router.get('/examDetails',auth.verifyToken,teacherRoute.examInfo);
 router.get('/questionsDetails',auth.verifyToken,teacherRoute.quesInfo);
+router.get('/group',auth.verifyToken,teacherRoute.group);
 module.exports=router

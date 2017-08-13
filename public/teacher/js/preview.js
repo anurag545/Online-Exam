@@ -20,7 +20,7 @@ appPreview.controller('previewCtrl',['$scope','$http','$location',function($scop
   },function(error){
     console.log("error in preview exam details http");
   });
-  
+
 $http.get('/teacher/questionsDetails?examid='+$scope.examid).then(function(response){
 $scope.questions=response.data;
 console.log("questions",$scope.questions);
@@ -31,5 +31,8 @@ console.log("questions",$scope.questions);
 
 $scope.SaveOnly=function(){
 window.location="/teacher/home";
+}
+$scope.AddGroup=function(){
+window.location="/teacher/group";
 }
 }]);

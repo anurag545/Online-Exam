@@ -42,19 +42,13 @@ var upload=multer({storage:storage});
 app.use(express.static(__dirname));
 //app.use (express.static (path.join (__dirname,'public')));
 app.get('/',user.home);
-//app.use(express.static(__dirname+"/public"));
+
 app.post('/signup',upload.single('profilepic'),user.signup);
-
-app.get('/studentlogin',user.studentlogin);
-
-//app.get('/teacherlogin',user.teacherlogin);
-
-//app.post('/login',user.login);
 
 app.use(express.static(__dirname+"/public"));
 
 app.use('/teacher',teacher);
-//app.use('/student',student);
+app.use('/student',student);
 app.listen(8080,function(){
    console.log("localhost at 8080");
 });
