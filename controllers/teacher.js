@@ -115,6 +115,7 @@ teacherController.examInfo=function(request,response){
 }
 teacherController.quesInfo=function(request,response){
 	  var examid=request.query.examid;
+		console.log(examid,"exanid");
 		TeacherAuth.quesInfo(examid,function(questions){
 			response.send(questions);
 		});

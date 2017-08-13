@@ -53,7 +53,7 @@ var Question=require('../schemas/quesSchema.js');
       callback(exam);
     });
     }
-    this.examInfo=function(data,callback){
+    this.quesInfo=function(data,callback){
       Question.find({ examId:data}, function(err,questions) {
       if (err) throw err;
       //console.log(questions);

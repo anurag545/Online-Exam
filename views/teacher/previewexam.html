@@ -10,27 +10,16 @@
     <meta name="author" content="">
 
     <title>New Exam</title>
-
-    <!-- Bootstrap Core CSS -->
     <link href="../../public/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="../../public/teacher/css/sb-admin.css" rel="stylesheet">
-    <!--date-->
-    <!-- Custom Fonts -->
     <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="../../public/bootstrap/bootstrap.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+       <script>var rootApp=angular.module('rootApp',['mainApp','previewApp']);</script>
 </head>
 
-<body>
+<body ng-app="rootApp">
 
     <div id="wrapper">
 
@@ -132,7 +121,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li ng-click="Profile()">
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -196,9 +185,9 @@
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" id="previewPage" ng-app="previewApp" ng-controller="previewCtrl">
 
-            <div class="container-fluid" ng-app="previewApp" ng-controller="previewCtrl">
+            <div class="container-fluid">
 
                 <!-- Page Heading -->
 
@@ -221,26 +210,24 @@
 <!-- /.row -->
             <div class="row" id="previewExam">
                   <div class="col-md-12" align="center">
-                      <h1>{{exam.examName }}</h1>
+                      <h1 bold>{{exam.examName }}</h1>
                        <p>{{exam.examDes}}</p>
                   </div>
                   <div class="col-md-12">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
 
                              <h3>Exam Time :{{ exam.examDur}}</h3>
                         </div>
-                        <div class="col-md-3  col-md-offset-6">
+                        <div class="col-md-4  col-md-offset-4" align="right">
                              <h3>Tota Marks : {{ exam.examMarks}}</h3>
                         </div>
                  </div>
-                 <div class="col-md-12">
-
-
-                     <div class="col-md-12 preview-questions" ng-repeat="question in questions track by $index">
+                 <div class="col-md-12" style="padding-left:20px;">
+                     <div class="col-md-12 preview-questions" ng-repeat="question in questions">
                          <div class="col-md-1 question-number"><i>{{ $index+1 }}</i></div>
                          <div class="col-md-11">
                                <div clas="col-md-11">
-                                  <p>{{ question.quesName }}</p>
+                                  <p>{{ question.quesName }}scsdcd</p>
                                </div>
                                 <div class="col-md-11 options">
 
@@ -270,7 +257,7 @@
 
 
               </div>
-
+           </div>
               <!--   <div class="row" id="addquestion">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -291,9 +278,9 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-             <script src="../../public/tecaher/js/dashboard.js"></script>
-             <script src="../../public/teacher/js/preview.js"></script>
+    <script src="../../public/teacher/js/jquery.js"></script>
+     <script src="../../public/teacher/js/dashboard.js"></script>
+     <script src="../../public/teacher/js/preview.js"></script>
     <!-- Bootstrap Core JavaScript -->
 </body>
 

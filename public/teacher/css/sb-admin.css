@@ -244,6 +244,17 @@ width: 30%;
 }
 /*End*/
 /*peviewexamhtml*/
+#previewExam {
+  border:2px solid grey;
+  width:80%;
+  margin: auto;
+  padding-bottom: 30px;
+}
+#previewExam .col-md-10{
+  width:80%;
+  margin:auto;
+  border-bottom: 0.5px solid grey;
+}
 .preview-questions{
   margin-top:15px;
 }

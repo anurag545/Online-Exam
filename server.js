@@ -51,10 +51,10 @@ app.get('/studentlogin',user.studentlogin);
 
 //app.post('/login',user.login);
 
-//app.use(express.static(__dirname+"/public"));
+app.use(express.static(__dirname+"/public"));
 
 app.use('/teacher',teacher);
-
+//app.use('/student',student);
 app.listen(8080,function(){
    console.log("localhost at 8080");
 });
