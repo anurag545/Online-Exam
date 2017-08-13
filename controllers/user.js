@@ -33,7 +33,7 @@ user.signup=function(req,res){
 user.studentlogin=function(req,res){
 		res.sendFile(path.resolve(__dirname+"/../views/student/studentlogin.html"));
 		}
-
+/*
 user.teacherlogin=function(req,res){
 	  console.log(__dirname);
 		res.sendFile(path.resolve(__dirname+"/../views/teacher/teacherlogin.html"));
@@ -54,11 +54,12 @@ user.login=function (req,res){
 
 			 }else if(user.length!="0"){
 			   email=user[0].email;
-			  var token=jsonwebtoken.sign({id:email,username:user[0].username,user:data.client},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES}*/);
+			  var token=jsonwebtoken.sign({id:email,username:user[0].username,user:data.client},TOKEN_SECRET/*,{expiresIn:TOKEN_EXPIRES});
 			  res.cookie('token',token).sendStatus(200);
 			}
 			});
 		}
+		*/
 /*
 user.login=function(request,response){
 	console.log (request.body);

@@ -12,30 +12,30 @@
     <title>New Exam</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../../public/teacher/css/sb-admin.css" rel="stylesheet">
     <!--date-->
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/moment.min.js"></script>
-     <script src="js/pikaday.js"></script>
-       <link href="css/pikaday.css" rel="stylesheet">
-
+      <script src="../../public/bootstrap/bootstrap.min.js"></script>
+      <script src="../../public/teacher/js/moment.min.js"></script>
+     <script src="../../public/teacher/js/pikaday.js"></script>
+       <link href="../../public/teacher/css/pikaday.css" rel="stylesheet">
+       <script>var rootApp=angular.module('rootApp',['mainApp','examApp']);</script>
 </head>
 
-<body>
+<body ng-app="rootApp">
 
-    <div id="wrapper" ng-app="rootApp">
+    <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-app="mainApp" ng-controller="mainCtrl">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="mainDash" ng-app="mainApp" ng-controller="mainCtrl">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -154,13 +154,13 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="/teacher/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="newexam.html"><i class="fa fa-fw fa-dashboard"></i> New Exam</a>
+                        <a href="/teacher/newexam"><i class="fa fa-fw fa-dashboard"></i> New Exam</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="/teacher/profile"><i class="fa fa-fw fa-bar-chart-o"></i> Profile</a>
                     </li>
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
@@ -273,9 +273,9 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../../public/teacher/js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
-     <script type="text/javascript" src="js/dashboard.js"></script>
- <script type="text/javascript" src="js/newexam.js"></script>
+     <script type="text/javascript" src="../../public/teacher/js/dashboard.js"></script>-->
+ <script type="text/javascript" src="../../public/teacher/js/newexam.js"></script>
 </body>
 </html>

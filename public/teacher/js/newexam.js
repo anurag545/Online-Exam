@@ -1,12 +1,12 @@
 var app = angular.module('examApp',['ngRoute']);
-angular.bootstrap(document.getElementById('makeExam'),['examApp']);
+angular.bootstrap(document.getElementById('examForm'),['examApp']);
 app.config(['$routeProvider',function($routeProvider){
-    $routeProvider.when('/newexam',{
-   templateUrl : "newexamdetail.html",
+    $routeProvider.when('/',{
+   templateUrl : "../../../views/teacher/newexamdetail.html",
     //template : "<h1>Main Route 1</h1><p>Click on the links to change this content {{uid}}</p>",
     controller :'examCtrl'
     }).when('/addque/:examid',{
-        templateUrl:"addquestions.html",
+        templateUrl:"../../../views/teacher/addquestions.html",
         controller :'quesCtrl'
     })
 }]);
@@ -45,11 +45,11 @@ $scope.examForm.examSubmit=function (){
     examtime:$scope.examForm.xtime,
     examdur:$scope.examForm.xdur
   };
-$http.post('/examdetails',examObj).then(function(response){
+$http.post('/teacher/examDetails',examObj).then(function(response){
  $scope.examid=response.data;
  //console.log("done");
   $log.log($scope.examid);
-  window.location="/newexam.html#!/addque/:"+$scope.examid;
+  window.location="/teacher/newexam#!/addque/:"+$scope.examid;
 },function(error){
  console.log("error in xam http");
 });
@@ -176,7 +176,7 @@ $http.post('/examdetails',examObj).then(function(response){
        }
        else{
          $scope.emsg="";
-       $http.post('/question',quesDetails).then(function (response){
+       $http.post('/teacher/question',quesDetails).then(function (response){
        $scope.examId=response.data
         console.log($scope.examId,"done with servefr");
         $scope.quesForm.ques="";
@@ -289,10 +289,10 @@ $http.post('/examdetails',examObj).then(function(response){
        }
        else {
          $scope.emsg="";
-       $http.post('/question',quesDetails).then(function (response){
+       $http.post('/teacher/question',quesDetails).then(function (response){
         $scope.examid=response.data
         console.log($scope.examid,"client done server");
-        window.location="/preview?examid="+$scope.examid;
+        window.location="/teacher/preview?examid="+$scope.examid;
 
        },function (error){
        	console.log("question http error");
@@ -300,7 +300,11 @@ $http.post('/examdetails',examObj).then(function(response){
      }
     };
 }]);
-
+/*
+angular.element(document).ready(function() {
+  // angular.bootstrap(document.getElementById("mainDash"), ['mainApp']);
+   angular.bootstrap(document.getElementById("makeExam"), ['examApp']);
+});
 
 /*previewqQuestionPaper*/
 /*var appPreview=angular.module('previewApp', []);

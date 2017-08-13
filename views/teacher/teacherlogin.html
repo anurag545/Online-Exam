@@ -84,12 +84,11 @@
 	$scope.loginForm.Login=function (){
 		var  obj={
 			username:$scope.loginForm.name,
-			password:$scope.loginForm.pass,
-			client:"teacher"
+			password:$scope.loginForm.pass
 		};
 		console.log(obj);
 
-	$http.post("/login",obj)
+	$http.post("/teacher/checklogin",obj)
 						.then(function(response) {
 							var data = response.data;
 							console.log(data)
@@ -97,7 +96,7 @@
 									 $scope.elogin=response.data.err.errmsg;
 							}
 							else if(response.status==200){
-								window.location="/teacher";
+								window.location="/teacher/home";
 				 // console.log(data.token);
 				 //var obj ={
 				 // token:data.token

@@ -1,7 +1,7 @@
  var express=require('express');
 var app=express();
-var fs=require('fs');
-var path=require('path');
+//var fs=require('fs');
+//var path=require('path');
 
 var teacher = require("./routes/teacher");
 var student =require("./routes/student");
@@ -10,13 +10,13 @@ var user=require('./controllers/user');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-var auth=require('./config/loginsauth.js');
+//var auth=require('./config/loginsauth.js');
 
-var mongoose=require('mongoose');
+//var mongoose=require('mongoose');
  //var User=require('./schemas/userSchema.js');
- var Exam=require('./admin/js/examSchema.js');
-  var Question=require('./admin/js/quesSchema.js');
- mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+ //var Exam=require('./admin/js/examSchema.js');
+  //var Question=require('./admin/js/quesSchema.js');
+ //mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 var bodyParser=require('body-parser');
 app.use(bodyParser.json({strict:false}));
@@ -47,12 +47,17 @@ app.post('/signup',upload.single('profilepic'),user.signup);
 
 app.get('/studentlogin',user.studentlogin);
 
-app.get('/teacherlogin',user.teacherlogin);
+//app.get('/teacherlogin',user.teacherlogin);
 
-app.post('/login',user.login);
-app.use(express.static(__dirname+"/public"));
+//app.post('/login',user.login);
+
+//app.use(express.static(__dirname+"/public"));
+
 app.use('/teacher',teacher);
 
+app.listen(8080,function(){
+   console.log("localhost at 8080");
+});
 //app.post('/student',student);
  /*app.post('/login',function (req,res){
 var data=req.body;
@@ -79,17 +84,17 @@ var data=req.body;
    }
  });
  });*/
- app.get('/home',auth.verifyToken,function(req,res){
+ /*app.get('/home',auth.verifyToken,function(req,res){
 res.sendFile(__dirname+"/admin/index.html");
 });
 app.get('/profile',auth.verifyToken,function(req,res){
 res.sendFile(__dirname+"/admin/profile.html");
-});
+});*//*
 app.get('/name',auth.verifyToken,function(req,res){
     var payloadData=auth.getUserIdNameFromToken;
     var data=payloadData(req);
     res.send(data.username);
-});
+});*//*
 app.get('/profileDetails',auth.verifyToken,function (req,res){
   var payloadData=auth.getUserIdNameFromToken;
   var  data=payloadData(req);
@@ -98,7 +103,7 @@ app.get('/profileDetails',auth.verifyToken,function (req,res){
   console.log(userProfile);
   res.send(userProfile);
 });
-});
+});*//*
  app.post('/examdetails',auth.verifyToken,function (req,res){
     var data=req.body;
  // console.log(data);
@@ -121,7 +126,7 @@ app.get('/profileDetails',auth.verifyToken,function (req,res){
      }
   });
  });
-
+*//*
 app.post('/question',auth.verifyToken,function (req,res){
 var data=req.body;
 //console.log(data);
@@ -143,10 +148,10 @@ question.save(function (err,question,numAffected){
             res.send(question.examId);
         }
 });
-});
+});/*
 app.get('/preview',auth.verifyToken,function (req,res){
   res.sendFile(__dirname+"/admin/previewexam.html");
-});
+});*//*
 app.get('/examDetails',auth.verifyToken,auth.verifyToken,function(req,res){
   var examid=req.query.examid;
   //console.log(examid);
@@ -163,13 +168,10 @@ app.get('/questionsDetails',auth.verifyToken,function (req,res){
   console.log(questions);
   res.send(questions);
 });
-});
+});*//*
 app.get('/logout',auth.verifyToken,function (req,res){
     //var token1=req.cookies.token;
     res.clearCookie('token',{path:'/'});
     //console.log(req.cookies,"2");
     res.sendStatus(200);
-});
- app.listen(8080,function(){
-    console.log("localhost at 8080");
- });
+});*/

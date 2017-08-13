@@ -269,7 +269,25 @@ width: 30%;
 #addquestion{
   min-height: 200px;
 }
-#name{
-  margin-top: 20px;
-  padding-top: 20px;
+/*profile*/
+#profile {
+  padding-left: 40px;
+  min-height: 600px;
+}
+#profileimg img{
+  min-height: 200px;
+  min-width:100px;
+  max-width:400px;
+  max-height: 400px;
+  width:80%;
+  border-radius: 5px;
+}
+.profiledetails .form-group .form-control{
+ width:80%;
+}
+#profilename{
+  margin-top: 0px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-top: 15px;
 }

@@ -1,7 +1,7 @@
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('./config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
-var Cookies=require('cookies');
+//var Cookies=require('cookies');
 function verifyToken(request,response,next){
   //var cookies=new Cookies(request,response);
   //var tokenCookies=cookies.get("token");

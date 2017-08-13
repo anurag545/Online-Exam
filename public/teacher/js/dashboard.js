@@ -1,26 +1,26 @@
-var rootApp=angular.module('rootApp',['mainApp','examApp']);
+//var rootApp=angular.module('rootApp',['mainApp','examApp']);
 var appMain = angular.module('mainApp',[]);
 appMain.controller('mainCtrl',['$scope','$http',function($scope,$http){
 $scope.Logout=function(){
-   $http.get('/logout').then(function (response){
+   $http.get('/teacher/logout').then(function (response){
      if(response.status===200){
        console.log("done");
-       window.location="/teacherlogin";
+       window.location="/teacher/login";
      }
    });
 }
-$http.get('/name').then(function(response){
+$http.get('/teacher/name').then(function(response){
    $scope.name=response.data;
 });
 $scope.Profile=function (){
- window.location="/profile";
+ window.location="/teacher/profile";
 }
 $scope.Setting=function (){
-  winddow.location="/settings";
+  winddow.location="/teacher/settings";
 }
 }]);
 appMain.controller('profileCtrl',['$scope','$http',function($scope,$http){
-$http.get('/profileDetails').then(function(response){
+$http.get('/teacher/profileDetails').then(function(response){
  userProfile=response.data;
  console.log(userProfile);
  $scope.myProfile={};
