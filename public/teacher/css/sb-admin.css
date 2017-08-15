@@ -316,6 +316,7 @@ width: 30%;
   border-bottom:1px solid #ccc;
   border-top-right-radius: : 5px;
   border-top-left-radius: 5px;
+  z-index:1000;
 }
 #newgroup .search-result{
   height:20%;
@@ -326,4 +327,7 @@ width: 30%;
 #newgroup .search-result:hover{
   color: #1d2129;
   background-color: #e9ebee;
+}
+#newgroup table, th, td {
+   border: 1px solid #ccc;
 }
