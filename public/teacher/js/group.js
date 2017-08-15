@@ -6,7 +6,7 @@ appPreview.config(['$locationProvider', function($locationProvider){
   requireBase: false
 });
 }]);
-appPreview.controller('groupCtrl',['$scope','$http','$location','$timeout',function($scope,$http,$location,$timeout){
+appPreview.controller('groupCtrl',['$scope','$http','$location','$filter',function($scope,$http,$location,$filter){
   $scope.examid=$location.search().examid;
   $scope.exam={};
   $scope.questions={};
@@ -15,7 +15,7 @@ appPreview.controller('groupCtrl',['$scope','$http','$location','$timeout',funct
   $scope.searchText = null;
   $scope.change = function(text) {
       if($scope.searchText && $scope.searchText.length>3){
-             $("#search").fadeIn("fast");
+          /*   $("#search").fadeIn("fast"); */
       $http.get('/teacher/getuser?users=' + $scope.searchText).then(function(response){
           $scope.entries= response.data;
         });
@@ -24,11 +24,19 @@ appPreview.controller('groupCtrl',['$scope','$http','$location','$timeout',funct
            $scope.entries="";
        }
     };
-    $(document).click( function(){
+  /*  $(document).click( function(){
       $('#search').hide();
-    });
+    });*/
+      $scope.msg="";
   $scope.User=function(user){
+    var newTemp = $filter("filter")($scope.users, {email:user.email}, true);
+    console.log(newTemp.length);
+    if(newTemp.length==0){
     $scope.users.push(user);
+    }
+    else if(!newTemp.length==0){
+      $scope.msg="Already added";
+    }
   }
 
 }]);

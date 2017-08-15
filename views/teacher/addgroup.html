@@ -233,6 +233,7 @@
                                             <span>{{entry.email}} </span>
                                         </div>
                                    </div>
+                                   {{msg}}
                                    <script>
 
                                    </script>
@@ -240,19 +241,19 @@
                             <div>
                               <table class="table" align="left">
                                       <tbody>
-                                        <tr height="10px">
+                                        <tr>
                                           <th width="10%">S.No.</th>
                                           <th width="20%">Name</th>
                                           <th width="25%">Email</th>
                                           <th width="20%">Phone</th>
                                           <th width="15%">Delete</th>
                                         <tr>
-                                        <tr ng-repeat="user in users">
+                                        <tr ng-repeat="user in users track by user.email">
                                           <td width="10%">{{$index+1}}</td>
                                           <td width="20%">{{user.username}}</td>
                                           <td width="30%">{{user.email}}</td>
                                           <td width="20%">{{user.phone}}</td>
-                                          <td height="10px"><button class="btn btn-danger" height="10px" width="50px">Delete</button></td>
+                                          <td cellpadding="0px"><button class="btn btn-danger">Delete</button></td>
                                         </tr>
                                       </tbody>
                                 </table>
