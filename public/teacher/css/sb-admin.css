@@ -302,3 +302,28 @@ width: 30%;
   padding-left: 35px;
   padding-top: 15px;
 }
+/*Group */
+#newgroup .col-lg-12{
+  margin-top: 30px;
+}
+#newgroup .form-group{
+  width:50%;
+}
+#newgroup .search{
+  border-top: 1px solid #ccc;
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+  border-top-right-radius: : 5px;
+  border-top-left-radius: 5px;
+}
+#newgroup .search-result{
+  height:20%;
+  padding:5px;
+  background-color: white;
+  cursor: pointer;
+}
+#newgroup .search-result:hover{
+  color: #1d2129;
+  background-color: #e9ebee;
+}

@@ -123,4 +123,11 @@ teacherController.quesInfo=function(request,response){
 teacherController.group=function(request,response){
 	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
 }
+teacherController.getuser=function(request,response){
+	var user=request.query.users;
+	console.log(user);
+	TeacherAuth.getuser(user,function(users){
+		response.send(users);
+	});
+}
 module.exports=teacherController

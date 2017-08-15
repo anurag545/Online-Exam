@@ -1,12 +1,12 @@
 var express = require ("express");
-
-var bodyParser = require("body-parser");
+var app = express ();
+var bodyParser=require('body-parser');
+app.use(bodyParser.json({strict:false}));
+app.use(bodyParser.urlencoded({extended:false}));
 
 var auth=require('../config/loginsauth.js');
 
 var teacherRoute = require( "../controllers/teacher")
-
-var app = express ();
 
 var router  = express.Router ();
 console.log("okay");
@@ -24,4 +24,5 @@ router.get('/preview',auth.verifyToken,teacherRoute.preview);
 router.get('/examDetails',auth.verifyToken,teacherRoute.examInfo);
 router.get('/questionsDetails',auth.verifyToken,teacherRoute.quesInfo);
 router.get('/group',auth.verifyToken,teacherRoute.group);
+router.get('/getuser',auth.verifyToken,teacherRoute.getuser);
 module.exports=router

@@ -60,5 +60,12 @@ var Question=require('../schemas/quesSchema.js');
       callback(questions);
     });
     }
+    this.getuser=function(data,callback){
+      User.find({email:{ $regex: data + '.*' }}, function(err,users) {
+      if (err) throw err;
+      console.log(users);
+      callback(users);
+      });
+    }
 }
 module.exports=TeacherAuth
