@@ -209,7 +209,7 @@
                     </div>
                 </div>
 <!-- /.row -->
-            <div class="row">
+            <div class="row" style="min-height:470px;width:100%;margin:auto;">
 
               <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#groups">Groups</a></li>
@@ -221,47 +221,49 @@
                   </div>
                   <div id="newgroup" class="tab-pane fade">
                       <div class="col-lg-12">
-                            <div class="form-group">
+                            <div class="form-group" style="margin-top:20px;">
                                 <label>Group Name</label>
-                                <input class="form-control" name="gname" ng-model="gname" placeholder="Group name" type="text" required>
+                                <input class="form-control" name="gname" ng-model="groupName" placeholder="Group name" type="text" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="position:relative;">
                                 <label>Student</label>
-                                    <input class="form-control" id="searchinput" type="text" ng-model="searchText" ng-change="change(text)" placeholder="Student Email" required/>
-                                    <div class="search" ng-if="entries" visibility="hidden">
-                                        <div ng-repeat="entry in entries" class="search-result" ng-click="User(entry)">
-                                            <span>{{entry.email}} </span>
-                                        </div>
-                                   </div>
-                                   {{msg}}
-                                   <script>
-
-                                   </script>
-                            </div>
-                            <div>
-                              <table class="table" align="left">
-                                      <tbody>
-                                        <tr>
-                                          <th width="10%">S.No.</th>
-                                          <th width="20%">Name</th>
-                                          <th width="25%">Email</th>
-                                          <th width="20%">Phone</th>
-                                          <th width="15%">Delete</th>
-                                        <tr>
-                                        <tr ng-repeat="user in users track by user.email">
-                                          <td width="10%">{{$index+1}}</td>
-                                          <td width="20%">{{user.username}}</td>
-                                          <td width="30%">{{user.email}}</td>
-                                          <td width="20%">{{user.phone}}</td>
-                                          <td cellpadding="0px"><button class="btn btn-danger">Delete</button></td>
-                                        </tr>
-                                      </tbody>
-                                </table>
-                            </div>
-
-                      </div>
-                      <div class="col-lg-12 other">
-                          <button type="submit" class="btn btn-success" >Add Group</button><br><br>
+                                    <input class="form-control" id="searchinput" type="text" ng-model="searchText" ng-change="change(text)" placeholder="Search Email to add"/>
+                                    <div class="search" ng-if="entries" visibility="hidden" style="position:absolute;width:50%;">
+                                          <div ng-repeat="entry in entries" class="search-result" ng-click="User(entry)">
+                                              <span>{{entry.email}}</span>
+                                          </div>
+                                    </div>
+                                    <div style="color:red;margin-top:10px;margin-bottom:10px;">
+                                      {{msg}}
+                                    </div>
+                                    <div style="width:100%;margin-top:30px;">
+                                      <div style="float:left;width:100%;">
+                                        <table class="table" align="left">
+                                                <tbody>
+                                                  <tr>
+                                                    <th width="10%">S.No.</th>
+                                                    <th width="20%">Name</th>
+                                                    <th width="25%">Email</th>
+                                                    <th width="20%">Phone</th>
+                                                    <th width="15%">Delete</th>
+                                                  <tr>
+                                                  <tr ng-repeat="user in users track by user.email">
+                                                    <td width="10%">{{$index+1}}</td>
+                                                    <td width="20%">{{user.username}}</td>
+                                                    <td width="30%">{{user.email}}</td>
+                                                    <td width="20%">{{user.phone}}</td>
+                                                    <td cellpadding="0px"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+                                                  </tr>
+                                                </tbody>
+                                          </table>
+                                      </div>
+                                      <div class="col-lg-12" style="padding-left:0px;">
+                                          {{error}}
+                                          <button type="submit" class="btn btn-success" ng-click="addgroup()">Add Group</button><br><br>
+                                      </div>
+                                    </div>
+                                </div>
+                          </div>
                       </div>
                   </div>
               </div>
