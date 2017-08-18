@@ -115,7 +115,7 @@ teacherController.examInfo=function(request,response){
 }
 teacherController.quesInfo=function(request,response){
 	  var examid=request.query.examid;
-		console.log(examid,"exanid");
+		//console.log(examid,"exanid");
 		TeacherAuth.quesInfo(examid,function(questions){
 			response.send(questions);
 		});
@@ -125,17 +125,28 @@ teacherController.group=function(request,response){
 }
 teacherController.getuser=function(request,response){
 	var user=request.query.users;
-	console.log(user);
+	//console.log(user);
 	TeacherAuth.getuser(user,function(users){
 		response.send(users);
 	});
 }
 teacherController.addgroup=function(request,response){
+	console.log(request.query.examid);
 	if(request.query.examid){
 		var groupObj={
+			examId:request.query.examid,
 			groupName:request.body.groupName,
 			usersEmail:request.body.users
 		}
-	}
+	}	else if(!request.query.examid){
+			var groupObj={
+				groupName:request.body.groupName,
+				usersEmail:request.body.users
+			}
+		}
+		console.log(groupObj,"cont");
+		TeacherAuth.addgroup(groupObj,function(group){
+			response.send(group);
+		});
 }
 module.exports=teacherController

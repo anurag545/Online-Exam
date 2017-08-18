@@ -57,20 +57,21 @@ appPreview.controller('groupCtrl',['$scope','$http','$location','$filter',functi
        users:array
      }
      console.log(groupObj,$scope.examid);
-     if($scope.emailid){
-       var url='/teacher/addgroup?examid='+$scope.emailid;
+     if($scope.examid){
+       var url='/teacher/addgroup?examid='+$scope.examid;
      }
-     if(!$scope.emailid){
+     if(!$scope.examid){
         var url='/teacher/addgroup';
      }
-     $http.post('/teacher/addgroup?examid='+$scope.emailid,groupObj).then(function(response){
+     console.log(url);
+     $http.post(url,groupObj).then(function(response){
       console.log(response.data);
-      //console.log("done");
+       //console.log("done");
        //$log.log($scope.examid);
        window.location="/teacher/group#groups";
      },function(error){
       console.log("error in group http");
-     });
+    });
    }else{
      if(!$scope.groupnName){
      $scope.error="Plz add group Name";}

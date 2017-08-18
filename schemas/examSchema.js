@@ -2,7 +2,7 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var examSchema=new Schema({
-	  examName:{type:String,required:true},
+	  examName:{type:String,required:true,unique:true},
 	  examDes:String,
     examDate:{type:Date,required:true},
     examMarks:{type:Number,required:true},

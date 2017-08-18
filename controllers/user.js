@@ -16,7 +16,7 @@ user.constructor = function(){
 };
 
 user.home=function(req,res){
-	console.log(path.resolve(__dirname + "/../index.html"));
+	//console.log(path.resolve(__dirname + "/../index.html"));
 		 res.sendFile(path.resolve(__dirname + "/../index.html"));
 		}
 
@@ -24,7 +24,7 @@ user.signup=function(req,res){
 			var data=req.body;
 			UserAuth.signupdata(data,function(numAffected){
 				if(numAffected){
-					console.log(numAffected,"numAffected");
+					//console.log(numAffected,"numAffected");
 				 res.status(200).send();
 				 }
 			});

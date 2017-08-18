@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var groupSchema=new Schema({
-	  groupName:{type:String,required:true},
+	  groupName:{type:String,required:true,unique:true},
 		usersEmail:{type:[String],required:true}
 });
 

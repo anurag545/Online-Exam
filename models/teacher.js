@@ -2,6 +2,7 @@ var mongoose=require('mongoose');
 var User=require('../schemas/userSchema.js');
 var Exam=require('../schemas/examSchema.js');
 var Question=require('../schemas/quesSchema.js');
+var Group=require('../schemas/groupSchema.js');
  mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
  function TeacherAuth(){
 
@@ -63,9 +64,33 @@ var Question=require('../schemas/quesSchema.js');
     this.getuser=function(data,callback){
       User.find({email:{ $regex: data + '.*' }}, function(err,users) {
       if (err) throw err;
-      console.log(users);
+      //console.log(users);
       callback(users);
       });
+    }
+
+    this.addgroup=function(data,callback){
+       var group=new Group({
+         groupName:data.groupName,
+         usersEmail:data.usersEmail
+       });
+       console.log(group,"model");
+       group.save(function (err,group,numAffected){
+           if (err) throw err
+               if(numAffected){
+                    if(data.examId){
+                     console.log(group._id,"groupid",group,data.examId);
+                     Exam.findByIdAndUpdate(data.examId, { $push: { groupId:group._id }}, { new: true }, function (err, exam) {
+                        if (err) throw err;
+                         console.log(exam);
+                         callback(group);
+                        });
+                      }
+                      else{
+                        callback(group);
+                      }
+               }
+       });
     }
 }
 module.exports=TeacherAuth

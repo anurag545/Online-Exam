@@ -29,7 +29,7 @@ function UserAuth(){
              var  user=new User(userObj);
                user.save(function(err,numAffected){
                if(err) throw err;
-               console.log("modeldb");
+               //console.log("modeldb");
                callback(numAffected);
              });
     }
