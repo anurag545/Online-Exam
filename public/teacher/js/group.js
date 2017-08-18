@@ -45,17 +45,25 @@ appPreview.controller('groupCtrl',['$scope','$http','$location','$filter',functi
   }
 
   $scope.addgroup=function(){
-   if($scope.searchText && $scope.users.length!=0){
+
+   if($scope.groupName && $scope.users.length!="0"){
      var array=[];
-     foreach(user in users){
-       array.push(user.email);
+     for(var key in $scope.users){
+       console.log($scope.users[key].email);
+       array.push($scope.users[key].email);
      }
      var groupObj={
        groupName:$scope.groupName,
        users:array
      }
-     console.log(groupObj);
-     $http.post('/teacher/addgroup',groupObj).then(function(response){
+     console.log(groupObj,$scope.examid);
+     if($scope.emailid){
+       var url='/teacher/addgroup?examid='+$scope.emailid;
+     }
+     if(!$scope.emailid){
+        var url='/teacher/addgroup';
+     }
+     $http.post('/teacher/addgroup?examid='+$scope.emailid,groupObj).then(function(response){
       console.log(response.data);
       //console.log("done");
        //$log.log($scope.examid);
@@ -63,11 +71,10 @@ appPreview.controller('groupCtrl',['$scope','$http','$location','$filter',functi
      },function(error){
       console.log("error in group http");
      });
-
    }else{
-     if(!$scope.searchText){
+     if(!$scope.groupnName){
      $scope.error="Plz add group Name";}
-     if($scope.users.length!=0){
+     if($scope.users.length!="0"){
        $scope.error="PLz add atleast one student";
      }
    }

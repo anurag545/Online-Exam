@@ -130,4 +130,12 @@ teacherController.getuser=function(request,response){
 		response.send(users);
 	});
 }
+teacherController.addgroup=function(request,response){
+	if(request.query.examid){
+		var groupObj={
+			groupName:request.body.groupName,
+			usersEmail:request.body.users
+		}
+	}
+}
 module.exports=teacherController
