@@ -1,11 +1,6 @@
 var appPreview=angular.module('previewApp', []);
 angular.bootstrap(document.getElementById('previewPage'),['previewApp']);
-appPreview.config(['$locationProvider', function($locationProvider){
-  $locationProvider.html5Mode({
-  enabled: true,
-  requireBase: false
-});
-}]);
+
 appPreview.controller('previewCtrl',['$scope','$http','$location',function($scope,$http,$location){
   $scope.examid=$location.search().examid;
   $scope.exam={};

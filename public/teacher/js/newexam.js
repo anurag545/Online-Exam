@@ -292,7 +292,7 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
        $http.post('/teacher/question',quesDetails).then(function (response){
         $scope.examid=response.data
         console.log($scope.examid,"client done server");
-        window.location="/teacher/preview?examid="+$scope.examid;
+        window.location="/teacher/preview/:"+$scope.examid;
 
        },function (error){
        	console.log("question http error");

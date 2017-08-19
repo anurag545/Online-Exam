@@ -12,13 +12,7 @@ appGroup.config(['$routeProvider',function($routeProvider){
         controller :'addgroupCtrl'
     })
 }]);*/
-appGroup.config(['$locationProvider', function($locationProvider){
-  $locationProvider.html5Mode({
-  enabled: true,
-  requireBase: false
-});
-}]);
-appGroup.controller('groupsCtrl',['$scope','$http','$location','$filter',function($scope,$http,$location,$filter){
+appGroup.controller('groupCtrl',['$scope','$http','$location','$filter',function($scope,$http,$location,$filter){
   $scope.groups=[];
   $http.get('/teacher/getgroups').then(function(response){
    console.log(response.data);

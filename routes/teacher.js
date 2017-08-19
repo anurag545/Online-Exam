@@ -23,8 +23,11 @@ router.post('/question',auth.verifyToken,teacherRoute.question);
 router.get('/preview',auth.verifyToken,teacherRoute.preview);
 router.get('/examDetails',auth.verifyToken,teacherRoute.examInfo);
 router.get('/questionsDetails',auth.verifyToken,teacherRoute.quesInfo);
-router.get('/group',auth.verifyToken,teacherRoute.group);
+router.get('/groups',auth.verifyToken,teacherRoute.group);
 router.get('/getuser',auth.verifyToken,teacherRoute.getuser);
+router.get('/newgroup',auth.verifyToken,teacherRoute.newgroup);
 router.post('/addgroup',teacherRoute.addgroup);
 router.get('/getgroups',teacherRoute.getgroups);
+router.get('/exams',auth.verifyToken,teacherRoute.exam);
+router.get('/getexams',teacherRoute.getexams);
 module.exports=router

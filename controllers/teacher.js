@@ -64,6 +64,9 @@ teacherController.profileDetails=function(request,response){
   response.send(userProfile);
 	});
 }
+teacherController.exam=function(request,response) {
+  response.sendFile(path.resolve(__dirname+"/../views/teacher/exam.html"));
+}
 teacherController.newexam=function(request,response) {
 	//console.log("teachercon");
   response.sendFile(path.resolve(__dirname+"/../views/teacher/newexam.html"));
@@ -159,5 +162,13 @@ teacherController.getgroups=function(request,response){
 	TeacherAuth.getgroups(function(groups){
 		response.send(groups);
 	});
+}
+teacherController.getexams=function(request,response){
+	TeacherAuth.getexams(function(exams){
+		response.send(exams);
+	});
+}
+teacherController.newgroup=function(request,response){
+	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
 }
 module.exports=teacherController

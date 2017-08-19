@@ -174,11 +174,17 @@
                     <li>
                         <a href="/teacher/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
+                    <li class="active">
+                        <a href="/teacher/exams"><i class="fa fa-fw fa-dashboard"></i> Exams</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/groups"><i class="fa fa-fw fa-dashboard"></i> Groups</a>
+                    </li>
                     <li>
                         <a href="/teacher/newexam"><i class="fa fa-fw fa-dashboard"></i> New Exam</a>
                     </li>
-                    <li class="active">
-                        <a href="/teacher/group"><i class="fa fa-fw fa-table"></i> New Group</a>
+                    <li>
+                        <a href="/teacher/newgroup"><i class="fa fa-fw fa-table"></i> New Group</a>
                     </li>
                     <li>
                         <a href="/teacher/profile"><i class="fa fa-fw fa-bar-chart-o"></i> Profile</a>
@@ -217,7 +223,7 @@
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper" id="groupPage" ng-app="groupApp">
+        <div id="page-wrapper" id="groupPage" ng-app="groupApp" ng-controller="groupCtrl">
 
             <div class="container-fluid">
               <div class="row">

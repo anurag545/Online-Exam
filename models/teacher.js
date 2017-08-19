@@ -100,5 +100,11 @@ var Group=require('../schemas/groupSchema.js');
       callback(groups);
     });
     }
+    this.getexams=function(callback){
+      Exam.find({},'examName examDate groupId',function(err,exams){
+        if(err) throw err;
+        callback(exams);
+      });
+    }
 }
 module.exports=TeacherAuth
