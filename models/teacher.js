@@ -93,5 +93,12 @@ var Group=require('../schemas/groupSchema.js');
                }
        });
     }
+    this.getgroups=function(callback){
+      Group.find({}, function(err,groups) {
+      if (err) throw err;
+      //console.log(questions);
+      callback(groups);
+    });
+    }
 }
 module.exports=TeacherAuth

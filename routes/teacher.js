@@ -26,4 +26,5 @@ router.get('/questionsDetails',auth.verifyToken,teacherRoute.quesInfo);
 router.get('/group',auth.verifyToken,teacherRoute.group);
 router.get('/getuser',auth.verifyToken,teacherRoute.getuser);
 router.post('/addgroup',teacherRoute.addgroup);
+router.get('/getgroups',teacherRoute.getgroups);
 module.exports=router

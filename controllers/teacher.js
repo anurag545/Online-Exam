@@ -124,7 +124,7 @@ teacherController.quesInfo=function(request,response){
 		});
 }
 teacherController.group=function(request,response){
-	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
+	response.sendFile(path.resolve(__dirname+"/../views/teacher/group.html"));
 }
 teacherController.getuser=function(request,response){
 	var user=request.query.users;
@@ -154,5 +154,10 @@ teacherController.addgroup=function(request,response){
 		TeacherAuth.addgroup(groupObj,function(group){
 			response.send(group);
 		});
+}
+teacherController.getgroups=function(request,response){
+	TeacherAuth.getgroups(function(groups){
+		response.send(groups);
+	});
 }
 module.exports=teacherController

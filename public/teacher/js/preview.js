@@ -33,6 +33,6 @@ $scope.SaveOnly=function(){
 window.location="/teacher/home";
 }
 $scope.AddGroup=function(){
-window.location="/teacher/group?examid="+$scope.examid;
+window.location="/teacher/group";
 }
 }]);
