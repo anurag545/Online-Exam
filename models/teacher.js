@@ -71,6 +71,7 @@ var Group=require('../schemas/groupSchema.js');
 
     this.addgroup=function(data,callback){
        var group=new Group({
+         userEmail:data.userEmail,
          groupName:data.groupName,
          usersEmail:data.usersEmail
        });

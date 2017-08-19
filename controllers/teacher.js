@@ -69,9 +69,12 @@ teacherController.newexam=function(request,response) {
   response.sendFile(path.resolve(__dirname+"/../views/teacher/newexam.html"));
 }
 teacherController.examDetails=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
 	var data=request.body;
 // console.log(data);
 	var examObj={
+	userEmail:data1.id,
 	examName:data.examname,
 	examDes:data.examdes,
 	examDate:data.examdate,
@@ -131,15 +134,18 @@ teacherController.getuser=function(request,response){
 	});
 }
 teacherController.addgroup=function(request,response){
-	console.log(request.query.examid);
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
 	if(request.query.examid){
 		var groupObj={
+			userEmail:data1.id,
 			examId:request.query.examid,
 			groupName:request.body.groupName,
 			usersEmail:request.body.users
 		}
 	}	else if(!request.query.examid){
 			var groupObj={
+				userEmail:data1.id,
 				groupName:request.body.groupName,
 				usersEmail:request.body.users
 			}

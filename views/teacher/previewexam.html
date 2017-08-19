@@ -17,6 +17,14 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="../../public/bootstrap/bootstrap.min.js"></script>
        <script>var rootApp=angular.module('rootApp',['mainApp','previewApp']);</script>
+       <style>
+       .question-number table{
+         border: 0px;
+       }
+       .preview-questions .previewtable>tbody>tr>td{
+         border-top: 0px;
+       }
+       </style>
 </head>
 
 <body ng-app="rootApp">
@@ -234,7 +242,7 @@
                                </div>
                                 <div class="col-md-11 options">
 
-                                     <table class="table" align="left">
+                                     <table class="previewtable" align="left">
                                              <tbody>
                                                <tr ng-repeat="options in question.quesOptions">
                                                  <td width="5%">{{optionArr[$index]}}</td>

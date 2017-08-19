@@ -17,6 +17,34 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="../../public/bootstrap/bootstrap.min.js"></script>
        <script>var rootApp=angular.module('rootApp',['mainApp','groupApp']);</script>
+       <style>
+       #usertable table{
+         width:95%;
+       }
+       #usertable th, td {
+          border: 1px solid #ccc;
+          padding-top: 1px;
+          padding-bottom: 1px;
+       }
+       #usertable th{
+         padding-top: 3px;
+         padding-bottom: 3px;
+         padding-left: 4px;
+          height: 40px;
+       }
+       #usertable td{
+         padding-top: 4px;
+         padding-bottom: 4px;
+         padding-left: 4px;
+       }
+       #usertable table .btn{
+         padding-top:0px;
+         padding-bottom: 0px;
+         width: 100px;
+         font-size: 12px;
+         height: 25px;
+       }
+       </style>
 </head>
 
 <body ng-app="rootApp">
@@ -217,7 +245,29 @@
               </ul>
               <div class="tab-content">
                   <div id="groups" class="tab-pane fade in active">
-
+                      <div class=".col-md-12" style="margin-top:20px;">
+                        <div id="usertable">
+                          <table align="left">
+                                  <tbody>
+                                    <tr>
+                                      <th width="10%">S.No.</th>
+                                      <th width="20%">Name</th>
+                                      <th width="25%">Email</th>
+                                      <th width="20%">Phone</th>
+                                      <th width="15%">Delete</th>
+                                    <tr>
+                                    <tr ng-repeat="user in users track by user.email">
+                                      <td width="10%">{{$index+1}}</td>
+                                      <td width="20%">{{user.username}}</td>
+                                      <td width="30%">{{user.email}}</td>
+                                      <td width="20%">{{user.phone}}</td>
+                                      <td cellpadding="0px" align="center"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+                                    </tr>
+                                  </tbody>
+                            </table>
+                        </div>
+                        <!--usertable-->
+                      </div>
                   </div>
                   <div id="newgroup" class="tab-pane fade">
                       <div class="col-lg-12">
@@ -237,8 +287,8 @@
                                       {{msg}}
                                     </div>
                                     <div style="width:100%;margin-top:30px;">
-                                      <div style="float:left;width:100%;">
-                                        <table class="table" align="left">
+                                      <div id="usertable">
+                                        <table align="left">
                                                 <tbody>
                                                   <tr>
                                                     <th width="10%">S.No.</th>
@@ -252,12 +302,12 @@
                                                     <td width="20%">{{user.username}}</td>
                                                     <td width="30%">{{user.email}}</td>
                                                     <td width="20%">{{user.phone}}</td>
-                                                    <td cellpadding="0px"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+                                                    <td cellpadding="0px" align="center"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
                                                   </tr>
                                                 </tbody>
                                           </table>
                                       </div>
-                                      <div class="col-lg-12" style="padding-left:0px;">
+                                      <div class="col-lg-12" style="padding-left:0px;margin-top:20px;">
                                           {{error}}
                                           <button type="submit" class="btn btn-success" ng-click="addgroup()">Add Group</button><br><br>
                                       </div>
