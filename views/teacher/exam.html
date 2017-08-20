@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>New Group</title>
+    <title>Exams</title>
     <link href="../../public/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="../../public/teacher/css/sb-admin.css" rel="stylesheet">
     <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -38,11 +38,12 @@
          padding-left: 4px;
        }
        #usertable table .btn{
-         padding-top:0px;
+         padding-top:0px;groups
          padding-bottom: 0px;
          width: 100px;
          font-size: 12px;
          height: 25px;
+         margin-left: 10px;
        }
        </style>
        <script>var rootApp=angular.module('rootApp',['mainApp','examApp']);</script>
@@ -229,7 +230,7 @@
               <div class="row">
               		<div class="col-lg-12">
               				<h1 class="page-header">
-                          Groups
+                        Exams
               						<small></small>
               				</h1>
               				<ol class="breadcrumb">
@@ -237,7 +238,7 @@
               								<i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
               						</li>
               						<li class="active">
-              								<i class="fa fa-file"></i>Exam Paper
+              								<i class="fa fa-file"></i>Exams
               						</li>
               				</ol>
               		</div>
@@ -248,18 +249,18 @@
                       <table align="left">
                               <tbody>
                                 <tr>
-                                  <th width="10%">S.No.</th>
-                                  <th width="20%">Exam Name</th>
+                                  <th width="5%">S.No.</th>
+                                  <th width="15%">Exam Name</th>
                                   <th width="10%">Exam Date</th>
                                   <th width="20%">Group Name</th>
                                   <th width="15%" align="center"><span>Edit / </span><span>Delete</span></th>
                                 <tr>
                                 <tr ng-repeat="exam in exams">
-                                  <td width="10%">{{$index+1}}</td>
-                                  <td width="20%">{{exam.examName}}</td>
-                                  <td width="10%">{{exam.examDate}}</td>
-                                  <td width="20%">{{}}</td>
-                                  <td cellpadding="0px" width="15%"><button class="btn btn-danger" ng-click="remove($index)">Edit</button><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+                                  <td width="5%">{{$index+1}}</td>
+                                  <td width="15%">{{exam.examName}}</td>
+                                  <td width="10%">{{exam.examDate | date:'yyyy-MM-dd , h:mm a'}}</td>
+                                  <td width="20%"><span ng-repeat="name in exams[$index].groupsName">{{name ,}}</span></td>
+                                  <td cellpadding="0px" width="17%"><button class="btn btn-danger" ng-click="">Edit</button><button class="btn btn-danger" ng-click="remove(exam.examName)">Delete</button></td>
                                 </tr>
                               </tbody>
                         </table>

@@ -153,7 +153,7 @@ teacherController.addgroup=function(request,response){
 				usersEmail:request.body.users
 			}
 		}
-		console.log(groupObj,"cont");
+		//console.log(groupObj,"cont");
 		TeacherAuth.addgroup(groupObj,function(group){
 			response.send(group);
 		});
@@ -165,10 +165,19 @@ teacherController.getgroups=function(request,response){
 }
 teacherController.getexams=function(request,response){
 	TeacherAuth.getexams(function(exams){
+		//console.log(exams,"cont");
 		response.send(exams);
 	});
 }
 teacherController.newgroup=function(request,response){
 	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
+}
+teacherController.deleteExam=function(request,response){
+	var exam=request.body.exam
+	console.log(exam,"cont");
+	TeacherAuth.deleteExam(exam,function(exam){
+		console.log("cont");
+		response.send(exam);
+	});
 }
 module.exports=teacherController

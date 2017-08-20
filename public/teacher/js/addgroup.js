@@ -1,7 +1,8 @@
 var appAddGroup=angular.module('addgroupApp', []);
 angular.bootstrap(document.getElementById('groupPage'),['addgroupApp']);
-appAddGroup.controller('addgroupCtrl',['$scope','$http','$location','$filter',function($scope,$http,$location,$filter){
-  $scope.examid=$location.search().examid;
+appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scope,$http,$filter){
+  var urlParams = new URLSearchParams(window.location.search);
+  $scope.examid=urlParams.get('examid');
   $scope.users=[];
   $scope.entries="";
   $scope.searchText = null;
@@ -60,9 +61,11 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$location','$filter',fu
      console.log(url);
      $http.post(url,groupObj).then(function(response){
       console.log(response.data);
+      $scope.users=[];
+      $scope.groupName="";
        //console.log("done");
        //$log.log($scope.examid);
-       window.location="/teacher/group#groups";
+       //window.location="/teacher/newgroup?examid="+$scope.examid;
      },function(error){
       console.log("error in group http");
     });

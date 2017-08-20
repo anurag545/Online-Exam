@@ -9,7 +9,7 @@ var examSchema=new Schema({
     examMarks:{type:Number,required:true},
     examTime:{type:String,required:true},
     examDur:{type:Number,required:true},
-		groupId:[]
+		groupId:[{ type: Schema.ObjectId, ref: 'Group'}]
 });
 
 var Exam=mongoose.model('Exam',examSchema);

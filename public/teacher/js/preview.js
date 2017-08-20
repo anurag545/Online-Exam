@@ -1,8 +1,9 @@
 var appPreview=angular.module('previewApp', []);
 angular.bootstrap(document.getElementById('previewPage'),['previewApp']);
 
-appPreview.controller('previewCtrl',['$scope','$http','$location',function($scope,$http,$location){
-  $scope.examid=$location.search().examid;
+appPreview.controller('previewCtrl',['$scope','$http',function($scope,$http){
+ var urlParams = new URLSearchParams(window.location.search);
+  $scope.examid=urlParams.get('examid');
   $scope.exam={};
   $scope.questions={};
   //var tokenObj=$cookieStore.get('tokenObj');
@@ -28,6 +29,6 @@ $scope.SaveOnly=function(){
 window.location="/teacher/home";
 }
 $scope.AddGroup=function(){
-window.location="/teacher/group";
+window.location="/teacher/newgroup?examid="+$scope.examid;
 }
 }]);
