@@ -12,7 +12,7 @@ appGroup.config(['$routeProvider',function($routeProvider){
         controller :'addgroupCtrl'
     })
 }]);*/
-appGroup.controller('groupCtrl',['$scope','$http','$location','$filter',function($scope,$http,$location,$filter){
+appGroup.controller('groupCtrl',['$scope','$http','$filter',function($scope,$http,$filter){
   $scope.groups=[];
   $http.get('/teacher/getgroups').then(function(response){
    console.log(response.data);
@@ -22,5 +22,17 @@ appGroup.controller('groupCtrl',['$scope','$http','$location','$filter',function
   },function(error){
    console.log("error in group http");
  });
-
+ $scope.remove=function (group){
+   console.log(JSON.stringify(group))
+   var group={
+     group:group
+   }
+   $http.post('/teacher/deleteGroup',JSON.stringify(group)).then(function(response){
+     console.log(response.data);
+     var group=response.data;
+     var foundgroup = $filter("filter")($scope.groups, {groupName:group}, true)[0];
+      var index=$scope.groups.indexOf(foundgroup);
+      $scope.groups.splice(index,1);
+   });
+ }
 }]);

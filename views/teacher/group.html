@@ -256,7 +256,7 @@
                                 <tr ng-repeat="group in groups">
                                   <td width="5%">{{$index+1}}</td>
                                   <td width="20%">{{group.groupName}}</td>
-                                  <td cellpadding="0px" width="15%"><button class="btn btn-danger" ng-click="remove($index)">Edit</button><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+                                  <td cellpadding="0px" width="15%"><button class="btn btn-danger" ng-click="remove($index)">Edit</button><button class="btn btn-danger" ng-click="remove(group.groupName)">Delete</button></td>
                                 </tr>
                               </tbody>
                         </table>

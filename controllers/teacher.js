@@ -174,10 +174,16 @@ teacherController.newgroup=function(request,response){
 }
 teacherController.deleteExam=function(request,response){
 	var exam=request.body.exam
-	console.log(exam,"cont");
+	//console.log(exam,"cont");
 	TeacherAuth.deleteExam(exam,function(exam){
-		console.log("cont");
 		response.send(exam);
+	});
+}
+teacherController.deleteGroup=function(request,response){
+	var group=request.body.group
+	console.log(group,"cont");
+	TeacherAuth.deleteGroup(group,function(group){
+		response.send(group);
 	});
 }
 module.exports=teacherController

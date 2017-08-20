@@ -31,4 +31,5 @@ router.get('/getgroups',teacherRoute.getgroups);
 router.get('/exams',auth.verifyToken,teacherRoute.exam);
 router.get('/getexams',teacherRoute.getexams);
 router.post('/deleteExam',teacherRoute.deleteExam);
+router.post('/deleteGroup',teacherRoute.deleteGroup);
 module.exports=router

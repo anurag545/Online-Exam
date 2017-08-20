@@ -150,14 +150,34 @@ var Group=require('../schemas/groupSchema.js');
     }
 
     this.deleteExam=function(data,callback){
-      console.log(data,"model");
+      //console.log(data,"model");
       Exam.findOneAndRemove({examName:data}, function (err, exam) {
-           console.log(exam)
+           //console.log(exam)
+           if(err) throw (err);
            Question.remove({examId:exam._id}, function (err, writeOpResult) {
-                  console.log(writeOpResult);
+                  //console.log(writeOpResult);
+                  if(err) throw err;
                   callback(exam.examName)
               });
          });
+    }
+    this.deleteGroup=function(data,callback){
+      console.log(data,"model");
+      Group.findOneAndRemove({groupName:data}, function (err,group){
+          console.log(group);
+      var groupId = group._id;
+        if (err) throw err
+          Exam.find({ groupId: { $in : groupId }},'groupId', function (err,exams) {
+            console.log(exams)
+            for(var i;i<exams.length|| function(){
+              Exam.save().then(function(dive) {
+                callback(group)
+             });
+            }();i++){
+              exams[i].pull({groupId:groupId });
+             }
+          });
+    });
     }
 }
 module.exports=TeacherAuth
