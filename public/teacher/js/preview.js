@@ -28,6 +28,9 @@ console.log("questions",$scope.questions);
 $scope.SaveOnly=function(){
 window.location="/teacher/home";
 }
+$scope.Group=function(){
+  window.location="/teacher/groups?examid="+$scope.examid;
+}
 $scope.AddGroup=function(){
 window.location="/teacher/newgroup?examid="+$scope.examid;
 }

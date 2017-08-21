@@ -73,7 +73,8 @@ var Group=require('../schemas/groupSchema.js');
        var group=new Group({
          userEmail:data.userEmail,
          groupName:data.groupName,
-         usersEmail:data.usersEmail
+         usersEmail:data.usersEmail,
+         examsId:data.examId
        });
        console.log(group,"model");
        group.save(function (err,group,numAffected){
@@ -164,18 +165,25 @@ var Group=require('../schemas/groupSchema.js');
     this.deleteGroup=function(data,callback){
       console.log(data,"model");
       Group.findOneAndRemove({groupName:data}, function (err,group){
-          console.log(group);
-      var groupId = group._id;
+          console.log(group,group._id);
+      var groupid = group._id;
         if (err) throw err
-          Exam.find({ groupId: { $in : groupId }},'groupId', function (err,exams) {
-            console.log(exams)
-            for(var i;i<exams.length|| function(){
-              Exam.save().then(function(dive) {
+          Exam.find({ groupId: { $all  : groupid }},'groupId' ,function (err,groupsid) {
+            console.log(groupsid);
+            if(groupsid){
+              if(err) throw err
+            for(var i;i<groupsid.length|| function(){
+              console.log(groupsid[i]);
+              //var exam=new Exam(exams[i]);
+              //exam.save(function(err,exam) {
+                //console.log(exam);
                 callback(group)
-             });
-            }();i++){
-              exams[i].pull({groupId:groupId });
-             }
+            // });
+           }();i++){
+              groupsid[i].groupId.pull(new ObjectId(groupid));
+              console.log(groupsid);
+            }
+           }
           });
     });
     }

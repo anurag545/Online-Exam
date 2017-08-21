@@ -49,7 +49,8 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
      }
      var groupObj={
        groupName:$scope.groupName,
-       users:array
+       users:array,
+       examid:$scope.examid
      }
      console.log(groupObj,$scope.examid);
      if($scope.examid){

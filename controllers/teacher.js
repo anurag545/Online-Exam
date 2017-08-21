@@ -142,15 +142,15 @@ teacherController.addgroup=function(request,response){
 	if(request.query.examid){
 		var groupObj={
 			userEmail:data1.id,
-			examId:request.query.examid,
 			groupName:request.body.groupName,
-			usersEmail:request.body.users
+			usersEmail:request.body.users,
+		  examId:request.query.examid
 		}
 	}	else if(!request.query.examid){
 			var groupObj={
 				userEmail:data1.id,
 				groupName:request.body.groupName,
-				usersEmail:request.body.users
+				usersEmail:request.body.users,
 			}
 		}
 		//console.log(groupObj,"cont");
