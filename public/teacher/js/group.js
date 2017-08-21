@@ -1,19 +1,10 @@
 var appGroup=angular.module('groupApp', []);
 angular.bootstrap(document.getElementById('groupPage'),['groupApp']);
-/*
-appGroup.config(['$routeProvider',function($routeProvider){
-    $routeProvider.when('/teacher/group/',{
-   templateUrl : "../../../views/teacher/groupsdetail.html",
-    //template : "<h1>Main Route 1</h1><p>Click on the links to change this content {{uid}}</p>",
-    controller :'groupsCtrl'
-  }).when('/addqroup',{
-
-        templateUrl:"../../../views/teacher/addgroupdetail.html",
-        controller :'addgroupCtrl'
-    })
-}]);*/
 appGroup.controller('groupCtrl',['$scope','$http','$filter',function($scope,$http,$filter){
   $scope.groups=[];
+  var urlParams = new URLSearchParams(window.location.search);
+  $scope.examid=urlParams.get('examid');
+  $scope.success="";
   $http.get('/teacher/getgroups').then(function(response){
    console.log(response.data);
     //console.log("done");
@@ -33,6 +24,20 @@ appGroup.controller('groupCtrl',['$scope','$http','$filter',function($scope,$htt
      var foundgroup = $filter("filter")($scope.groups, {groupName:group}, true)[0];
       var index=$scope.groups.indexOf(foundgroup);
       $scope.groups.splice(index,1);
+   });
+ }
+
+$scope.Add=function(id){
+   console.log(id);
+   var addGroup={
+     examId:$scope.examid,
+     groupId:id
+   }
+   console.log(addGroup);
+   $http.post('/teacher/addGroupId',addGroup).then(function(response){
+     if(response.status==200){
+       $scope.success=" Group Added Succesfully";
+     }
    });
  }
 }]);

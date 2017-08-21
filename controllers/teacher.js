@@ -1,7 +1,9 @@
 var express = require ( "express" );
 var app=express();
 var path=require("path");
-
+var bodyParser=require('body-parser');
+app.use(bodyParser.json({strict:false}));
+app.use(bodyParser.urlencoded({extended:false}));
 var jsonwebtoken=require('jsonwebtoken');
 var CONFIG=require('../config/config.js');
 var TOKEN_SECRET=CONFIG.jwtSecret;
@@ -181,9 +183,19 @@ teacherController.deleteExam=function(request,response){
 }
 teacherController.deleteGroup=function(request,response){
 	var group=request.body.group
-	console.log(group,"cont");
+	//console.log(group,"cont");
 	TeacherAuth.deleteGroup(group,function(group){
 		response.send(group);
+	});
+}
+teacherController.addGroupId=function(request,response){
+	var addGroup={
+   examId:request.body.examId,
+	 groupId:request.body.groupId		
+	}
+	console.log( addGroup,"cont");
+	TeacherAuth.addGroupId(addGroup,function(){
+		response.sendStatus(200);
 	});
 }
 module.exports=teacherController

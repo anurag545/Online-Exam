@@ -187,5 +187,14 @@ var Group=require('../schemas/groupSchema.js');
           });
     });
     }
+    this.addGroupId=function(data,callback){
+      console.log(data,"model");
+      Exam.findByIdAndUpdate(data.examId, { $push: { groupId:data.groupId }}, { new: true }, function (err,exam) {
+         if (err) throw err;
+          console.log(exam);
+          callback();
+         });
+
+    }
 }
 module.exports=TeacherAuth
