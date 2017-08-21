@@ -191,11 +191,14 @@ teacherController.deleteGroup=function(request,response){
 teacherController.addGroupId=function(request,response){
 	var addGroup={
    examId:request.body.examId,
-	 groupId:request.body.groupId		
+	 groupId:request.body.groupId
 	}
 	console.log( addGroup,"cont");
 	TeacherAuth.addGroupId(addGroup,function(){
 		response.sendStatus(200);
 	});
+}
+teacherController.editgroup=function(request,response){
+		response.sendFile(path.resolve(__dirname+"/../views/teacher/editgroup.html"));
 }
 module.exports=teacherController

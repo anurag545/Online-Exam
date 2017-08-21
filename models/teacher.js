@@ -107,47 +107,25 @@ var Group=require('../schemas/groupSchema.js');
 
       Exam.find({},'examName examDate groupId',function(err,exams){
             if(err) throw err;
-          //  console.log(exams.length);
-            for(var i = 0;i < exams.length || function(){ callback(exams)}();i++) {
+           console.log(exams);
+            for(var i = 0;i< exams.length || function(){ callback(exams)}();i++) {
           var groupsName=[];
-        // console.log(exams[i].groupId.length,"groupId")
-
            for(var j=0;j<exams[i].groupId.length||function (){
-            // console.log(groupsName);
-           exams[i].groupsName=groupsName; }();j++){
-          //   console.log(exams[i].groupId[j]);
+            console.log(groupsName);
+         exams[i].groupsName=groupsName;
+       }();j++){
+             //console.log(exams[i].groupId[j]);
               Group.findById(exams[i].groupId[j],'groupName',function (err,group){
                 if(err) throw err
-              //  console.log(group.groupName,"group");
+               console.log(group.groupName,"group");
                 groupsName.push(group.groupName);
+
               });
            }
-
+            console.log(groupsName);
+           exams[i].groupName=groupsName;
          }
       });
-     /*
-      Exam.find({},'examName examDate groupId',function(err,exams){
-        if(err) throw err;
-      //  console.log(exams);
-         for(var key1 in exams){
-           var groupsName=[];
-          //console.log(exams[key1].groupId.length,"groupId")
-            for(var i=0;i<exams[key1].groupId.length;i++){
-              //console.log(exams[key1].groupId[i]);
-               Group.findById(exams[key1].groupId[i],'groupName',function (err,group){
-                 if(err) throw err
-                 console.log(group.groupName,"group");
-                 groupsName.push(group.groupName);
-               });
-            }.then(function(){
-                console.log(groupsName);
-                exams[key1].groupsName=groupsName;
-            });
-
-         }.then(function(){
-               callback(exams);
-         });
-      });*/
     }
 
     this.deleteExam=function(data,callback){
@@ -158,7 +136,7 @@ var Group=require('../schemas/groupSchema.js');
            Question.remove({examId:exam._id}, function (err, writeOpResult) {
                   //console.log(writeOpResult);
                   if(err) throw err;
-                  callback(exam.examName)
+                  callback(exam.examName);
               });
          });
     }
@@ -189,7 +167,7 @@ var Group=require('../schemas/groupSchema.js');
     }
     this.addGroupId=function(data,callback){
       console.log(data,"model");
-      Exam.findByIdAndUpdate(data.examId, { $push: { groupId:data.groupId }}, { new: true }, function (err,exam) {
+      Exam.findByIdAndUpdate(data.examId, { $push: { groupId:data.groupIds }}, { new: true }, function (err,exam) {
          if (err) throw err;
           console.log(exam);
           callback();
@@ -198,3 +176,39 @@ var Group=require('../schemas/groupSchema.js');
     }
 }
 module.exports=TeacherAuth
+/*
+ Exam.find({},'examName examDate groupId',function(err,exams){
+   if(err) throw err;
+ //  console.log(exams);
+    for(var key1 in exams){
+      var groupsName=[];
+     //console.log(exams[key1].groupId.length,"groupId")
+       for(var i=0;i<exams[key1].groupId.length;i++){
+         //console.log(exams[key1].groupId[i]);
+          Group.findById(exams[key1].groupId[i],'groupName',function (err,group){
+            if(err) throw err
+            console.log(group.groupName,"group");
+            groupsName.push(group.groupName);
+          });
+       }.then(function(){
+           console.log(groupsName);
+           exams[key1].groupsName=groupsName;
+       });
+
+    }.then(function(){
+          callback(exams);
+    });
+ });*/
+
+         // console.log(exams[i].groupId.length,"groupId")
+         /*
+         exams[i].groupId.forEach(function(u,i){
+            //var users = [];
+            console.log(u);
+     Group.findById(u,'groupName', function(err,groupName){
+         if (err) throw err;
+            console.log(groupName);
+            groupsName.push(groupName);
+       });
+       console.log(groupsName);
+     });*/

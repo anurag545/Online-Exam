@@ -40,4 +40,12 @@ $scope.Add=function(id){
      }
    });
  }
+ $scope.EditGroup=function(groupid){
+    if($scope.examid){
+    window.location="/teacher/editgroup?groupid="+groupid+"&examid="+$scope.examid;
+    }
+    else if(!$scope.examid){
+    window.location="/teacher/editgroup?groupid="+groupid;
+    }
+  }
 }]);
