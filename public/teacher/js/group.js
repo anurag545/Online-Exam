@@ -13,12 +13,12 @@ appGroup.controller('groupCtrl',['$scope','$http','$filter',function($scope,$htt
   },function(error){
    console.log("error in group http");
  });
- $scope.remove=function (group){
-   console.log(JSON.stringify(group))
+ $scope.remove=function (id){
+   console.log(id);
    var group={
-     group:group
+     groupid:id
    }
-   $http.post('/teacher/deleteGroup',JSON.stringify(group)).then(function(response){
+   $http.post('/teacher/deleteGroup',group).then(function(response){
      console.log(response.data);
      var group=response.data;
      var foundgroup = $filter("filter")($scope.groups, {groupName:group}, true)[0];

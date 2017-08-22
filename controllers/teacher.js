@@ -155,7 +155,7 @@ teacherController.addgroup=function(request,response){
 				usersEmail:request.body.users,
 			}
 		}
-		//console.log(groupObj,"cont");
+		console.log(groupObj,"cont");
 		TeacherAuth.addgroup(groupObj,function(group){
 			response.send(group);
 		});
@@ -182,9 +182,9 @@ teacherController.deleteExam=function(request,response){
 	});
 }
 teacherController.deleteGroup=function(request,response){
-	var group=request.body.group
+	var groupid=request.body.groupid
 	//console.log(group,"cont");
-	TeacherAuth.deleteGroup(group,function(group){
+	TeacherAuth.deleteGroup(groupid,function(group){
 		response.send(group);
 	});
 }
@@ -200,5 +200,21 @@ teacherController.addGroupId=function(request,response){
 }
 teacherController.editgroup=function(request,response){
 		response.sendFile(path.resolve(__dirname+"/../views/teacher/editgroup.html"));
+}
+teacherController.getgroup=function(request,response){
+	var groupid=request.query.groupid;
+	TeacherAuth.getgroup(groupid,function(group){
+		response.send(group);
+	});
+}
+teacherController.updategroup=function(request,response){
+	var groupObj={
+		groupId:request.body.groupId,
+		groupName:request.body.groupName,
+		usersEmail:request.body.users
+	}
+	TeacherAuth.updategroup(groupObj,function(){
+		response.sendStatus(200);
+	});
 }
 module.exports=teacherController

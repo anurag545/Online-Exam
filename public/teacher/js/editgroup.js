@@ -5,6 +5,10 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
   $scope.groupid=urlParams.get('groupid');
   $scope.examid=urlParams.get('examid');
   console.log($scope.examid,$scope.groupid);
+  $http.get('/teacher/getgroup?groupid='+$scope.groupid).then(function(response){
+    $scope.groupName=response.data.groupdata.groupName;
+    $scope.users=response.data.userdata;
+  });
   $scope.users=[];
   $scope.entries="";
   $scope.searchText = null;
@@ -25,7 +29,7 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
   $(document).click( function(){
       $('.search').hide();
     });
-/*
+
   $scope.User=function(user){
     var newTemp = $filter("filter")($scope.users, {email:user.email}, true);
     if(newTemp.length==0){
@@ -37,11 +41,12 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
         $scope.searchText = null;
     }
   }
+
   $scope.remove=function(index){
     $scope.users.splice(index,1);
   }
 
-  $scope.addgroup=function(){
+  $scope.updategroup=function(){
 
    if($scope.groupName && $scope.users.length!="0"){
      var array=[];
@@ -50,25 +55,20 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
        array.push($scope.users[key].email);
      }
      var groupObj={
+       groupId:$scope.groupid,
        groupName:$scope.groupName,
        users:array,
-       examid:$scope.examid
      }
      console.log(groupObj,$scope.examid);
-     if($scope.examid){
-       var url='/teacher/addgroup?examid='+$scope.examid;
-     }
-     if(!$scope.examid){
-        var url='/teacher/addgroup';
-     }
-     console.log(url);
-     $http.post(url,groupObj).then(function(response){
+       //console.log(url);
+     $http.post('/teacher/updategroup',groupObj).then(function(response){
       console.log(response.data);
-      $scope.users=[];
-      $scope.groupName="";
-       //console.log("done");
-       //$log.log($scope.examid);
-       //window.location="/teacher/newgroup?examid="+$scope.examid;
+       if($scope.examid){
+       window.location="/teacher/groups?examid="+$scope.examid;
+         }
+         else if(!$scope.examid){
+           window.location="/teacher/groups";
+         }
      },function(error){
       console.log("error in group http");
     });
@@ -79,5 +79,5 @@ appAddGroup.controller('addgroupCtrl',['$scope','$http','$filter',function($scop
        $scope.error="PLz add atleast one student";
      }
    }
- }*/
+ }
 }]);

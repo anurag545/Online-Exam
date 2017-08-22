@@ -174,6 +174,28 @@ var Group=require('../schemas/groupSchema.js');
          });
 
     }
+    this.getgroup=function(data,callback){
+      Group.findById(data,'groupName usersEmail',function(err,group){
+        if(err) throw err;
+        //console.log(group);
+          User.find({email:{$in:group.usersEmail}},'username email phone',function(err,user){
+            var groupData={
+              groupdata:group,
+              userdata:user
+            }
+            console.log(groupData);
+            callback(groupData);
+          });
+      });
+    }
+    this.updategroup=function(data,callback){
+      Group.findByIdAndUpdate(data.groupId, {groupName:data.groupName,usersEmail:data.usersEmail}, { new: true }, function (err,group) {
+         if (err) throw err;
+          console.log(group);
+          callback();
+         });
+
+    }
 }
 module.exports=TeacherAuth
 /*

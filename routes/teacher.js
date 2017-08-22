@@ -34,4 +34,6 @@ router.post('/deleteExam',teacherRoute.deleteExam);
 router.post('/deleteGroup',teacherRoute.deleteGroup);
 router.post('/addGroupId',teacherRoute.addGroupId);
 router.get('/editgroup',teacherRoute.editgroup);
+router.get('/getgroup',teacherRoute.getgroup);
+router.post('/updategroup',teacherRoute.updategroup);
 module.exports=router
