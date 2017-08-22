@@ -103,14 +103,70 @@ var Group=require('../schemas/groupSchema.js');
     });
     }
 
-    this.getexams=function(callback){
+    this.getexams=function(callback1){
 
       Exam.find({},'examName examDate groupId',function(err,exams){
             if(err) throw err;
-           console.log(exams);
-            for(var i = 0;i< exams.length || function(){ callback(exams)}();i++) {
-          var groupsName=[];
-           for(var j=0;j<exams[i].groupId.length||function (){
+            //console.log(exams);
+            var groupsName=[];
+            function asyncLoop( i, callback ) {
+                if( i < exams.length ) {
+                      console.log(i)
+                      //var question_ans = eval('(' + answers[i]+ ')');
+
+                      //var question_to_find = question_ans.question.toString()
+                      //var ans = question_ans.ans.toString()
+                      //console.log(ans)
+
+                        Group.find({_id:{$in:exams[i].groupId}},'groupName', function(err,groupName){
+                           if (err) throw err;
+                              console.log(groupName,"gn");
+                              groupsName.push(groupName);
+                              console.log(groupsName,"inside");
+                              asyncLoop(i+1,callback);
+                         });
+                      /*Group.where("_id",{$in:exams[i].groupId}).exec(function(err,groupName)  {
+                       if (err) throw err;
+                       console.log(groupName,"gn");
+                       groupsName.push(groupName);
+                       asyncLoop(i+1,callback);
+                     })*/
+                  } else {
+                    var obj={
+                      exams:exams,
+                      groups:groupsName
+                    }
+                      callback(obj);
+                  }
+              }
+                asyncLoop( 0, function(obj){
+    // put the code that should happen after the loop here
+                      //console.log(groupsName);
+                      //exams["groupsName"]=groupsName
+                      console.log(obj)
+                      callback1(obj);
+                 });
+            //console.log(exams);
+            //for(var i = 0;i< exams.length;i++) {
+            // var groupsName=[];
+            // console.log(exams[i].groupId.length,"groupId")
+   /*/           var groupsName = [];
+            exams.forEach(function(u){
+               //console.log(u,"u");
+        Group.findById({$in:u.groupId},'groupName', function(err,groupName){
+            if (err) throw err;
+               console.log(groupName,"gn");
+               groupsName.push(groupName)
+          });
+          console.log(groupsName,"gpsnm");
+        });
+              /*Group.findById({$in:exams},'groupName',function(err,group){
+                if(err) throw err;
+                console.log(group,"group");
+                callback(exams)
+              });
+
+          /* for(var j=0;j<exams[i].groupId.length||function (){
             console.log(groupsName);
          exams[i].groupsName=groupsName;
        }();j++){
@@ -121,10 +177,10 @@ var Group=require('../schemas/groupSchema.js');
                 groupsName.push(group.groupName);
 
               });
-           }
-            console.log(groupsName);
-           exams[i].groupName=groupsName;
-         }
+           }*/
+            //console.log(groupsName);
+           //exams[i].groupName=groupsName;
+         //}
       });
     }
 
@@ -149,23 +205,6 @@ var Group=require('../schemas/groupSchema.js');
              console.log(exam,"exam");
              callback(group);
            });
-      /*    Exam.find({ groupId: { $all  : groupid }},'groupId' ,function (err,groupsid) {
-            console.log(groupsid);
-            if(groupsid){
-              if(err) throw err
-            for(var i;i<groupsid.length|| function(){
-              console.log(groupsid[i]);
-              //var exam=new Exam(exams[i]);
-              //exam.save(function(err,exam) {
-                //console.log(exam);
-                callback(group)
-            // });
-           }();i++){
-              groupsid[i].groupId.pull(new ObjectId(groupid));
-              console.log(groupsid);
-            }
-           }
-         });*/
     });
     }
     this.addGroupId=function(data,callback){
@@ -237,3 +276,20 @@ module.exports=TeacherAuth
        });
        console.log(groupsName);
      });*/
+     /*    Exam.find({ groupId: { $all  : groupid }},'groupId' ,function (err,groupsid) {
+           console.log(groupsid);
+           if(groupsid){
+             if(err) throw err
+           for(var i;i<groupsid.length|| function(){
+             console.log(groupsid[i]);
+             //var exam=new Exam(exams[i]);
+             //exam.save(function(err,exam) {
+               //console.log(exam);
+               callback(group)
+           // });
+          }();i++){
+             groupsid[i].groupId.pull(new ObjectId(groupid));
+             console.log(groupsid);
+           }
+          }
+        });*/

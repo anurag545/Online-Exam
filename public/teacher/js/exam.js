@@ -3,8 +3,9 @@ angular.bootstrap(document.getElementById('groupPage'),['examApp']);
 app.controller('examCtrl',['$scope','$http','$filter',function($scope,$http,$filter){
   $http.get('/teacher/getexams').then(function(response){
    console.log(response.data);
-    $scope.exams=response.data;
-
+    $scope.exams=response.data.exams;
+    $scope.groupsName=response.data.groups;
+    console.log($scope.exams,"exams",$scope.groupsName,"groups");
   },function(error){
    console.log("error in getexam http");
  });

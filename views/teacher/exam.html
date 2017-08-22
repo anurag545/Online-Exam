@@ -260,7 +260,7 @@
                                   <td width="5%">{{$index+1}}</td>
                                   <td width="15%">{{exam.examName}}</td>
                                   <td width="12%">{{exam.examDate | date:'yyyy-MM-dd , h:mm a'}}</td>
-                                  <td width="20%"><span ng-repeat="name in exams[$index].groupsName">{{name ,}}</span></td>
+                                  <td width="20%"><span ng-repeat="name in groupsName[$index]">{{name.groupName }} , </span></td>
                                   <td cellpadding="0px" width="7%"><button class="btn btn-danger" ng-click="">Edit</button></td>
                                   <td cellpadding="0px" width="7%"><button class="btn btn-danger" ng-click="remove(exam.examName)">Delete</button></td>
                                 </tr>
