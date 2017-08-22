@@ -142,11 +142,14 @@ var Group=require('../schemas/groupSchema.js');
     }
     this.deleteGroup=function(data,callback){
       console.log(data,"model");
-      Group.findOneAndRemove({groupName:data}, function (err,group){
-          console.log(group,group._id);
-      var groupid = group._id;
+      Group.findByIdAndRemove(data, function (err,group){
+          console.log(group,group._id,"group");
         if (err) throw err
-          Exam.find({ groupId: { $all  : groupid }},'groupId' ,function (err,groupsid) {
+           Exam.update({groupId:{$in:[group._id]}},{$pull:{groupId:group._id}},{multi:true},function(err,exam){
+             console.log(exam,"exam");
+             callback(group);
+           });
+      /*    Exam.find({ groupId: { $all  : groupid }},'groupId' ,function (err,groupsid) {
             console.log(groupsid);
             if(groupsid){
               if(err) throw err
@@ -162,7 +165,7 @@ var Group=require('../schemas/groupSchema.js');
               console.log(groupsid);
             }
            }
-          });
+         });*/
     });
     }
     this.addGroupId=function(data,callback){
