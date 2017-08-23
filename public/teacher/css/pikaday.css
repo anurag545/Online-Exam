@@ -37,6 +37,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
 }
 
+
 .pika-lendar {
     float: left;
     width: 240px;
@@ -82,8 +83,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     padding: 0;
     width: 20px;
     height: 30px;
-    /* hide text using text-indent trick, using width value (it's enough) */
-    text-indent: 20px;
+    color: rgba(0, 0, 0, 0);
     white-space: nowrap;
     overflow: hidden;
     background-color: transparent;
@@ -181,26 +181,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     border-radius: 3px;
 }
 
-.is-inrange .pika-button {
-    background: #D5E9F7;
-}
-
-.is-startrange .pika-button {
-    color: #fff;
-    background: #6CB31D;
-    box-shadow: none;
-    border-radius: 3px;
-}
-
-.is-endrange .pika-button {
-    color: #fff;
-    background: #33aaff;
-    box-shadow: none;
-    border-radius: 3px;
-}
-
-.is-disabled .pika-button,
-.is-outside-current-month .pika-button {
+.is-disabled .pika-button {
     pointer-events: none;
     cursor: default;
     color: #999;
@@ -208,10 +189,10 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 }
 
 .pika-button:hover {
-    color: #fff;
-    background: #ff8000;
-    box-shadow: none;
-    border-radius: 3px;
+    color: #fff !important;
+    background: #ff8000 !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
 }
 
 /* styling for abbr */
@@ -219,4 +200,31 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     border-bottom: none;
     cursor: help;
 }
+
+/* Timepicker */
+.pika-timepicker {
+    text-align: center;
+    padding-bottom:8px;
+}
+
+.pika-single.pika-split-time {
+    padding-right: 58px;
+}
+
+.pika-single.pika-split-time .pika-timepicker {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom:0;
+    width:58px;
+    z-index: 99999;
+    border-left: 1px solid #ccc;
+    padding: 0;
+}
+
+.pika-timepicker select { font-size:0.9em; text-align: center; }
+
+.pika-single.pika-split-time .pika-timepicker select { width:58px; height: 100% !important; border:0 solid;}
+
+
 

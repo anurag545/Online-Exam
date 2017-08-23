@@ -24,7 +24,7 @@ var Group=require('../schemas/groupSchema.js');
 
     this.examDetails=function(data,callback){
       var exam=new Exam(data);
-      //console.log(examObj);
+      console.log(data);
       exam.save(function(err,exam,numAffected){
         if(err)
           throw err
@@ -112,12 +112,6 @@ var Group=require('../schemas/groupSchema.js');
             function asyncLoop( i, callback ) {
                 if( i < exams.length ) {
                       console.log(i)
-                      //var question_ans = eval('(' + answers[i]+ ')');
-
-                      //var question_to_find = question_ans.question.toString()
-                      //var ans = question_ans.ans.toString()
-                      //console.log(ans)
-
                         Group.find({_id:{$in:exams[i].groupId}},'groupName', function(err,groupName){
                            if (err) throw err;
                               console.log(groupName,"gn");
@@ -125,12 +119,7 @@ var Group=require('../schemas/groupSchema.js');
                               console.log(groupsName,"inside");
                               asyncLoop(i+1,callback);
                          });
-                      /*Group.where("_id",{$in:exams[i].groupId}).exec(function(err,groupName)  {
-                       if (err) throw err;
-                       console.log(groupName,"gn");
-                       groupsName.push(groupName);
-                       asyncLoop(i+1,callback);
-                     })*/
+
                   } else {
                     var obj={
                       exams:exams,
@@ -140,9 +129,6 @@ var Group=require('../schemas/groupSchema.js');
                   }
               }
                 asyncLoop( 0, function(obj){
-    // put the code that should happen after the loop here
-                      //console.log(groupsName);
-                      //exams["groupsName"]=groupsName
                       console.log(obj)
                       callback1(obj);
                  });
@@ -186,7 +172,7 @@ var Group=require('../schemas/groupSchema.js');
 
     this.deleteExam=function(data,callback){
       //console.log(data,"model");
-      Exam.findOneAndRemove({examName:data}, function (err, exam) {
+      Exam.findByIdAndRemove(data, function (err, exam) {
            //console.log(exam)
            if(err) throw (err);
            Question.remove({examId:exam._id}, function (err, writeOpResult) {

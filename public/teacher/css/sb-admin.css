@@ -121,7 +121,7 @@ ul.alert-dropdown {
         margin-left: -225px;
         border: none;
         border-radius: 0;
-        overflow-y: auto;
+        overflow-y:hidden;
         background-color: #222;
         bottom: 0;
         overflow-x: hidden;
@@ -269,12 +269,14 @@ width: 30%;
 
 /*end*/
 /*exam form*/
+#makeExam{
+  overflow-x:hidden;
+  padding-top:20px;
+}
 #examform{
   min-height: 500px;
 }
-#addquestion{
-  min-height: 200px;
-}
+
 /*profile*/
 #profile {
   padding-left: 40px;

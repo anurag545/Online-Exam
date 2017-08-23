@@ -5,7 +5,7 @@ app.config(['$routeProvider',function($routeProvider){
    templateUrl : "../../../views/teacher/newexamdetail.html",
     //template : "<h1>Main Route 1</h1><p>Click on the links to change this content {{uid}}</p>",
     controller :'examCtrl'
-    }).when('/addque/:examid',{
+  }).when('/addque/:examid/:tmarks',{
         templateUrl:"../../../views/teacher/addquestions.html",
         controller :'quesCtrl'
     })
@@ -19,49 +19,118 @@ $scope.examForm.xdes="";
 
 $scope.examForm.xdate="";
 
-$scope.examForm.xtime="";
-
-$scope.examForm.xmarks="";
-
 $scope.examForm.xdur="";
 
+$scope.examForm.xenddate=""
 
-
+$scope.examForm.xmarks="";
 var picker = new Pikaday(
      {
        field: document.getElementById('datepickeronly'),
-       format: 'YYYY-MM-DD',
+       format: 'YYYY-MM-DD hh:mm A',
        firstDay: 1,
        minDate: new Date(),
-      maxDate: new Date(2020, 12, 31)
-
+      maxDate: new Date(2020, 12, 31),
+      //setDefaultDate : true,
+      showTime       : true,
+      splitTimeView  : false,
+      //showSeconds    : true,
+      hours24format  : false
    });
+   var picker = new Pikaday(
+        {
+          field: document.getElementById('enddatepickeronly'),
+          format: 'YYYY-MM-DD hh:mm A',
+          firstDay: 1,
+          minDate: new Date(),
+         maxDate: new Date(2020, 12, 31),
+         //setDefaultDate : true,
+         showTime       : true,
+         splitTimeView  : false,
+        // showSeconds    : true,
+         hours24format  : false
+      });
+   $scope.caldur=function(){
+     $scope.examForm.xdur="";
+     if($scope.examForm.xdate &&$scope.examForm.xenddate ){
+       function getDataDiff(startDate, endDate) {
+           var diffDate = endDate.getTime() - startDate.getTime();
+           if(diffDate<=0){
+             return undefined;
+           }
+           var days = Math.floor(diffDate / (60 * 60 * 24 * 1000));
+           var hours = Math.floor(diffDate / (60 * 60 * 1000)) - (days * 24);
+           var minutes = Math.floor(diffDate / (60 * 1000)) - ((days * 24 * 60) + (hours * 60));
+           //var seconds = Math.floor(diff / 1000) - ((days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60));
+           return { day: days, hour: hours, minute: minutes };
+       }
+        var diff= getDataDiff(new Date($scope.examForm.xdate), new Date($scope.examForm.xenddate));
+        if(diff==undefined){
+          document.getElementsByClassName("durerror")[0].style="border-color:#a94442";
+          $scope.examForm.xdur="Not Valid";
+        }else{
+          document.getElementsByClassName("durerror")[0].style="border-color:#ccc";
+             if(diff.day!="0"){
+
+                if(diff.day=="1"){
+                  $scope.examForm.xdur=diff.day+" day "
+                }
+                else {
+                  $scope.examForm.xdur=diff.day+" days "
+                }
+             }
+             if(diff.hour!="0"){
+                if(diff.hour=="1"){
+                  $scope.examForm.xdur=$scope.examForm.xdur+diff.hour+" hour "
+                }
+                else {
+                  $scope.examForm.xdur=$scope.examForm.xdur+diff.hour+" hours "
+                }
+             }
+             if(diff.minute!="0"){
+                if(diff.minute=="1"){
+                  $scope.examForm.xdur=$scope.examForm.xdur+diff.minute+" minute "
+                }
+                else {
+                  $scope.examForm.xdur=$scope.examForm.xdur+diff.minute+" minutes "
+                }
+             }
+
+               //console.log($scope.examForm.xdur);
+        }
+     }
+   }
+
 $scope.examForm.examSubmit=function (){
- var examObj={
+  if($scope.examForm.xdur!="Not Valid"){
+var examObj={
     examname:$scope.examForm.xname,
     examdes:$scope.examForm.xdes,
-    examdate:$scope.examForm.xdate,
-    exammarks:$scope.examForm.xmarks,
-    examtime:$scope.examForm.xtime,
-    examdur:$scope.examForm.xdur
-  };
+    examstartdate:$scope.examForm.xdate,
+    examenddate:$scope.examForm.xenddate,
+    examdur:$scope.examForm.xdur,
+    exammarks:$scope.examForm.xmarks
+    };
+  //console.log(examObj);
 $http.post('/teacher/examDetails',examObj).then(function(response){
  $scope.examid=response.data;
  //console.log("done");
   $log.log($scope.examid);
-  window.location="/teacher/newexam#!/addque/:"+$scope.examid;
+  window.location="/teacher/newexam#!/addque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
 },function(error){
  console.log("error in xam http");
 });
+}
 }
 }]);
 
 
  app.controller('quesCtrl',['$scope','$routeParams','$http','$log',function ($scope,$routeParams,$http,$log){
-    $scope.examid=$routeParams.examid;
-    var idArray=$scope.examid.split(':');
+    var idArray=$routeParams.examid.split(':');
+    var tmarksArray=$routeParams.tmarks.split(':');
     //$log.log(idArray[1]);
    $scope.examid=idArray[1];
+   $scope.tmarks=tmarksArray[1];
     console.log($scope.examid);
     $scope.continue="";
     $scope.finish="";

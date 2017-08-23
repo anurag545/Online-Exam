@@ -9,17 +9,19 @@ app.controller('examCtrl',['$scope','$http','$filter',function($scope,$http,$fil
   },function(error){
    console.log("error in getexam http");
  });
-$scope.remove=function (exam){
-  console.log(JSON.stringify(exam))
-  var exam={
-    exam:exam
+$scope.Remove=function (examid){
+  var examid={
+    examid:examid
   }
-  $http.post('/teacher/deleteExam',JSON.stringify(exam)).then(function(response){
+  $http.post('/teacher/deleteExam',examid).then(function(response){
     console.log(response.data);
     var exam=response.data;
     var foundexam = $filter("filter")($scope.exams, {examName:exam}, true)[0];
      var index=$scope.exams.indexOf(foundexam);
      $scope.exams.splice(index,1);
   });
+}
+$scope.EditExam=function(examid){
+window.location="/teacher/editexam?examid="+examid;
 }
 }]);

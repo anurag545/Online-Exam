@@ -82,11 +82,12 @@ teacherController.examDetails=function(request,response){
 	userEmail:data1.id,
 	examName:data.examname,
 	examDes:data.examdes,
-	examDate:data.examdate,
-	examMarks:data.exammarks,
-	examTime:data.examtime,
-	examDur:data.examdur
+	examStartDate:data.examstartdate,
+	examEndDate:data.examenddate,
+	examDur:data.examdur,
+	examMarks:data.exammarks
 };
+console.log(examObj);
  TeacherAuth.examDetails(examObj,function(examid){
 	 response.send(examid);
  });
@@ -175,9 +176,9 @@ teacherController.newgroup=function(request,response){
 	response.sendFile(path.resolve(__dirname+"/../views/teacher/addgroup.html"));
 }
 teacherController.deleteExam=function(request,response){
-	var exam=request.body.exam
+	var examid=request.body.examid
 	//console.log(exam,"cont");
-	TeacherAuth.deleteExam(exam,function(exam){
+	TeacherAuth.deleteExam(examid,function(exam){
 		response.send(exam);
 	});
 }
