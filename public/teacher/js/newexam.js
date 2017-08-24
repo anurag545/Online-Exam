@@ -1,4 +1,4 @@
-var app = angular.module('examApp',['ngRoute']);
+var app = angular.module('examApp',['ngRoute','ngStorage']);
 angular.bootstrap(document.getElementById('examForm'),['examApp']);
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider.when('/',{
@@ -10,7 +10,7 @@ app.config(['$routeProvider',function($routeProvider){
         controller :'quesCtrl'
     })
 }]);
-app.controller('examCtrl',['$scope','$http','$log',function ($scope,$http,$log){
+app.controller('examCtrl',['$scope','$http','$log','$sessionStorage',function ($scope,$http,$log,$sessionStorage){
 $scope.examForm={};
 
 $scope.examForm.xname="";
@@ -112,10 +112,13 @@ var examObj={
     exammarks:$scope.examForm.xmarks
     };
   //console.log(examObj);
+
 $http.post('/teacher/examDetails',examObj).then(function(response){
  $scope.examid=response.data;
  //console.log("done");
   $log.log($scope.examid);
+  $sessionStorage.marks=parseInt(0);
+  $sessionStorage.quesno= parseInt(1);
   window.location="/teacher/newexam#!/addque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
 },function(error){
  console.log("error in xam http");
@@ -125,13 +128,16 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
 }]);
 
 
- app.controller('quesCtrl',['$scope','$routeParams','$http','$log',function ($scope,$routeParams,$http,$log){
+ app.controller('quesCtrl',['$scope','$routeParams','$http','$log','$sessionStorage',function ($scope,$routeParams,$http,$log,$sessionStorage){
     var idArray=$routeParams.examid.split(':');
     var tmarksArray=$routeParams.tmarks.split(':');
+    $scope.count=parseInt($sessionStorage.marks);
+    $scope.quesno=parseInt($sessionStorage.quesno);
+    console.log($scope.count);
     //$log.log(idArray[1]);
    $scope.examid=idArray[1];
    $scope.tmarks=tmarksArray[1];
-    console.log($scope.examid);
+    //console.log($scope.examid);
     $scope.continue="";
     $scope.finish="";
     $scope.quesForm={};
@@ -231,7 +237,6 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
          marks:    $scope.quesForm.marks
          };
          console.log(quesDetails);
-
        }
        console.log(ansArray.length,optArray.length);
        if(ansArray.length==0 || optArray.length<=1)
@@ -245,9 +250,15 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
        }
        else{
          $scope.emsg="";
+         $scope.count=parseInt($sessionStorage.marks)+parseInt($scope.quesForm.marks);
+        if($scope.count<=$scope.tmarks){
        $http.post('/teacher/question',quesDetails).then(function (response){
        $scope.examId=response.data
         console.log($scope.examId,"done with servefr");
+        $sessionStorage.marks=$scope.count;
+        $scope.count=parseInt($sessionStorage.marks);
+        $sessionStorage.quesno=parseInt($sessionStorage.quesno)+parseInt(1);
+        $scope.quesno=parseInt($sessionStorage.quesno);
         $scope.quesForm.ques="";
         $scope.quesForm.ansObj="";
         $scope.quesForm.optObjA="";
@@ -264,6 +275,7 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
         $scope.quesForm.optMultiC="";
         $scope.quesForm.optMultiD="";
         $scope.quesForm.marks="";
+        $scope.count1=$scope.count;
         var quesObj={};
          var optArray=[];
         var  ansArray=[];
@@ -272,6 +284,10 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
        	console.log("question http error");
        })
      }
+     else{
+       $scope.emsg="Limit Exceeds of Marks (must less than total marks)";
+     }
+   }
     };
     $scope.quesForm.Finish=function (){
 

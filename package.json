@@ -12,6 +12,7 @@
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.11.1",
     "multer": "^1.3.0",
+    "ngstorage": "^0.3.11",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1"
   },
