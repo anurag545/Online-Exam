@@ -87,7 +87,7 @@ teacherController.examDetails=function(request,response){
 	examDur:data.examdur,
 	examMarks:data.exammarks
 };
-console.log(examObj);
+//console.log(examObj);
  TeacherAuth.examDetails(examObj,function(examid){
 	 response.send(examid);
  });
@@ -162,12 +162,18 @@ teacherController.addgroup=function(request,response){
 		});
 }
 teacherController.getgroups=function(request,response){
-	TeacherAuth.getgroups(function(groups){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+  var email=data1.id;
+	TeacherAuth.getgroups(email,function(groups){
 		response.send(groups);
 	});
 }
 teacherController.getexams=function(request,response){
-	TeacherAuth.getexams(function(exams){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+	var email=data1.id;
+	TeacherAuth.getexams(email,function(exams){
 		//console.log(exams,"cont");
 		response.send(exams);
 	});

@@ -24,7 +24,7 @@ var Group=require('../schemas/groupSchema.js');
 
     this.examDetails=function(data,callback){
       var exam=new Exam(data);
-      console.log(data);
+      //console.log(data);
       exam.save(function(err,exam,numAffected){
         if(err)
           throw err
@@ -95,17 +95,21 @@ var Group=require('../schemas/groupSchema.js');
        });
     }
 
-    this.getgroups=function(callback){
-      Group.find({}, function(err,groups) {
+    this.getgroups=function(data,callback){
+      //console.log(data.name,data,data.userid);
+
+     Group.find({userEmail:data}, function(err,groups) {
       if (err) throw err;
-      //console.log(questions);
+      console.log(groups);
+      if(groups){
       callback(groups);
+       }
     });
     }
 
-    this.getexams=function(callback1){
+    this.getexams=function(data,callback1){
 
-      Exam.find({},'examName examDate groupId',function(err,exams){
+      Exam.find({userEmail:data},'examName examStartDate examDur groupId',function(err,exams){
             if(err) throw err;
             //console.log(exams);
             var groupsName=[];
@@ -195,7 +199,7 @@ var Group=require('../schemas/groupSchema.js');
     }
     this.addGroupId=function(data,callback){
       console.log(data,"model");
-      Exam.findByIdAndUpdate(data.examId, { $push: { groupId:data.groupIds }}, { new: true }, function (err,exam) {
+      Exam.findByIdAndUpdate(data.examId, { $push: { groupId:data.groupId}}, { new: true }, function (err,exam) {
          if (err) throw err;
           console.log(exam);
           callback();
