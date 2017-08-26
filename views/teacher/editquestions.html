@@ -42,7 +42,10 @@
                              <div class="col-md-1">
                                {{question.quesMarks}}
                              </div>
-                             <div class="col-md-2" align="right">
+                             <div class="col-md-1" align="right">
+                               <a href="#newques"><button class="btn btn-danger" ng-click="Edit(question._id)">Edit</button></a>
+                             </div>
+                             <div class="col-md-1" align="right">
                                <button class="btn btn-danger" ng-click="Remove(question._id)">Delete</button>
                              </div>
                           </div>

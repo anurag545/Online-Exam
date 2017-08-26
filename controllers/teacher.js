@@ -119,6 +119,7 @@ teacherController.examInfo=function(request,response){
 }
 teacherController.examInfo=function(request,response){
 	  var examid=request.query.examid;
+		console.log(examid);
 		TeacherAuth.examInfo(examid,function(exam){
 			response.send(exam);
 		});
@@ -250,5 +251,20 @@ teacherController.deleteQues=function(request,response){
 	TeacherAuth.deleteQues(quesid,function(ques){
 		response.send(ques);
 	});
+}
+teacherController.addquestion=function(request,response){
+	var data=request.body;
+	//console.log(data);
+	var quesObj={
+	    examId:data.examid,
+	    quesType:data.questype,
+	    quesName:data.question,
+	    quesOptions:data.options,
+	    quesAnswer:data.answer,
+	    quesMarks:data.marks
+	};
+ TeacherAuth.addquestion(quesObj,function(ques){
+	 response.send(ques);
+ });
 }
 module.exports=teacherController

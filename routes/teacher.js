@@ -40,4 +40,5 @@ router.get('/editexam',teacherRoute.editexam);
 router.get('/getexam',teacherRoute.getgroup);
 router.post('/updateexam',teacherRoute.updateexam);
 router.post('/deleteQues',teacherRoute.deleteQues);
+router.post('/addquestion',auth.verifyToken,teacherRoute.addquestion);
 module.exports=router

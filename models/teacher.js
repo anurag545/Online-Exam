@@ -224,6 +224,19 @@ var Group=require('../schemas/groupSchema.js');
                callback(quesObj);
          });
     }
+
+    this.addquestion=function(data,callback){
+        var question=new Question(data);
+        question.save(function (err,question,numAffected){
+            if (err) throw err
+                if(numAffected){
+                  console.log(question);
+                    //console.log(question.examId,"in");
+                   // var mark=(question.quesMarks).toString();
+                    callback(question);
+                }
+        });
+    }
 }
 
 module.exports=TeacherAuth

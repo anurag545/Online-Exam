@@ -15,6 +15,7 @@ app.controller('examCtrl',['$scope','$http','$log','$filter',function ($scope,$h
   $scope.examid=urlParams.get('examid');
   console.log($scope.examid);
   $scope.examForm={};
+  if($scope.examid){
   $http.get('/teacher/examDetails?examid='+$scope.examid).then(function(response){
   var exam=response.data;
 
@@ -27,8 +28,10 @@ app.controller('examCtrl',['$scope','$http','$log','$filter',function ($scope,$h
   var date2=new Date(exam.examEndDate);
   $scope.examForm.xenddate=$filter('date')(date2,'yyyy-MM-dd  h:mm a')
   $scope.examForm.xmarks=exam.examMarks;
-  });
-
+},function(error){
+  console.log(error,"error in examdetails");
+});
+}
 var picker = new Pikaday(
      {
        field: document.getElementById('datepickeronly'),
@@ -178,6 +181,14 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
         $scope.count=$scope.count-ques.quesMark;
      });
    }
+   $scope.Edit=function(quesid){
+    document.getElementById("newques").style.display="block";
+     var foundques = $filter("filter")($scope.questions, {_id:quesid}, true)[0];
+       var index=$scope.questions.indexOf(foundques);
+       $scope.quesForm.ques=$scope.questions[index].quesName;
+       $scope.quesForm.type=$scope.questions[index].quesType;
+       
+   }
     //$scope.quesno=parseInt($sessionStorage.quesno);
     console.log($scope.count);
     $scope.continue="";
@@ -293,12 +304,15 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
        }
        else{
          $scope.emsg="";
+        $scope.count=$scope.count+parseInt($scope.quesForm.marks);
+        console.log($scope.count);
         if($scope.count<=$scope.tmarks){
-       $http.post('/teacher/question',quesDetails).then(function (response){
-        $scope.examId=response.data
-        console.log($scope.examId,"done with server");
-        $scope.count=$scope.count+
+       $http.post('/teacher/addquestion',quesDetails).then(function (response){
+        $scope.ques=response.data;
+        console.log($scope.ques,"done with server");
+      //  $scope.count=$scope.count+parseInt($scope.ques.quesMarks);
         $scope.quesno=$scope.quesno+1;
+        $scope.questions.push($scope.ques);
         $scope.quesForm.ques="";
         $scope.quesForm.ansObj="";
         $scope.quesForm.optObjA="";
@@ -326,107 +340,15 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
      }
      else{
        $scope.emsg="Limit Exceeds of Marks (must less than total marks)";
+       $scope.count=$scope.count-parseInt($scope.quesForm.marks);
+       console.log($scope.count);
      }
    }
   }else{
     $scope.emsg="Plz fill Required fields";
   }
-    };
-    $scope.quesForm.Finish=function (){
+  };
 
-     	console.log($scope.quesForm.questype);
-     if($scope.quesForm.questype=="objective")
-     {
-
-       if($scope.quesForm.optObjA){
-         optArray.push($scope.quesForm.optObjA);
-       } if($scope.quesForm.optObjB){
-         optArray.push($scope.quesForm.optObjB);
-       } if($scope.quesForm.optObjC){
-         optArray.push($scope.quesForm.optObjC);
-       } if($scope.quesForm.optObjD){
-         optArray.push($scope.quesForm.optObjD);
-       }
-       ansArray.push($scope.quesForm.ansObj);
-     // console.log(optArray);
-        quesDetails={
-        examid:	$scope.examid,
-        questype: $scope.quesForm.questype,
-        question: $scope.quesForm.ques,
-        answer:   $scope.quesForm.ansObj,
-        options:  optArray,
-        marks:    $scope.quesForm.marks
-       };
-       console.log(quesDetails);
-    }
-    else if($scope.quesForm.questype=="true-false"){
-         ansArray.push($scope.quesForm.alterType);
-         optArray.push("True");
-         optArray.push("False");
-         quesDetails={
-        examid:	$scope.examid,
-        questype: $scope.quesForm.questype,
-        question: $scope.quesForm.ques,
-        options:  ["True","False"],
-        answer:   $scope.quesForm.alterType,
-        marks:    $scope.quesForm.marks
-        };
-        console.log(quesDetails);
-    }
-    else if($scope.quesForm.questype=="multiselect"){
-
-
-       if($scope.quesForm.optMultiA){
-         optArray.push($scope.quesForm.optMultiA);
-       } if($scope.quesForm.optMultiB){
-         optArray.push($scope.quesForm.optMultiB);
-       } if($scope.quesForm.optMultiC){
-         optArray.push($scope.quesForm.optMultiC);
-       } if($scope.quesForm.optMultiD){
-         optArray.push($scope.quesForm.optMultiD);
-       }
-
-       if($scope.quesForm.ansMultiA){
-         ansArray.push($scope.quesForm.ansMultiA);
-       } if($scope.quesForm.ansMultiB){
-         ansArray.push($scope.quesForm.ansMultiB);
-       } if($scope.quesForm.ansMultiC){
-         ansArray.push($scope.quesForm.ansMultiC);
-       } if($scope.quesForm.ansMultiD){
-         ansArray.push($scope.quesForm.ansMultiD);
-       }
-        console.log(optArray,ansArray);
-        var quesDetails={
-        examid:	$scope.examid,
-        questype: $scope.quesForm.questype,
-        question: $scope.quesForm.ques,
-        options:  optArray,
-        answer:   ansArray,
-        marks:    $scope.quesForm.marks
-        };
-        console.log(quesDetails);
-
-      }
-       if(ansArray.length==0 || optArray.length<=1)
-       {
-         $scope.emsg="Plz select options/answer";
-         return
-       }else if($scope.quesForm.ques=="" ||  $scope.quesForm.marks=="" || $scope.quesForm.questype==""){
-         $scope.emsg="Plz fill all fields";
-         return
-       }
-       else {
-         $scope.emsg="";
-       $http.post('/teacher/question',quesDetails).then(function (response){
-        $scope.examid=response.data
-        console.log($scope.examid,"client done server");
-        window.location="/teacher/preview?examid="+$scope.examid;
-
-       },function (error){
-       	console.log("question http error");
-      });
-     }
-    };
 }]);
 /*
 angular.element(document).ready(function() {
