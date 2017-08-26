@@ -1,14 +1,13 @@
 
 <div class="row" id="addquestion">
-   <div class="col-lg-12">
+  <form method="post" ng-controller="quesCtrl">
+   <div class="col-lg-12" >
       <div class="panel panel-default" style="margin-left:15px;width:97%;min-height:350px">
          <div class="panel-body" style="padding-top:0px;">
-            <form method="post" ng-controller="quesCtrl">
               <div class="col-sm-11" style="padding-left:0px;margin-top:0px;padding-top:0px;margin-bottom:10px;">
                 <br/>
-
                    <div class="form-group" id="mark">
-                     <label class="control-label col-sm-2" for="name" style="min-height:31px;padding-top:5px;">Question No.</label>
+                     <label class="control-label col-sm-2" for="name" style="min-height:31px;padding-top:5px;">Questions</label>
                       <div class="col-sm-4" style="padding-left:33px;">
                          <span bold style="font-size:1.6em;">{{quesno}}</span>
                       </div>
@@ -18,120 +17,162 @@
                         </div>
                    </div>
              </div>
-               <div class="form-group">
-                  <label class="control-label col-sm-2" for="name">Question</label>
-                     <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="qinput" name="ques" ng-model="quesForm.ques" required></textarea>
-                     </div>
-               </div><br/><br/>
-               <div class="form-group">
-                     <label class="control-label col-sm-2" for="name">Question Type</label>
-                     <div class="col-sm-10">
-                            <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.questype" required>Objective</label>
-                            <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.questype" required>True/False</label>
-                             <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.questype" required>MultiSelect</label>
-                     </div>
-                </div>
-                <div class="form-group col-sm-11" style="display:none;" id="hidden_div_objective">
-                     <h5>Enter Choices</h5>
-                      <table class="table table-bordered  table-striped">
-                        <thead>
-                           <tr>
-                               <th>No.</th>
-                               <th>Correct</th>
-                               <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           <tr>
-                             <td>A</td>
-                                  <td><input type="radio" name="optObj" value="objA" ng-model="quesForm.ansObj"  id="objective"></td>
-                                  <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optObjA" type="text" ></td>
-                            </tr>
-                           <tr>
-                               <td>B</td>
-                               <td><input type="radio" name="optObj" value="objB" id="objective" ng-model="quesForm.ansObj" ></td>
-                               <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optObjB" type="text" ></td>
-                          </tr>
-                          <tr>
-                              <td>C</td>
-                              <td><input type="radio" name="optObj" value="objC" id="objective" ng-model="quesForm.ansObj" ></td>
-                              <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optObjC" type="text"></td>
-                           </tr>
-                           <tr>
-                             <td>D</td>
-                                <td><input type="radio" name="optObj" value="objD" id="objective" ng-model="quesForm.ansObj" ></td>
-                                <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optObjD" type="text"></td>
-                             </tr>
-                        </tbody>
-                     </table>
-                    </div>
-                        <div class="form-group col-sm-12" style="display:none;" id="hidden_div_truefalse">
-                            <h5>Answer</h5>
-                            <label class="radio-inline"><input type="radio" name="optTrue" ng-model="quesForm.alterType" value="true" id="objective" >True</label>
-                            <label class="radio-inline"><input type="radio" name="optTrue"  ng-model="quesForm.alterType" value="false" id="true-false" >False</label>
-                    </div>
-                        <div class="form-group col-sm-11" style="display:none;" id="hidden_div_multiselect">
+             <div class="col-lg-12">
+                  <div class="col-lg-12" style="margin-bottom:20px;">
+                    <div class="col-md-12 preview-questions" ng-repeat="question in questions">
+                        <div class="col-md-1 question-number"><i>{{ $index+1 }}</i></div>
+                        <div class="col-md-8">
+                              <div clas="col-md-11">
+                                 <p>{{ question.quesName }}scsdcd</p>
+                              </div>
+                               <div class="col-md-11 options">
+
+                                    <table class="previewtable" align="left">
+                                            <tbody>
+                                              <tr ng-repeat="options in question.quesOptions">
+                                                <td width="5%">{{optionArr[$index]}}</td>
+                                                <td width="5%"><input type="checkbox" name="optMulti" ng-if="question.quesType=='multiselect'" ><input type="radio" name="optMulti" ng-if="question.quesType!='multiselect'" ></td>
+                                                <td>{{options}}</td>
+                                              </tr>
+
+                                            </tbody>
+                                      </table>
+                                 </div>
+                             </div>
+                             <div class="col-md-1">
+                               {{question.quesMarks}}
+                             </div>
+                             <div class="col-md-2" align="right">
+                               <button class="btn btn-danger" ng-click="Remove(question._id)">Delete</button>
+                             </div>
+                          </div>
+                   </div>
+
+                   <div id="newques" style="display:hidden;margin-top:20px;" hidden>
+                      <div class="form-group">
+                         <label class="control-label col-sm-2" for="name">Question</label>
+                            <div class="col-sm-10">
+                               <textarea class="form-control" rows="5" id="qinput" name="ques" ng-model="quesForm.ques" ></textarea>
+                            </div>
+                      </div><br/><br/>
+                      <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Question Type</label>
+                            <div class="col-sm-10">
+                                   <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.questype" >Objective</label>
+                                   <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.questype" >True/False</label>
+                                    <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.questype">MultiSelect</label>
+                            </div>
+                       </div>
+                       <div class="form-group col-sm-11" style="display:none;" id="hidden_div_objective">
                             <h5>Enter Choices</h5>
-                            <table class="table table-bordered  table-striped">
-                                  <thead>
-                                      <tr>
-                                         <th>No.</th>
-                                         <th>Correct</th>
-                                        <th>Options</th>
+                             <table class="table table-bordered  table-striped" style="margin-bottom:0px;">
+                               <thead>
+                                  <tr>
+                                      <th>No.</th>
+                                      <th>Correct</th>
+                                      <th>Options</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                  <tr>
+                                    <td>A</td>
+                                         <td><input type="radio" name="optObj" value="objA" ng-model="quesForm.ansObj"  id="objective"></td>
+                                         <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optObjA" type="text" ></td>
+                                   </tr>
+                                  <tr>
+                                      <td>B</td>
+                                      <td><input type="radio" name="optObj" value="objB" id="objective" ng-model="quesForm.ansObj" ></td>
+                                      <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optObjB" type="text" ></td>
+                                 </tr>
+                                 <tr>
+                                     <td>C</td>
+                                     <td><input type="radio" name="optObj" value="objC" id="objective" ng-model="quesForm.ansObj" ></td>
+                                     <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optObjC" type="text"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>D</td>
+                                       <td><input type="radio" name="optObj" value="objD" id="objective" ng-model="quesForm.ansObj" ></td>
+                                       <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optObjD" type="text"></td>
                                     </tr>
-                                  </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>A</td>
-                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiA"></td>
-                                        <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optMultiA" type="text" ></td>
-                                      </tr>
-                                      <tr>
-                                        <td>B</td>
-                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiB"></td>
-                                        <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optMultiB" type="text" ></td>
-                                      </tr>
-                                      <tr>
-                                        <td>C</td>
-                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiC"></td>
-                                        <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optMultiC"  type="text"></td>
-                                      </tr>
-                                            <tr>
-                                        <td>D</td>
-                                        <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiD"></td>
-                                        <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optMultiD" type="text"></td>
-                                      </tr>
-                                    </tbody>
+                               </tbody>
                             </table>
+                           </div>
+                               <div class="form-group col-sm-12" style="display:none;" id="hidden_div_truefalse">
+                                   <h5>Answer</h5>
+                                   <label class="radio-inline"><input type="radio" name="optTrue" ng-model="quesForm.alterType" value="true" id="objective" >True</label>
+                                   <label class="radio-inline"><input type="radio" name="optTrue"  ng-model="quesForm.alterType" value="false" id="true-false" >False</label>
+                           </div>
+                               <div class="form-group col-sm-11" style="display:none;" id="hidden_div_multiselect">
+                                   <h5>Enter Choices</h5>
+                                   <table class="table table-bordered  table-striped">
+                                         <thead>
+                                             <tr>
+                                                <th>No.</th>
+                                                <th>Correct</th>
+                                               <th>Options</th>
+                                           </tr>
+                                         </thead>
+                                           <tbody>
+                                             <tr>
+                                               <td>A</td>
+                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiA"></td>
+                                               <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optMultiA" type="text" ></td>
+                                             </tr>
+                                             <tr>
+                                               <td>B</td>
+                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiB"></td>
+                                               <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optMultiB" type="text" ></td>
+                                             </tr>
+                                             <tr>
+                                               <td>C</td>
+                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiC"></td>
+                                               <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optMultiC"  type="text"></td>
+                                             </tr>
+                                                   <tr>
+                                               <td>D</td>
+                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiD"></td>
+                                               <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optMultiD" type="text"></td>
+                                             </tr>
+                                           </tbody>
+                                   </table>
+                             </div>
+                          <div class="col-sm-11" style="padding-left:0px;">
+                            <br/>
+                               <div class="form-group" id="mark">
+                                   <label class="control-label col-md-2" for="name">Set Marks</label>
+                                    <div class="col-md-9" style="padding-left:33px;">
+                                       <input type="text" class="form-control" pattern="^[0-9]*$" id="minput" placeholder="Enter Marks" ng-model="quesForm.marks" >
+                               </div>
+                           </div>
+                         </div>
+
+                     <div class="col-sm-12">
+                        <p style="color:red;"> {{emsg}}</p>
+                               <div class="col-sm-2" style="padding-top:-20px;">
+                                   <br/>
+                                <button class="btn btn-xs btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button>
+                                       <br/><br/>
+                                </div>
+
                       </div>
-                   <div class="col-sm-11" style="padding-left:0px;">
-                     <br/>
-                        <div class="form-group" id="mark">
-                            <label class="control-label col-md-2" for="name">Set Marks</label>
-                             <div class="col-md-9" style="padding-left:33px;">
-                                <input type="text" class="form-control" pattern="^[0-9]*$" id="minput" placeholder="Enter Marks" ng-model="quesForm.marks" >
-                        </div>
-                    </div>
-                  </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom:10px;">
+                      <div class="col-md-2" align="left">
+                          <div id="newbtn" style="display:block;">
+                              <button class="btn btn-success" ng-click="showques()">Add New Question</button>
+                          </div>
+                          <div id="done" style="display:none;">
+                              <input type="button" class="btn btn btn-success" ng-click="done()" value="Done">
+                           </div>
+                      </div>
+                      <div class="col-md-3" align="left">
+                         <button class="btn btn-success" ng-click="showques()">Update Questions</button>
+                      </div>
+                </div>
+            </div>
 
-              <div class="col-sm-12">
-                 <p style="color:red;"> {{emsg}}</p>
-                        <div class="col-sm-2" style="padding-top:-20px;">
-                            <br/>
-                         <button class="btn btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button>
-                                <br/><br/>
-                         </div>
-                         <div class="col-sm-10">
-                            <br/>
-                             <button class="btn btn-success" ng-click="quesForm.Finish()">Done</button>
-                          <br/><br/>
-                         </div>
-               </div>
-
-            </form>
-
-         </div>
+       </div>
       </div>
     </div>
+  </form>
 </div>

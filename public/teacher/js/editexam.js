@@ -1,4 +1,4 @@
-var app = angular.module('examApp',['ngRoute','ngStorage']);
+var app = angular.module('examApp',['ngRoute']);
 angular.bootstrap(document.getElementById('examForm'),['examApp']);
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider.when('/',{
@@ -10,7 +10,7 @@ app.config(['$routeProvider',function($routeProvider){
         controller :'quesCtrl'
     })
 }]);
-app.controller('examCtrl',['$scope','$http','$log','$filter','$sessionStorage',function ($scope,$http,$log,$filter,$sessionStorage){
+app.controller('examCtrl',['$scope','$http','$log','$filter',function ($scope,$http,$log,$filter){
   var urlParams = new URLSearchParams(window.location.search);
   $scope.examid=urlParams.get('examid');
   console.log($scope.examid);
@@ -131,16 +131,55 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
 }]);
 
 
- app.controller('quesCtrl',['$scope','$routeParams','$http','$log','$sessionStorage',function ($scope,$routeParams,$http,$log,$sessionStorage){
-    var idArray=$routeParams.examid.split(':');
-    var tmarksArray=$routeParams.tmarks.split(':');
-    $scope.count=parseInt($sessionStorage.marks);
-    $scope.quesno=parseInt($sessionStorage.quesno);
+ app.controller('quesCtrl',['$scope','$routeParams','$http','$log','$filter',function ($scope,$routeParams,$http,$log,$filter){
+
+  $scope.showques=function (){
+         document.getElementById("newques").style.display="block";
+         document.getElementById("newbtn").style="display:none;";
+         document.getElementById("done").style="display:block;";
+    }
+  $scope.done=function (){
+     document.getElementById("newques").style="display:none;";
+     document.getElementById("newbtn").style="display:block";
+      document.getElementById("done").style="display:none";
+  }
+
+  //document.getElementById("done").style="display:none;"
+  var idArray=$routeParams.examid.split(':');
+  var tmarksArray=$routeParams.tmarks.split(':');
+  $scope.examid=idArray[1];
+  $scope.tmarks=tmarksArray[1];
+  $scope.exam={};
+  $scope.questions={};
+  console.log($scope.examid);
+   $scope.count=parseInt(0);
+  $http.get('/teacher/questionsDetails?examid='+$scope.examid).then(function(response){
+  $scope.questions=response.data;
+  $scope.quesno=$scope.questions.length;
+  for(i=0;i<$scope.questions.length;i++){
+    $scope.count=$scope.count+$scope.questions[i].quesMarks;
+  }
+  console.log("questions",$scope.questions);
+  },function (error){console.log("error in previre http questions")});
+
+   $scope.optionArr=["A","B","C","D"];
+
+   $scope.Remove=function (quesid){
+     var quesid={
+       quesid:quesid
+     }
+     $http.post('/teacher/deleteQues',quesid).then(function(response){
+       console.log(response.data);
+       var ques=response.data;
+       var foundques = $filter("filter")($scope.questions, {_id:ques.quesid}, true)[0];
+        var index=$scope.questions.indexOf(foundques);
+        $scope.questions.splice(index,1);
+        $scope.quesno=$scope.quesno-parseInt(1);
+        $scope.count=$scope.count-ques.quesMark;
+     });
+   }
+    //$scope.quesno=parseInt($sessionStorage.quesno);
     console.log($scope.count);
-    //$log.log(idArray[1]);
-   $scope.examid=idArray[1];
-   $scope.tmarks=tmarksArray[1];
-    //console.log($scope.examid);
     $scope.continue="";
     $scope.finish="";
     $scope.quesForm={};
@@ -165,7 +204,8 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
     var optArray=[];
     var  ansArray=[];
     $scope.quesForm.saveContinue=function (){
-
+     if($scope.quesForm.questype && $scope.quesForm.ques)
+     {
     	console.log($scope.quesForm.questype);
       var quesObj={};
   var optArray=[];
@@ -253,15 +293,12 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
        }
        else{
          $scope.emsg="";
-         $scope.count=parseInt($sessionStorage.marks)+parseInt($scope.quesForm.marks);
         if($scope.count<=$scope.tmarks){
        $http.post('/teacher/question',quesDetails).then(function (response){
-       $scope.examId=response.data
-        console.log($scope.examId,"done with servefr");
-        $sessionStorage.marks=$scope.count;
-        $scope.count=parseInt($sessionStorage.marks);
-        $sessionStorage.quesno=parseInt($sessionStorage.quesno)+parseInt(1);
-        $scope.quesno=parseInt($sessionStorage.quesno);
+        $scope.examId=response.data
+        console.log($scope.examId,"done with server");
+        $scope.count=$scope.count+
+        $scope.quesno=$scope.quesno+1;
         $scope.quesForm.ques="";
         $scope.quesForm.ansObj="";
         $scope.quesForm.optObjA="";
@@ -291,6 +328,9 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
        $scope.emsg="Limit Exceeds of Marks (must less than total marks)";
      }
    }
+  }else{
+    $scope.emsg="Plz fill Required fields";
+  }
     };
     $scope.quesForm.Finish=function (){
 

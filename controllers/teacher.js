@@ -244,4 +244,11 @@ teacherController.updateexam=function(request,response){
 		response.sendStatus(200);
 	});
 }
+teacherController.deleteQues=function(request,response){
+	var quesid=request.body.quesid
+	//console.log(exam,"cont");
+	TeacherAuth.deleteQues(quesid,function(ques){
+		response.send(ques);
+	});
+}
 module.exports=teacherController

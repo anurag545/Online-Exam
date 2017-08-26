@@ -211,6 +211,19 @@ var Group=require('../schemas/groupSchema.js');
             callback();
            });
     }
+
+    this.deleteQues=function(data,callback){
+        Question.findByIdAndRemove(data, function (err, ques) {
+             //console.log(exam)
+             if(err) throw (err);
+             var quesObj={
+               quesid:ques._id,
+               quesMark:ques.quesMarks
+             }
+             console.log(quesObj);
+               callback(quesObj);
+         });
+    }
 }
 
 module.exports=TeacherAuth

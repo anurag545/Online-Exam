@@ -242,7 +242,7 @@
                  <div class="col-md-12" style="padding-left:20px;">
                      <div class="col-md-12 preview-questions" ng-repeat="question in questions">
                          <div class="col-md-1 question-number"><i>{{ $index+1 }}</i></div>
-                         <div class="col-md-11">
+                         <div class="col-md-10">
                                <div clas="col-md-11">
                                   <p>{{ question.quesName }}scsdcd</p>
                                </div>
@@ -259,6 +259,9 @@
                                              </tbody>
                                        </table>
                                   </div>
+                              </div>
+                              <div class="col-md-1">
+                                {{question.quesMarks}}
                               </div>
                            </div>
                      <div class="col-sm-12">
