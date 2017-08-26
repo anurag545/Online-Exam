@@ -251,17 +251,17 @@
                               <tbody>
                                 <tr>
                                   <th width="5%">S.No.</th>
-                                  <th width="20 %">Group Name</th>
-                                  <th width="10%" align="center">Edit</th>
-                                  <th width="10%" align="center" ng-if="examid">Add</th>
-                                  <th width="10%" align="center">Delete</th>
+                                  <th width="20%">Group Name</th>
+                                  <th width="12%" align="center">Edit</th>
+                                  <th width="12%" align="center" ng-if="examid">Add</th>
+                                  <th width="12%" align="center">Delete</th>
                                 <tr>
                                 <tr ng-repeat="group in groups">
                                   <td width="5%">{{$index+1}}</td>
                                   <td width="20%">{{group.groupName}}</td>
-                                  <td cellpadding="0px" width="10%"><button class="btn btn-danger" ng-click="EditGroup(group._id)">Edit</button></td>
-                                  <td cellpadding="0px" width="10%" ng-if="examid"> <button class="btn btn-danger" ng-click="Add(group._id)">Add</button></td>
-                                  <td cellpadding="0px" width="10%"> <button class="btn btn-danger" ng-click="remove(group._id)">Delete</button></td>
+                                  <td cellpadding="0px" width="12%"><button class="btn btn-danger" ng-click="EditGroup(group._id)">Edit</button></td>
+                                  <td cellpadding="0px" width="12%" ng-if="examid"> <button class="btn btn-danger" ng-click="Add(group._id)">Add</button></td>
+                                  <td cellpadding="0px" width="12%"> <button class="btn btn-danger" ng-click="remove(group._id)">Delete</button></td>
                                 </tr>
                               </tbody>
                         </table>

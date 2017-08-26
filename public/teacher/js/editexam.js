@@ -2,28 +2,33 @@ var app = angular.module('examApp',['ngRoute','ngStorage']);
 angular.bootstrap(document.getElementById('examForm'),['examApp']);
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider.when('/',{
-   templateUrl : "../../../views/teacher/newexamdetail.html",
+     templateUrl : "../../../views/teacher/editexamdetail.html",
     //template : "<h1>Main Route 1</h1><p>Click on the links to change this content {{uid}}</p>",
     controller :'examCtrl'
-  }).when('/addque/:examid/:tmarks',{
-        templateUrl:"../../../views/teacher/addquestions.html",
+  }).when('/editque/:examid/:tmarks',{
+        templateUrl:"../../../views/teacher/editquestions.html",
         controller :'quesCtrl'
     })
 }]);
-app.controller('examCtrl',['$scope','$http','$log','$sessionStorage',function ($scope,$http,$log,$sessionStorage){
-$scope.examForm={};
+app.controller('examCtrl',['$scope','$http','$log','$filter','$sessionStorage',function ($scope,$http,$log,$filter,$sessionStorage){
+  var urlParams = new URLSearchParams(window.location.search);
+  $scope.examid=urlParams.get('examid');
+  console.log($scope.examid);
+  $scope.examForm={};
+  $http.get('/teacher/examDetails?examid='+$scope.examid).then(function(response){
+  var exam=response.data;
 
-$scope.examForm.xname="";
+  $scope.examForm.xname=exam.examName;
 
-$scope.examForm.xdes="";
+  $scope.examForm.xdes=exam.examDes;
+   var date = new Date(exam.examStartDate);
+  $scope.examForm.xdate = $filter('date')(date, 'yyyy-MM-dd  h:mm a');
+  $scope.examForm.xdur=exam.examDur;
+  var date2=new Date(exam.examEndDate);
+  $scope.examForm.xenddate=$filter('date')(date2,'yyyy-MM-dd  h:mm a')
+  $scope.examForm.xmarks=exam.examMarks;
+  });
 
-$scope.examForm.xdate="";
-
-$scope.examForm.xdur="";
-
-$scope.examForm.xenddate=""
-
-$scope.examForm.xmarks="";
 var picker = new Pikaday(
      {
        field: document.getElementById('datepickeronly'),
@@ -100,10 +105,13 @@ var picker = new Pikaday(
         }
      }
    }
-
+ $scope.EditQuestions=function(){
+   window.location="/teacher/editexam#!/editque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
+ }
 $scope.examForm.examSubmit=function (){
   if($scope.examForm.xdur!="Not Valid"){
 var examObj={
+    examid:$scope.examid,
     examname:$scope.examForm.xname,
     examdes:$scope.examForm.xdes,
     examstartdate:$scope.examForm.xdate,
@@ -111,15 +119,10 @@ var examObj={
     examdur:$scope.examForm.xdur,
     exammarks:$scope.examForm.xmarks
     };
-  //console.log(examObj);
+  console.log(examObj);
 
-$http.post('/teacher/examDetails',examObj).then(function(response){
- $scope.examid=response.data;
- //console.log("done");
-  $log.log($scope.examid);
-  $sessionStorage.marks=parseInt(0);
-  $sessionStorage.quesno= parseInt(1);
-  window.location="/teacher/newexam#!/addque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
+$http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(response){
+  window.location="/teacher/editexam#!/editque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
 },function(error){
  console.log("error in xam http");
 });

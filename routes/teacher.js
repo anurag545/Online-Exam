@@ -36,4 +36,7 @@ router.post('/addGroupId',teacherRoute.addGroupId);
 router.get('/editgroup',teacherRoute.editgroup);
 router.get('/getgroup',teacherRoute.getgroup);
 router.post('/updategroup',teacherRoute.updategroup);
+router.get('/editexam',teacherRoute.editexam);
+router.get('/getexam',teacherRoute.getgroup);
+router.post('/updateexam',teacherRoute.updateexam);
 module.exports=router

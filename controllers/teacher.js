@@ -112,6 +112,7 @@ teacherController.preview=function(request,response){
 }
 teacherController.examInfo=function(request,response){
 	  var examid=request.query.examid;
+		console.log(examid,"examid");
 		TeacherAuth.examInfo(examid,function(exam){
 			response.send(exam);
 		});
@@ -221,6 +222,25 @@ teacherController.updategroup=function(request,response){
 		usersEmail:request.body.users
 	}
 	TeacherAuth.updategroup(groupObj,function(){
+		response.sendStatus(200);
+	});
+}
+teacherController.editexam=function(request,response){
+	console.log("hello");
+		response.sendFile(path.resolve(__dirname+"/../views/teacher/editexam.html"));
+}
+teacherController.updateexam=function(request,response){
+		var data=request.body;
+	var examObj={
+	examId:data.examid,
+	examName:data.examname,
+	examDes:data.examdes,
+	examStartDate:data.examstartdate,
+	examEndDate:data.examenddate,
+	examDur:data.examdur,
+	examMarks:data.exammarks
+};
+	TeacherAuth.updateexam(examObj,function(){
 		response.sendStatus(200);
 	});
 }
