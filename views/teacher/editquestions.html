@@ -21,9 +21,9 @@
                   <div class="col-lg-12" style="margin-bottom:20px;">
                     <div class="col-md-12 preview-questions" ng-repeat="question in questions">
                         <div class="col-md-1 question-number"><i>{{ $index+1 }}</i></div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                               <div clas="col-md-11">
-                                 <p>{{ question.quesName }}scsdcd</p>
+                                 <p>{{ question.quesName }}</p>
                               </div>
                                <div class="col-md-11 options">
 
@@ -42,8 +42,8 @@
                              <div class="col-md-1">
                                {{question.quesMarks}}
                              </div>
-                             <div class="col-md-1" align="right">
-                               <a href="#newques"><button class="btn btn-danger" ng-click="Edit(question._id)">Edit</button></a>
+                             <div class="col-md-2" align="right">
+                               <a href="/editque/:{{examid}}/:{{tmarks}}#newques"><button class="btn btn-danger" ng-click="Edit(question._id)"  id="editbtn">Edit</button></a>
                              </div>
                              <div class="col-md-1" align="right">
                                <button class="btn btn-danger" ng-click="Remove(question._id)">Delete</button>
@@ -61,9 +61,9 @@
                       <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Question Type</label>
                             <div class="col-sm-10">
-                                   <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" onClick="showDiv(this)" ng-model="quesForm.questype" >Objective</label>
-                                   <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" onClick="showDiv(this)" ng-model="quesForm.questype" >True/False</label>
-                                    <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" onClick="showDiv(this)" ng-model="quesForm.questype">MultiSelect</label>
+                                   <label class="radio-inline"><input type="radio" name="qtype" id="objective" value="objective" ng-click="showDiv('objective')" ng-model="quesForm.questype" ng-checked="objective=='objective'">Objective</label>
+                                   <label class="radio-inline"><input type="radio" name="qtype" id="true-false" value="true-false" ng-click="showDiv('true-false')" ng-model="quesForm.questype" ng-checked="truefalse=='truefalse'">True/False</label>
+                                    <label class="radio-inline"><input type="radio" name="qtype" id="multiselect" value="multiselect" ng-click="showDiv('multiselect')" ng-model="quesForm.questype" ng-checked="multiselect=='multiselect'">MultiSelect</label>
                             </div>
                        </div>
                        <div class="form-group col-sm-11" style="display:none;" id="hidden_div_objective">
@@ -79,22 +79,22 @@
                                <tbody>
                                   <tr>
                                     <td>A</td>
-                                         <td><input type="radio" name="optObj" value="objA" ng-model="quesForm.ansObj"  id="objective"></td>
+                                         <td><input type="radio" name="optObj" value="A" ng-model="quesForm.ansObj"  id="objective"></td>
                                          <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optObjA" type="text" ></td>
                                    </tr>
                                   <tr>
                                       <td>B</td>
-                                      <td><input type="radio" name="optObj" value="objB" id="objective" ng-model="quesForm.ansObj" ></td>
+                                      <td><input type="radio" name="optObj" value="B"  id="objective" ng-model="quesForm.ansObj" ></td>
                                       <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optObjB" type="text" ></td>
                                  </tr>
                                  <tr>
                                      <td>C</td>
-                                     <td><input type="radio" name="optObj" value="objC" id="objective" ng-model="quesForm.ansObj" ></td>
+                                     <td><input type="radio" name="optObj" value="C" id="objective" ng-model="quesForm.ansObj" ></td>
                                      <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optObjC" type="text"></td>
                                   </tr>
                                   <tr>
                                     <td>D</td>
-                                       <td><input type="radio" name="optObj" value="objD" id="objective" ng-model="quesForm.ansObj" ></td>
+                                       <td><input type="radio" name="optObj" value="D" id="objective" ng-model="quesForm.ansObj" ></td>
                                        <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optObjD" type="text"></td>
                                     </tr>
                                </tbody>
@@ -102,8 +102,8 @@
                            </div>
                                <div class="form-group col-sm-12" style="display:none;" id="hidden_div_truefalse">
                                    <h5>Answer</h5>
-                                   <label class="radio-inline"><input type="radio" name="optTrue" ng-model="quesForm.alterType" value="true" id="objective" >True</label>
-                                   <label class="radio-inline"><input type="radio" name="optTrue"  ng-model="quesForm.alterType" value="false" id="true-false" >False</label>
+                                   <label class="radio-inline"><input type="radio"  ng-checked="True=='True'" name="optTrue" ng-model="quesForm.alterType" value="True" id="objective" >True</label>
+                                   <label class="radio-inline"><input type="radio" name="optTrue"  ng-checked="False=='False'" ng-model="quesForm.alterType" value="False" id="true-false" >False</label>
                            </div>
                                <div class="form-group col-sm-11" style="display:none;" id="hidden_div_multiselect">
                                    <h5>Enter Choices</h5>
@@ -118,22 +118,22 @@
                                            <tbody>
                                              <tr>
                                                <td>A</td>
-                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiA"></td>
+                                               <td><input type="checkbox"  name="optMulti" value="A" ng-model="quesForm.ansMultiA" ng-checked="quesForm.ansMultiA=='A'" id="multiple" ></td>
                                                <td><input class="form-control" placeholder="Option A" ng-model="quesForm.optMultiA" type="text" ></td>
                                              </tr>
                                              <tr>
                                                <td>B</td>
-                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiB"></td>
+                                               <td><input type="checkbox" name="optMulti" value="B" ng-model="quesForm.ansMultiB" ng-checked="quesForm.ansMultiB=='B'" id="multiple" ></td>
                                                <td><input class="form-control" placeholder="Option B" ng-model="quesForm.optMultiB" type="text" ></td>
                                              </tr>
                                              <tr>
                                                <td>C</td>
-                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiC"></td>
+                                               <td><input type="checkbox" name="optMulti" value="C" ng-model="quesForm.ansMultiC" ng-checked="quesForm.ansMultiC=='C'" id="multiple" ></td>
                                                <td><input class="form-control" placeholder="Option C" ng-model="quesForm.optMultiC"  type="text"></td>
                                              </tr>
                                                    <tr>
                                                <td>D</td>
-                                               <td><input type="checkbox" name="optMulti" id="multiple" ng-model="quesForm.ansMultiD"></td>
+                                               <td><input type="checkbox" name="optMulti" value="D" ng-model="quesForm.ansMultiD" ng-checked="quesForm.ansMultiD=='D'" id="multiple" ></td>
                                                <td><input class="form-control" placeholder="Option D" ng-model="quesForm.optMultiD" type="text"></td>
                                              </tr>
                                            </tbody>
@@ -149,12 +149,11 @@
                            </div>
                          </div>
 
-                     <div class="col-sm-12">
+                     <div class="col-sm-12" style="margin-bottom:15px;">
                         <p style="color:red;"> {{emsg}}</p>
                                <div class="col-sm-2" style="padding-top:-20px;">
-                                   <br/>
-                                <button class="btn btn-xs btn-success" ng-click="quesForm.saveContinue()">Save & Continue</button>
-                                       <br/><br/>
+                                <button class="btn btn-xs btn-success" id="addbtn" ng-click="quesForm.saveContinue()">Add & Continue</button>
+                                <button class="btn btn-xs btn-success" id="updatebtn" ng-click="Update()" style="display:none;">Update Question</button>
                                 </div>
 
                       </div>
@@ -166,10 +165,10 @@
                           </div>
                           <div id="done" style="display:none;">
                               <input type="button" class="btn btn btn-success" ng-click="done()" value="Done">
-                           </div>
+                          </div>
                       </div>
-                      <div class="col-md-3" align="left">
-                         <button class="btn btn-success" ng-click="showques()">Update Questions</button>
+                      <div class="col-md-2" align="right">
+                        <button class="btn btn-success" id="prev" ng-click="Preview()">Preview Exam</button>
                       </div>
                 </div>
             </div>

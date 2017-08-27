@@ -267,4 +267,20 @@ teacherController.addquestion=function(request,response){
 	 response.send(ques);
  });
 }
+
+teacherController.updatequestion=function(request,response){
+		var data=request.body;
+	var quesObj={
+		quesid:data.quesid,
+		examId:data.examid,
+		quesType:data.questype,
+		quesName:data.question,
+		quesOptions:data.options,
+		quesAnswer:data.answer,
+		quesMarks:data.marks
+};
+	TeacherAuth.updatequestion(quesObj,function(question){
+		response.send(question);
+	});
+}
 module.exports=teacherController

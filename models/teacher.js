@@ -237,6 +237,23 @@ var Group=require('../schemas/groupSchema.js');
                 }
         });
     }
+
+    this.updatequestion=function(data,callback){
+      console.log(data);
+      var  quesObj={
+    		examId:data.examId,
+    		quesType:data.quesType,
+    		quesName:data.quesName,
+    		quesOptions:data.quesOptions,
+    		quesAnswer:data.quesAnswer,
+    		quesMarks:data.quesMarks
+      }
+        Question.findByIdAndUpdate(data.quesid,quesObj, { new: true }, function (err,question) {
+           if (err) throw err;
+            console.log(question);
+            callback(question);
+           });
+    }
 }
 
 module.exports=TeacherAuth

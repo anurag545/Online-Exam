@@ -219,13 +219,13 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
         }
 
         if($scope.quesForm.ansMultiA){
-        	ansArray.push($scope.quesForm.ansMultiA);
+        	ansArray.push("A");
         } if($scope.quesForm.ansMultiB){
-        	ansArray.push($scope.quesForm.ansMultiB);
+        	ansArray.push("B");
         } if($scope.quesForm.ansMultiC){
-        	ansArray.push($scope.quesForm.ansMultiC);
+        	ansArray.push("C");
         } if($scope.quesForm.ansMultiD){
-        	ansArray.push($scope.quesForm.ansMultiD);
+        	ansArray.push("D");
         }
          console.log(optArray,ansArray);
          var quesDetails={
@@ -344,13 +344,13 @@ $http.post('/teacher/examDetails',examObj).then(function(response){
        }
 
        if($scope.quesForm.ansMultiA){
-         ansArray.push($scope.quesForm.ansMultiA);
+         ansArray.push("A");
        } if($scope.quesForm.ansMultiB){
-         ansArray.push($scope.quesForm.ansMultiB);
+         ansArray.push("B");
        } if($scope.quesForm.ansMultiC){
-         ansArray.push($scope.quesForm.ansMultiC);
+         ansArray.push("C");
        } if($scope.quesForm.ansMultiD){
-         ansArray.push($scope.quesForm.ansMultiD);
+         ansArray.push("D");
        }
         console.log(optArray,ansArray);
         var quesDetails={
