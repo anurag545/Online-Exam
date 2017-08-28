@@ -24,4 +24,7 @@ $scope.Remove=function (examid){
 $scope.EditExam=function(examid){
 window.location="/teacher/editexam?examid="+examid;
 }
+$scope.Preview=function(examid){
+  window.location="/teacher/preview?examid="+examid+"&flag=0";
+}
 }]);

@@ -38,8 +38,10 @@ router.get('/getgroup',teacherRoute.getgroup);
 router.post('/updategroup',teacherRoute.updategroup);
 router.get('/editexam',teacherRoute.editexam);
 router.get('/getexam',teacherRoute.getgroup);
+router.get('/getexamDetails',auth.verifyToken,teacherRoute.getexamDetails);
 router.post('/updateexam',teacherRoute.updateexam);
 router.post('/deleteQues',teacherRoute.deleteQues);
 router.post('/addquestion',auth.verifyToken,teacherRoute.addquestion);
 router.post('/updatequestion',teacherRoute.updatequestion);
+router.get('/examspreview',auth.verifyToken,teacherRoute.examspreview);
 module.exports=router

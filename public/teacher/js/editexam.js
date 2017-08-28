@@ -14,21 +14,23 @@ app.controller('examCtrl',['$scope','$http','$log','$filter',function ($scope,$h
   var urlParams = new URLSearchParams(window.location.search);
   $scope.examid=urlParams.get('examid');
   console.log($scope.examid);
-
+  $scope.groups=[];
+  $scope.success="";
   $scope.examForm={};
   if($scope.examid){
-  $http.get('/teacher/examDetails?examid='+$scope.examid).then(function(response){
-  var exam=response.data;
+  $http.get('/teacher/getexamDetails?examid='+$scope.examid).then(function(response){
+  var examObj=response.data;
 
-  $scope.examForm.xname=exam.examName;
+  $scope.examForm.xname=examObj.exam.examName;
+  $scope.examForm.xdes=examObj.exam.examDes;
 
-  $scope.examForm.xdes=exam.examDes;
-   var date = new Date(exam.examStartDate);
+   var date = new Date(examObj.exam.examStartDate);
   $scope.examForm.xdate = $filter('date')(date, 'yyyy-MM-dd  h:mm a');
-  $scope.examForm.xdur=exam.examDur;
-  var date2=new Date(exam.examEndDate);
+  $scope.examForm.xdur=examObj.exam.examDur;
+  var date2=new Date(examObj.exam.examEndDate);
   $scope.examForm.xenddate=$filter('date')(date2,'yyyy-MM-dd  h:mm a')
-  $scope.examForm.xmarks=exam.examMarks;
+  $scope.examForm.xmarks=examObj.exam.examMarks;
+  $scope.groups=examObj.groupName;
 },function(error){
   console.log(error,"error in examdetails");
 });
@@ -109,11 +111,30 @@ var picker = new Pikaday(
         }
      }
    }
+
+   /*
+   $http.get('/teacher/getexamgroups?examid='+$scope.examid).then(function(response){
+    console.log(response.data);
+     $scope.groups=response.data;
+   },function(error){
+    console.log("error in group http");
+  });
+*/
+  $scope.remove=function (id){
+    console.log(id);
+    var foundgroup = $filter("filter")($scope.groups, {_id:id}, true)[0];
+     var index=$scope.groups.indexOf(foundgroup);
+     $scope.groups.splice(index,1);
+  }
  $scope.EditQuestions=function(){
    window.location="/teacher/editexam#!/editque/:"+$scope.examid+"/:"+$scope.examForm.xmarks;
  }
 $scope.examForm.examSubmit=function (){
   if($scope.examForm.xdur!="Not Valid"){
+     var groupid=[];
+    for(i=0;i<$scope.groups.length;i++){
+      groupid.push($scope.groups[i]._id);
+    }
 var examObj={
     examid:$scope.examid,
     examname:$scope.examForm.xname,
@@ -121,7 +142,8 @@ var examObj={
     examstartdate:$scope.examForm.xdate,
     examenddate:$scope.examForm.xenddate,
     examdur:$scope.examForm.xdur,
-    exammarks:$scope.examForm.xmarks
+    exammarks:$scope.examForm.xmarks,
+    groupid:groupid
     };
   console.log(examObj);
 
@@ -148,6 +170,7 @@ $http.post('/teacher/updateexam?examid='+$scope.examid,examObj).then(function(re
 
   $scope.done=function (){
     $scope.quesForm.ques="";
+    $scope.quesForm.questype=""
     $scope.quesForm.ansObj="";
     $scope.quesForm.optObjA="";
     $scope.quesForm.optObjB="";

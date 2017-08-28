@@ -203,7 +203,8 @@ var Group=require('../schemas/groupSchema.js');
         examStartDate:data.examStartDate,
         examEndDate:data.examEndDate,
         examDur:data.examDur,
-        examMarks:data.examMarks
+        examMarks:data.examMarks,
+        groupId:data.groupId
       }
         Exam.findByIdAndUpdate(data.examId,examObj, { new: true }, function (err,exam) {
            if (err) throw err;
@@ -253,6 +254,26 @@ var Group=require('../schemas/groupSchema.js');
             console.log(question);
             callback(question);
            });
+    }
+
+    this.getexamDetails=function(data,callback){
+        console.log(data,"data");
+        Exam.findById(data, function(err,exam) {
+        if (err) throw err;
+        console.log(exam);
+        Group.find({_id:{$in:exam.groupId}},'groupName', function(err,groupName){
+           if (err) throw err;
+              console.log(groupName,"gn");
+              var examObj={
+                exam:exam,
+                groupName:groupName
+              }
+              //groupsName.push(groupName);
+              //console.log(groupsName,"inside");
+              //asyncLoop(i+1,callback);
+              callback(examObj);
+         });
+        });
     }
 }
 

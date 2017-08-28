@@ -166,6 +166,9 @@
                         <a href="/teacher/newgroup"><i class="fa fa-fw fa-table"></i> New Group</a>
                     </li>
                     <li>
+                        <a href="/teacher/examspreview"><i class="fa fa-fw fa-bar-chart-o"></i> Preview Exams</a>
+                    </li>
+                    <li>
                         <a href="/teacher/profile"><i class="fa fa-fw fa-bar-chart-o"></i> Profile</a>
                     </li>
                     <li>
@@ -264,12 +267,12 @@
                                 {{question.quesMarks}}
                               </div>
                            </div>
-                     <div class="col-sm-12">
+                     <div class="col-sm-12" ng-if="flag!='0'">
                             <div class="col-sm-4" align="right">
                                <br/>
                             <a<button class="btn btn-success" ng-click="SaveOnly()">Save Only</button></a>
                             </div>
-                            <div class="col-sm-4" align="right">
+                            <div class="col-sm-3" align="left">
                                <br/>
                             <a<button class="btn btn-success" ng-click="Group()">Add To Saved Group</button></a>
                             </div>

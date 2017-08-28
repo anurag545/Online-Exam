@@ -9,30 +9,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Exam</title>
-
-    <!-- Bootstrap Core CSS -->
+    <title>Exams</title>
     <link href="../../public/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="../../public/teacher/css/sb-admin.css" rel="stylesheet">
-    <!--date-->
-    <!-- Custom Fonts -->
     <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="../../public/bootstrap/bootstrap.min.js"></script>
-      <script src="../../public/teacher/js/moment.min.js"></script>
-     <script src="../../public/teacher/js/pikaday.js"></script>
-       <link href="../../public/teacher/css/pikaday.css" rel="stylesheet">
-       <script>var rootApp=angular.module('rootApp',['mainApp','examApp']);</script>
-       <style type="text/css">
+       <style>
        #usertable table{
-         width:95%;
+         width:80%;
        }
        #usertable th, td {
+          border: 1px solid #ccc;
           padding-top: 1px;
           padding-bottom: 1px;
        }
@@ -48,13 +38,15 @@
          padding-left: 4px;
        }
        #usertable table .btn{
-         padding-top:0px;
+         padding-top:0px;groups
          padding-bottom: 0px;
          width: 100px;
          font-size: 12px;
          height: 25px;
+         margin-left: 10px;
        }
        </style>
+       <script>var rootApp=angular.module('rootApp',['mainApp','examApp']);</script>
 </head>
 
 <body ng-app="rootApp">
@@ -62,7 +54,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="mainDash" ng-app="mainApp" ng-controller="mainCtrl">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-app="mainApp" ng-controller="mainCtrl">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -71,15 +63,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/teacher/home">Admin/Teacher</a>
+                <a class="navbar-brand" href="index.html">Admin/Teacher</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
-                            <a href="">
+                            <a href="#">
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -95,7 +87,7 @@
                             </a>
                         </li>
                         <li class="message-preview">
-                            <a href="">
+                            <a href="#">
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -111,7 +103,7 @@
                             </a>
                         </li>
                         <li class="message-preview">
-                            <a href="">
+                            <a href="#">
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -127,52 +119,52 @@
                             </a>
                         </li>
                         <li class="message-footer">
-                            <a href="">Read All New Messages</a>
+                            <a href="#">Read All New Messages</a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
-                            <a href="">Alert Name <span class="label label-default">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="">Alert Name <span class="label label-success">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="">Alert Name <span class="label label-info">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="">View All</a>
+                            <a href="#">View All</a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li ng-click="Profile()">
-                            <a href="/teacher/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                         </li>
                         <li ng-click="Setting()">
-                            <a href=""><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li ng-click="Logout()">
-                            <a href=""><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -186,7 +178,7 @@
                     <li>
                         <a href="/teacher/exams"><i class="fa fa-fw fa-dashboard"></i> Exams</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/teacher/groups"><i class="fa fa-fw fa-dashboard"></i> Groups</a>
                     </li>
                     <li>
@@ -195,12 +187,13 @@
                     <li>
                         <a href="/teacher/newgroup"><i class="fa fa-fw fa-table"></i> New Group</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/teacher/examspreview"><i class="fa fa-fw fa-bar-chart-o"></i> Preview Exams</a>
                     </li>
                     <li>
                         <a href="/teacher/profile"><i class="fa fa-fw fa-bar-chart-o"></i> Profile</a>
                     </li>
+
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
@@ -234,32 +227,52 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-        <div id="page-wrapper" id="makeExam" ng-app="examApp">
 
-            <div class="container-fluid" style="width:98%;min-height:615px;">
+        <div id="page-wrapper" id="groupPage" ng-app="examApp" ng-controller="examCtrl">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12" style="position:'fixed';">
-                        <h1 class="page-header">
-                            EditExam
-                            <small></small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Edit Exam
-                            </li>
-                        </ol>
+            <div class="container-fluid">
+              <div class="row">
+              		<div class="col-lg-12">
+              				<h1 class="page-header">
+                        Exams
+              						<small></small>
+              				</h1>
+              				<ol class="breadcrumb">
+              						<li>
+              								<i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
+              						</li>
+              						<li class="active">
+              								<i class="fa fa-file"></i>Exams
+              						</li>
+              				</ol>
+              		</div>
+              </div>
+              <div class="row" style="min-height:470px;width:100%;margin:auto;">
+                <div class=".col-md-12" style="margin-top:20px;">
+                    <div id="usertable">
+                      <table align="center">
+                              <tbody>
+                                <tr>
+                                  <th width="5%">S.No.</th>
+                                  <th width="15%">Exam Name</th>
+                                  <th width="12%">Exam Date</th>
+                                  <th width="12%">Exam Duration</th>
+                                  <th width="7%" align="center">Preview</th>
+                                </tr>
+                                <tr ng-repeat="exam in exams">
+                                  <td width="5%">{{$index+1}}</td>
+                                  <td width="15%">{{exam.examName}}</td>
+                                  <td width="12%">{{exam.examStartDate | date:'yyyy-MM-dd , h:mm a'}}</td>
+                                  <td width="12%">{{exam.examDur}}</td>
+                                  <td cellpadding="0px" width="7%" align="center"><button class="btn btn-danger"          ng-click="Preview(exam._id)">preview</button></td>
+                                </tr>
+                              </tbody>
+                        </table>
                     </div>
-                </div>
-<!-- /.row -->
-                  <div class="row" ng-view>
-
-                </div>
-            </div>
+                    <!--usertable-->
+                  </div>
+              </div>
+          </div>
             <!-- /.container-fluid -->
 
         </div>
@@ -270,8 +283,9 @@
 
     <!-- jQuery -->
     <script src="../../public/teacher/js/jquery.js"></script>
+     <script src="../../public/teacher/js/dashboard.js"></script>
+     <script src="../../public/teacher/js/exam.js"></script>
     <!-- Bootstrap Core JavaScript -->
-     <script type="text/javascript" src="../../public/teacher/js/dashboard.js"></script>-->
- <script type="text/javascript" src="../../public/teacher/js/editexam.js"></script>
 </body>
+
 </html>

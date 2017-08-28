@@ -239,7 +239,8 @@ teacherController.updateexam=function(request,response){
 	examStartDate:data.examstartdate,
 	examEndDate:data.examenddate,
 	examDur:data.examdur,
-	examMarks:data.exammarks
+	examMarks:data.exammarks,
+	groupId:data.groupid
 };
 	TeacherAuth.updateexam(examObj,function(){
 		response.sendStatus(200);
@@ -282,5 +283,17 @@ teacherController.updatequestion=function(request,response){
 	TeacherAuth.updatequestion(quesObj,function(question){
 		response.send(question);
 	});
+}
+
+teacherController.getexamDetails=function(request,response){
+	  var examid=request.query.examid;
+		console.log(examid);
+		TeacherAuth.getexamDetails(examid,function(exam){
+			response.send(exam);
+		});
+}
+teacherController.examspreview=function(request,response){
+	//console.log("hello");
+		response.sendFile(path.resolve(__dirname+"/../views/teacher/examspreview.html"));
 }
 module.exports=teacherController

@@ -4,6 +4,7 @@ angular.bootstrap(document.getElementById('previewPage'),['previewApp']);
 appPreview.controller('previewCtrl',['$scope','$http',function($scope,$http){
  var urlParams = new URLSearchParams(window.location.search);
   $scope.examid=urlParams.get('examid');
+  $scope.flag=urlParams.get('flag');
   $scope.exam={};
   $scope.questions={};
   //var tokenObj=$cookieStore.get('tokenObj');

@@ -253,10 +253,16 @@ width: 30%;
 #previewExam .col-md-10{
   width:80%;
   margin:auto;
-  border-bottom: 0.5px solid grey;
 }
 .preview-questions{
   margin-top:15px;
+}
+.preview-questions .btn-danger{
+  padding-top:0px;
+  padding-bottom: 0px;
+  width:70px;
+  font-size: 12px;
+  height: 25px;
 }
 .question-number,.col-md-1{
   width:2%;
