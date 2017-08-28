@@ -15,18 +15,17 @@ app.controller('indexCtrl',['$scope','$http','$filter',function($scope,$http,$fi
    $scope.progress=response.data.count;
  },function(error){
   console.log("error in getexam http");
-});/*
+});
 $http.get('/teacher/countcomexams').then(function(response){
  console.log(response.data);
   $scope.completed=response.data.count;
 },function(error){
  console.log("error in getexam http");
 });
-/*
 $http.get('/teacher/countupexams').then(function(response){
  console.log(response.data);
   $scope.upcoming=response.data.count;
 },function(error){
  console.log("error in getexam http");
-});*/
+});
 }]);
