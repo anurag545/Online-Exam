@@ -111,7 +111,7 @@ var Group=require('../schemas/groupSchema.js');
     }
 
     this.getexams=function(data,callback1){
-        Exam.find({userEmail:data},'examName examStartDate examDur groupId',function(err,exams){
+        Exam.find({userEmail:data},'examName examStartDate examDur examMarks groupId',function(err,exams){
               if(err) throw err;
               //console.log(exams);
               var groupsName=[];
@@ -268,12 +268,63 @@ var Group=require('../schemas/groupSchema.js');
                 exam:exam,
                 groupName:groupName
               }
-              //groupsName.push(groupName);
-              //console.log(groupsName,"inside");
-              //asyncLoop(i+1,callback);
               callback(examObj);
          });
         });
+    }
+
+    this.getproupexams=function(data,callback1){
+        Exam.find({$and:[{userEmail:data},{examEndDate:{ $gte:new Date()}}]},'examName examStartDate examDur examMarks groupId',function(err,exams){
+              if(err) throw err;
+              console.log(exams,"up");
+              var groupsName=[];
+              function asyncLoop( i, callback ) {
+                  if( i < exams.length ) {
+                      //  console.log(i)
+                          Group.find({_id:{$in:exams[i].groupId}},'groupName', function(err,groupName){
+                             if (err) throw err;
+                                //console.log(groupName,"gn");
+                                groupsName.push(groupName);
+                                //console.log(groupsName,"inside");
+                                asyncLoop(i+1,callback);
+                           });
+                    } else {
+                      var obj={
+                        exams:exams,
+                        groups:groupsName
+                        }
+                        callback(obj);
+                      }
+                  }
+                  asyncLoop( 0, function(obj){
+                        console.log(obj,"up")
+                        callback1(obj);
+                   });
+          });
+    }
+
+    this.countproexams=function(data,callback1){
+        Exam.count({$and:[{userEmail:data},{$and:[{examStartDate:{ $lte:new Date()}},{examEndDate:{ $gte:new Date()}}]}]},function(err,count){
+              if(err) throw err;
+              console.log(count);
+              callback1(count);
+         });
+    }
+
+    this.countcomexams=function(data,callback1){
+        Exam.count({$and:[{userEmail:data},{examEndDate:{ $lt:new Date()}}]},function(err,count){
+              if(err) throw err;
+              console.log(count);
+              callback1(count);
+         });
+    }
+
+    this.countupexams=function(data,callback1){
+        Exam.count({$and:[{userEmail:data},{examStartDate:{ $gt:new Date()}}]},function(err,count){
+              if(err) throw err;
+              console.log(count);
+              callback1(count);
+         });
     }
 }
 

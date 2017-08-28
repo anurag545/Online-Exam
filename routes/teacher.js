@@ -44,4 +44,8 @@ router.post('/deleteQues',teacherRoute.deleteQues);
 router.post('/addquestion',auth.verifyToken,teacherRoute.addquestion);
 router.post('/updatequestion',teacherRoute.updatequestion);
 router.get('/examspreview',auth.verifyToken,teacherRoute.examspreview);
+router.get('/getproupexams',teacherRoute.getproupexams);
+router.get('/countproexams',teacherRoute.countproexams);
+router.get('/countcomexams',teacherRoute.countcomexams);
+router.get('/countupexams',teacherRoute.countupexams);
 module.exports=router

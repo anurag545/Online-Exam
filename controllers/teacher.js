@@ -296,4 +296,49 @@ teacherController.examspreview=function(request,response){
 	//console.log("hello");
 		response.sendFile(path.resolve(__dirname+"/../views/teacher/examspreview.html"));
 }
+teacherController.getproupexams=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+	var email=data1.id;
+	TeacherAuth.getproupexams(email,function(exams){
+		//console.log(exams,"cont");
+		response.send(exams);
+	});
+}
+teacherController.countproexams=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+	var email=data1.id;
+	TeacherAuth.countproexams(email,function(count){
+		//console.log(exams,"cont");
+		var count={
+			count:count
+		}
+		response.send(count);
+	});
+}
+teacherController.countcomexams=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+	var email=data1.id;
+	TeacherAuth.countcomexams(email,function(count){
+		//console.log(exams,"cont");
+		var count={
+			count:count
+		}
+		response.send(count);
+	});
+}
+teacherController.countupexams=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var data1=payloadData(request);
+	var email=data1.id;
+	TeacherAuth.countupexams(email,function(count){
+		//console.log(exams,"cont");
+		var count={
+			count:count
+		}
+		response.send(count);
+	});
+}
 module.exports=teacherController
