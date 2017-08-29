@@ -24,7 +24,7 @@
                                               <th width="20%">Group Name</th>
                                               <th width="12%" align="center">Delete</th>
                                             <tr>
-                                            <tr ng-repeat="group in groups">
+                                            <tr ng-repeat="group in groups | orderBy:'groupName'">
                                               <td width="5%">{{$index+1}}</td>
                                               <td width="20%">{{group.groupName}}</td>
                                               <td cellpadding="0px" width="12%" align="center"> <button class="btn btn-danger" ng-click="remove(group._id)">Remove</button></td>

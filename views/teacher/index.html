@@ -278,10 +278,10 @@
                                   <th width="5%">Marks</th>
                                   <th width="10%">Exam Duration</th>
                                 <tr>
-                                <tr ng-repeat="exam in exams" style="border-bottom:1px solid #eee;height:50px;">
+                                <tr ng-repeat="exam in exams | orderBy:'examStartDate'" style="border-bottom:1px solid #eee;height:50px;">
                                   <td width="15%" style="padding-left:10px;">{{exam.examName}}</td>
                                   <td width="13%">{{exam.examStartDate | date:'yyyy-MM-dd , h:mm a'}}</td>
-                                  <td width="20%"><span ng-repeat="name in groupsName[$index]">{{name.groupName }} , </span></td>
+                                  <td width="20%"><span ng-repeat="name in groupsName[$index] | orderBy:'groupName'">{{name.groupName }} , </span></td>
                                   <td width="5%">{{exam.examMarks}}</td>
                                   <td width="10%">{{exam.examDur}}</td>
                                 </tr>

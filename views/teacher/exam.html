@@ -260,12 +260,12 @@
                                   <th width="7%" align="center">Edit</th>
                                   <th width="7%" align="center">Delete</th>
                                 <tr>
-                                <tr ng-repeat="exam in exams">
+                                <tr ng-repeat="exam in exams | orderBy:'examName'">
                                   <td width="5%">{{$index+1}}</td>
                                   <td width="15%">{{exam.examName}}</td>
                                   <td width="12%">{{exam.examStartDate | date:'yyyy-MM-dd , h:mm a'}}</td>
                                   <td width="15%">{{exam.examDur}}</td>
-                                  <td width="20%"><span ng-repeat="name in groupsName[$index]">{{name.groupName }} , </span></td>
+                                  <td width="20%"><span ng-repeat="name in groupsName[$index] |orderBy:'groupName'">{{name.groupName }} , </span></td>
                                   <td cellpadding="0px" width="7%"><button class="btn btn-danger" ng-click="EditExam(exam._id)">Edit</button></td>
                                   <td cellpadding="0px" width="7%"><button class="btn btn-danger" ng-click="Remove(exam._id)">Delete</button></td>
                                 </tr>
