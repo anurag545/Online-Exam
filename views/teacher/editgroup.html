@@ -18,7 +18,11 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="../../public/bootstrap/bootstrap.min.js"></script>
        <style>
+       #usertable{
+         overflow-x: scroll;
+       }
        #usertable table{
+         overflow-x: scroll;
          width:95%;
        }
        #usertable th, td {
@@ -266,7 +270,7 @@
 																	</div>
 																	<div style="width:100%;margin-top:30px;">
 																		<div id="usertable">
-																			<table align="left">
+																			<table align="left" class="table">
 																							<tbody>
 																								<tr>
 																									<th width="10%">S.No.</th>
@@ -278,9 +282,9 @@
 																								<tr ng-repeat="user in users track by user.email">
 																									<td width="10%">{{$index+1}}</td>
 																									<td width="20%">{{user.username}}</td>
-																									<td width="30%">{{user.email}}</td>
+																									<td width="25%">{{user.email}}</td>
 																									<td width="20%">{{user.phone}}</td>
-																									<td cellpadding="0px" align="center"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
+																									<td cellpadding="0px" align="center" width="15%"><button class="btn btn-danger" ng-click="remove($index)">Delete</button></td>
 																								</tr>
 																							</tbody>
 																				</table>

@@ -41,7 +41,13 @@ body {
         padding: 10px;
     }
 }
-
+@@media (max-width:480) {
+  #page-wrapper {
+      padding: 10px;
+      overflow-x: scroll;
+      font-size: .7em;
+  }
+}
 /* Top Navigation */
 
 .top-nav {
@@ -121,10 +127,10 @@ ul.alert-dropdown {
         margin-left: -225px;
         border: none;
         border-radius: 0;
-        overflow-y:hidden;
+        overflow-y:auto;
         background-color: #222;
         bottom: 0;
-        overflow-x: hidden;
+        overflow-x: auto;
         padding-bottom: 40px;
     }
 
@@ -276,7 +282,7 @@ width: 30%;
 /*end*/
 /*exam form*/
 #makeExam{
-  overflow-x:hidden;
+  overflow-x:auto;
   padding-top:20px;
 }
 #examform{
@@ -310,7 +316,6 @@ width: 30%;
   width:50%;
 }
 #newgroup .search{
-
   border-left:1px solid #ccc;
   border-right:1px solid #ccc;
   border-bottom:1px solid #ccc;
