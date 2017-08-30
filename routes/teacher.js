@@ -18,6 +18,8 @@ router.get('/name',auth.verifyToken,teacherRoute.name);
 router.get('/profileDetails',auth.verifyToken,teacherRoute.profileDetails);
 router.post('/updateprofileDetails',auth.verifyToken,teacherRoute.updateprofileDetails);
 router.get('/profile',auth.verifyToken,teacherRoute.profile);
+router.get('/settings',auth.verifyToken,teacherRoute.settings);
+router.post('/changepwd',auth.verifyToken,teacherRoute.changepwd);
 router.get('/newexam',auth.verifyToken,teacherRoute.newexam);
 router.post('/examDetails',auth.verifyToken,teacherRoute.examDetails);
 router.post('/question',auth.verifyToken,teacherRoute.question);

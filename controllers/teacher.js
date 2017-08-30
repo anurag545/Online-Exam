@@ -86,8 +86,24 @@ teacherController.updateprofileDetails=function(request,response){
 	job: request.body.job,
 	birthdate: request.body.birthdate
 	}
-	TeacherAuth.updateprofileDetails(profileObj,function(){
-  response.sendStatus(200);
+	TeacherAuth.updateprofileDetails(profileObj,function(userProfile){
+  response.send(userProfile);
+	});
+}
+teacherController.settings=function(request,response){
+	response.sendFile(path.resolve(__dirname+"/../views/teacher/settings.html"));
+}
+teacherController.changepwd=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var  data=payloadData(request);
+	var changeObj={
+		id:data.id,
+		oldpwd:request.body.oldpwd,
+		newpwd:request.body.newpwd
+	}
+	console.log(changeObj);
+	TeacherAuth.changepwd(changeObj,function(){
+		response.sendStatus(200);
 	});
 }
 teacherController.exam=function(request,response) {

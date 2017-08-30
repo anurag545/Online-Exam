@@ -25,7 +25,7 @@ var Group=require('../schemas/groupSchema.js');
 
    this.updateprofileDetails=function (data,callback){
      var profileObj={
-   	name: data.name,
+   username: data.name,
    	phone: data.phone,
    	address:data.address,
    	country:data.country,
@@ -34,9 +34,18 @@ var Group=require('../schemas/groupSchema.js');
    	birthdate: data.birthdate
    	}
     console.log(profileObj);
-       User.update({email:data.id},profileObj ,function(err,userProfile) {
+       User.findOneAndUpdate({email:data.id},profileObj ,{new:true},function(err,userProfile) {
        if (err) throw err;
         console.log(userProfile);
+        callback(userProfile);
+       });
+   }
+
+   this.changepwd=function (data,callback){
+    console.log(data);
+       User.findOneAndUpdate({$and:[{email:data.id},{password:data.oldpwd}]},{password:data.newpwd},{new:true},function(err,user) {
+       if (err) throw err;
+        console.log(user);
         callback();
        });
    }

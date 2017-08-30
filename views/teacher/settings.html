@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Settings</title>
+    <link href="../../public/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/teacher/css/sb-admin.css" rel="stylesheet">
+    <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="../../public/bootstrap/bootstrap.min.js"></script>
+</head>
+
+<body ng-app="mainApp">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-app="mainApp" ng-controller="mainCtrl">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/teacher/home">Admin/Teacher</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li ng-click="Profile()">
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li ng-click="Setting()">
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li ng-click="Logout()">
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="/teacher/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/exams"><i class="fa fa-fw fa-dashboard"></i> Exams</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/groups"><i class="fa fa-fw fa-dashboard"></i> Groups</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/newexam"><i class="fa fa-fw fa-dashboard"></i> New Exam</a>
+                    </li>
+                    <li class="active">
+                        <a href="/teacher/newgroup"><i class="fa fa-fw fa-table"></i> New Group</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/examspreview"><i class="fa fa-fw fa-bar-chart-o"></i> Preview Exams</a>
+                    </li>
+                    <li>
+                        <a href="/teacher/profile"><i class="fa fa-fw fa-bar-chart-o"></i> Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper" id="groupPage"  ng-controller="settingsCtrl">
+            <div class="container-fluid">
+              <div class="row">
+              		<div class="col-lg-12">
+              				<h1 class="page-header">
+                       Change Password
+              						<small></small>
+              				</h1>
+              				<ol class="breadcrumb">
+              						<li>
+              								<i class="fa fa-dashboard"></i>  <a href="/teacher/home">Dashboard</a>
+              						</li>
+              						<li class="active">
+              								<i class="fa fa-file"></i> Change Password
+              						</li>
+              				</ol>
+              		</div>
+              </div>
+
+								<div class="row" style="min-height:470px;width:100%;margin:auto;">
+    								<div id="newgroup">
+    										<div class="col-lg-12">
+    													<div class="form-group" style="margin-top:20px;">
+    															<label>Old Password</label>
+    															<input class="form-control" ng-model="oldpwd" placeholder="Old Password" type="text" required>
+    													</div>
+                              <div class="form-group" style="margin-top:20px;">
+                                  <label>New Password</label>
+                                  <input class="form-control" ng-model="newpwd" placeholder="New Password" type="text" required>
+                              </div>
+                              <div class="form-group" style="margin-top:20px;">
+                                  <label>Confirm Password</label>
+                                  <input class="form-control" ng-model="conpwd" placeholder="Confirm Password" type="text" required>
+                              </div>
+    										</div>
+                        <div class="col-lg-12">
+                            <p>{{msg}}</p>
+                            <button type="submit" class="btn btn-success" ng-click="changePassword()">Change Password</button><br><br>
+                        </div>
+                    </div>
+								</div>
+
+
+          </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../public/teacher/js/jquery.js"></script>
+     <script src="../../public/teacher/js/dashboard.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+</body>
+
+</html>

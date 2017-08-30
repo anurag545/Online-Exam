@@ -227,7 +227,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="admin/index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/teacher/home">Dashboard</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-file"></i> Profile
@@ -240,8 +240,8 @@
 
                         <div class="col-md-4" id="profileimg" align="center">
                         <img src="../../public/uploads/{{ myProfile.profilepic }}"><br/>
-                        <div id="profilename" align="left">
-                        <h1>  {{name}} </h1>
+                        <div class="col-md-11" id="profilename" align="left">
+                        <h1>  {{myProfile.name}} </h1>
                         </div>
                         </div>
                         <div  class="profiledetails col-md-8">
