@@ -16,6 +16,7 @@ router.get('/logout',auth.verifyToken,teacherRoute.logout);
 router.get('/home',auth.verifyToken,teacherRoute.home);
 router.get('/name',auth.verifyToken,teacherRoute.name);
 router.get('/profileDetails',auth.verifyToken,teacherRoute.profileDetails);
+router.post('/updateprofileDetails',auth.verifyToken,teacherRoute.updateprofileDetails);
 router.get('/profile',auth.verifyToken,teacherRoute.profile);
 router.get('/newexam',auth.verifyToken,teacherRoute.newexam);
 router.post('/examDetails',auth.verifyToken,teacherRoute.examDetails);

@@ -66,6 +66,30 @@ teacherController.profileDetails=function(request,response){
   response.send(userProfile);
 	});
 }
+teacherController.profileDetails=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var  data=payloadData(request);
+	TeacherAuth.profileDetails(data,function(userProfile){
+  response.send(userProfile);
+	});
+}
+teacherController.updateprofileDetails=function(request,response){
+	var payloadData=auth.getUserIdNameFromToken;
+	var  data=payloadData(request);
+	var profileObj={
+	id:data.id,
+	name: request.body.name,
+	phone: request.body.phone,
+	address:request.body.address,
+	country:request.body.country,
+	gender:request.body.gender,
+	job: request.body.job,
+	birthdate: request.body.birthdate
+	}
+	TeacherAuth.updateprofileDetails(profileObj,function(){
+  response.sendStatus(200);
+	});
+}
 teacherController.exam=function(request,response) {
   response.sendFile(path.resolve(__dirname+"/../views/teacher/exam.html"));
 }

@@ -23,6 +23,24 @@ var Group=require('../schemas/groupSchema.js');
        });
    }
 
+   this.updateprofileDetails=function (data,callback){
+     var profileObj={
+   	name: data.name,
+   	phone: data.phone,
+   	address:data.address,
+   	country:data.country,
+   	gender:data.gender,
+   	job: data.job,
+   	birthdate: data.birthdate
+   	}
+    console.log(profileObj);
+       User.update({email:data.id},profileObj ,function(err,userProfile) {
+       if (err) throw err;
+        console.log(userProfile);
+        callback();
+       });
+   }
+
     this.examDetails=function(data,callback){
         var exam=new Exam(data);
         //console.log(data);

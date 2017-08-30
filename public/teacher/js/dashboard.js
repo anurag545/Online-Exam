@@ -23,6 +23,7 @@ appMain.controller('profileCtrl',['$scope','$http',function($scope,$http){
 $http.get('/teacher/profileDetails').then(function(response){
  userProfile=response.data;
  console.log(userProfile);
+ $scope.success="";
  $scope.myProfile={};
  if(userProfile){
    $scope.myProfile.name=userProfile[0].username;
@@ -36,4 +37,23 @@ $http.get('/teacher/profileDetails').then(function(response){
    $scope.myProfile.profilepic=userProfile[0].profilepic;
  }
 },function (error){console.log("error in profile http")});
+ $scope.update=function () {
+   var profileObj={
+   name: $scope.myProfile.name,
+   phone: $scope.myProfile.phone,
+   address:$scope.myProfile.address,
+   country:$scope.myProfile.country,
+   gender:$scope.myProfile.gender,
+   job:  $scope.myProfile.job,
+   birthdate: $scope.myProfile.birthdate
+   }
+   console.log(profileObj);
+   $http.post('/teacher/updateprofileDetails',profileObj).then(function(response){
+    //userProfile=response.data;
+    $scope.success="Updated Succesfully";
+    console.log("done");
+   },function (error){console.log("error in profile http")});
+
+ }
+
 }]);
