@@ -16,7 +16,8 @@ var mongoose=require('mongoose');
  //var User=require('./schemas/userSchema.js');
  //var Exam=require('./admin/js/examSchema.js');
   //var Question=require('./admin/js/quesSchema.js');
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 var bodyParser=require('body-parser');
 app.use(bodyParser.json({strict:false}));
