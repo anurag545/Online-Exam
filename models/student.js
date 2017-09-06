@@ -1,6 +1,6 @@
 var mongoose=require('mongoose');
 var User=require('../schemas/userSchema.js');
- mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+ mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/onlineExam",{useMongoClient: true});
  function StudentAuth(){
 
    this.signInWithUserNameAndPassword=function (data,callback){

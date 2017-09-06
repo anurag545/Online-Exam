@@ -61,7 +61,9 @@
 																			<p class="help-block"><a href="Forgots/username.html">Forgot User Name</a></p>
 																		</div>
 														</div>
-														<p class="col-sm-12" style="color:red"> {{ elogin }} </p>
+														<div class="show-hide-message" ng-show="elogin">
+														<p ng-class="alert"> {{ elogin }} </p>
+													  </div>
 													  <button type="submit" class="btn btn-md btn-primary">Sign in</button><br/><br/>
 
 													</form>
@@ -91,11 +93,13 @@
 	$http.post("/teacher/checklogin",obj)
 						.then(function(response) {
 							var data = response.data;
-							console.log(data)
-							if(response.data.err){
-									 $scope.elogin=response.data.err.errmsg;
+							//console.log(data)
+						    if(response.data.error){
+									// $scope.elogin=response.data.error;
+									 console.log($scope.elogin);
 							}
 							else if(response.status==200){
+								$scope.elogin="User Authenticate Succesfully";
 								window.location="/teacher/home";
 				 // console.log(data.token);
 				 //var obj ={
@@ -107,8 +111,9 @@
 				 //console.log(tokenObj);
 				 //window.location="/home";
 							}
-					},function (error){
-					console.log("error");
+					},function (err){
+					console.log("error",err.data.error);
+					 $scope.elogin=err.data.error;
 					});
 	}
 	}]);

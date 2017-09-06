@@ -16,7 +16,7 @@ user.constructor = function(){
 };
 
 user.home=function(req,res){
-	//console.log(path.resolve(__dirname + "/../index.html"));
+	   console.log(path.resolve(__dirname + "/../index.html"));
 		 res.sendFile(path.resolve(__dirname + "/../index.html"));
 		}
 

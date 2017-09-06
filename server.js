@@ -12,11 +12,11 @@ app.use(cookieParser());
 
 //var auth=require('./config/loginsauth.js');
 
-//var mongoose=require('mongoose');
+var mongoose=require('mongoose');
  //var User=require('./schemas/userSchema.js');
  //var Exam=require('./admin/js/examSchema.js');
   //var Question=require('./admin/js/quesSchema.js');
- //mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
 var bodyParser=require('body-parser');
 app.use(bodyParser.json({strict:false}));
@@ -49,8 +49,9 @@ app.use(express.static(__dirname+"/public"));
 
 app.use('/teacher',teacher);
 app.use('/student',student);
-app.listen(8080,function(){
-   console.log("localhost at 8080");
+app.listen(process.env.PORT || 8080,function(){
+   //console.log("localhost at 8080" ,this.address().port, app.settings.env);
+    console.log("localhost at 8080",process.env.PORT);
 });
 //app.post('/student',student);
  /*app.post('/login',function (req,res){

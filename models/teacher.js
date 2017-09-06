@@ -3,7 +3,7 @@ var User=require('../schemas/userSchema.js');
 var Exam=require('../schemas/examSchema.js');
 var Question=require('../schemas/quesSchema.js');
 var Group=require('../schemas/groupSchema.js');
- mongoose.connect("mongodb://localhost:27017/onlineExam",{useMongoClient: true});
+ mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/onlineExam",{useMongoClient: true});
 
  function TeacherAuth(){
 
