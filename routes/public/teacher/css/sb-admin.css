@@ -1,0 +1,337 @@
+/*!
+ * Start Bootstrap - SB Admin (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+/* Global Styles */
+
+body {
+    margin-top: 100px;
+    background-color: #222;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+#wrapper {
+    padding-left: 0;
+}
+
+#page-wrapper {
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+@@media (max-width:480) {
+  #page-wrapper {
+      padding: 10px;
+      overflow-x: scroll;
+      font-size: .7em;
+  }
+}
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+
+.top-nav>li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    color: #999;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    background-color: #000;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    border: 1px solid rgba(0,0,0,.15);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: normal;
+}
+
+ul.message-dropdown {
+    padding: 0;
+    max-height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+li.message-preview {
+    width: 275px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+li.message-preview>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+li.message-footer {
+    margin: 5px 0;
+}
+
+ul.alert-dropdown {
+    width: 200px;
+}
+
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y:auto;
+        background-color: #222;
+        bottom: 0;
+        overflow-x: auto;
+        padding-bottom: 40px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #000 !important;
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+/* Flot Chart Containers */
+
+.flot-chart {
+    display: block;
+    height: 400px;
+}
+
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom Colored Panels */
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+    color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+    color: #df8a13;
+}
+/*Dashboard*/
+ .page-header{
+   margin-top: 0px;
+ }
+/*End*/
+/*Edited Form.html*/
+#qinput {
+    width: 70%;
+    margin-bottom: 20px;
+}
+#mark{
+ width:100%;
+}
+#minput{
+width: 30%;
+
+}
+/*End*/
+/*peviewexamhtml*/
+#previewExam {
+  border:2px solid grey;
+  width:80%;
+  margin: auto;
+  padding-bottom: 30px;
+}
+#previewExam .col-md-10{
+  width:80%;
+  margin:auto;
+}
+.preview-questions{
+  margin-top:15px;
+}
+.preview-questions .btn-danger{
+  padding-top:0px;
+  padding-bottom: 0px;
+  width:70px;
+  font-size: 12px;
+  height: 25px;
+}
+.question-number,.col-md-1{
+  width:2%;
+  margin-right: 0px;
+  padding: 0px;
+}
+.preview-questions .col-md-11{
+  margin-left: 0px;
+}
+
+/*end*/
+/*exam form*/
+#makeExam{
+  overflow-x:auto;
+  padding-top:20px;
+}
+#examform{
+  min-height: 500px;
+}
+
+/*profile*/
+#profile {
+  padding-left: 40px;
+  min-height: 600px;
+}
+#profileimg img{
+  min-height: 200px;
+  min-width:100px;
+  max-width:400px;
+  max-height: 400px;
+  width:80%;
+  border-radius: 5px;
+}
+.profiledetails .form-group .form-control{
+ width:80%;
+}
+#profilename{
+  margin-top: 0px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-top: 15px;
+}
+/*Group */
+#newgroup .form-control{
+  width:50%;
+}
+#newgroup .search{
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+  z-index:1000;
+}
+#newgroup .search-result{
+  height:20%;
+  padding:5px;
+  background-color: white;
+  cursor: pointer;
+}
+#newgroup .search-result:hover{
+  color: #1d2129;
+  background-color: #e9ebee;
+}
+#usertable {
+  float:left;
+  width:100%;
+}

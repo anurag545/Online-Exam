@@ -1,4 +1,4 @@
- var express=require('express');
+var express=require('express');
 var app=express();
 //var fs=require('fs');
 //var path=require('path');
@@ -42,11 +42,12 @@ var storage=multer.diskStorage({
 var upload=multer({storage:storage});
 app.use(express.static(__dirname));
 //app.use (express.static (path.join (__dirname,'public')));
+app.use(express.static(__dirname+"/public"));
 app.get('/',user.home);
 
 app.post('/signup',upload.single('profilepic'),user.signup);
 
-app.use(express.static(__dirname+"/public"));
+
 
 app.use('/teacher',teacher);
 app.use('/student',student);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+<input type="text" name="name" ng-model="value" required onBlurd>
+<input type="submit" name="submit" value="Submit" ng-click="submit()">
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl',['$scope','$http', function($scope,$http) {
+  $scope.submit=function(){
+    console.log("okay");
+    $http.get('/find?num='+$scope.value).then(function(response){
+        $scope.details=response.data;
+         console.log(response.data,"okay");
+        },function(error){
+          console.log("error in http request");
+    });
+  }
+}]);
+</script>
+
+</body>
+</html>
