@@ -22,10 +22,10 @@ user.home=function(req,res){
 
 user.signup=function(req,res){
 			var data=req.body;
-			UserAuth.signupdata(data,function(numAffected){
-				if(numAffected){
-					//console.log(numAffected,"numAffected");
-				 res.status(200).send();
+			UserAuth.signupdata(data,function(Obj){
+				if(Obj){
+				 
+				 res.send(Obj);
 				 }
 			});
 		}

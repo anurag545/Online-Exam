@@ -56,14 +56,14 @@
   <div class="form-group">
     <label class="control-label col-sm-4" for="pwd">Password:</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control" name ="pwd" ng-model="myForm.pwd" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$" id="pwd" placeholder="Enter password" required><p> {{ epwd }} </p>
+      <input type="password" class="form-control" name ="pwd" ng-model="myForm.pwd" id="pwd" placeholder="Enter password" required><p> {{ epwd }} </p>
     </div>
   </div>
-
+   <!--pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$" -->
     <div class="form-group">
     <label class="control-label col-sm-4" for="cpwd">Confirm Password:</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control"  name ="cpwd" ng-model="myForm.cpwd" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$" id="cpwd" placeholder="Confirm password" required>
+      <input type="password" class="form-control"  name ="cpwd" ng-model="myForm.cpwd" id="cpwd" placeholder="Confirm password" required>
     </div>
   </div>
 
@@ -133,6 +133,7 @@
     <label class="control-label col-sm-4" for="profilepic">Profile Pic:</label>
     <div class="col-sm-8">
       <input type="file" class="form-control" name="profilepic" file-model="myForm.profilepic" id="profilepic">
+    <p id="error"></p>
     </div>
   </div>
    </div>

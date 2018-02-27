@@ -25,10 +25,16 @@ app.service('multipartForm',['$http',function($http){
 		$http.post(uploadUrl, fd, {
 			transformRequest: angular.indentity,
 			headers: { 'Content-Type': undefined }
-		}).then(function (response){console.log("done signup");
-		if(response.status==200){
+		}).then(function (response){
+		   console.log(response);	
+			if(response.data.numAffected){
 			console.log("ok");
-     window.location="/";
+            window.location="/";
+         }
+         else if(response.data.error){
+         	console.log(response.data.error,"jjh");
+         	document.getElementById("error").innerHTML="Already Registered";
+         	document.getElementById("error").style="color:red;";
          }
 	},function (err){console.log("error sign up")});
 	}
@@ -53,11 +59,10 @@ $scope.myForm.country="";
 $scope.myForm.gender="";
 
 $scope.myForm.job="";
-
+$scope.myForm.error="";
 $scope.myForm.dob="";
 $scope.myForm.profilepic="";
 $scope.myForm.epwd="";
-
 $scope.myForm.Submit=function (){
 	if($scope.myForm.pwd!=$scope.myForm.cpwd){
 		console.log($scope.myForm.pwd,$scope.myForm.cpwd);
